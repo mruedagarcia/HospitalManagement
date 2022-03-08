@@ -1,0 +1,5 @@
+PROGRESS REPORT
+This week we expected to be able to catch up to the schedule because we do not want to feel stressed about the project.
+This week we finished the E-R diagram and the tables associated to the diagram (steps 1, 2 and 3).
+Next week we need to pass the tables to SQL in DDL. Also we want to create the DDL  for our relational database because we want to move on.
+
