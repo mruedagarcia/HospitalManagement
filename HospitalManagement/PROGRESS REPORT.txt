@@ -1,0 +1,5 @@
+PROGRESS REPORT
+We completed the DDL and the tables. We learn how to use github and created a repository. We start with the java program 
+and we share it with the members of the team and they have imported it. 
+Next week we want to continue with the pojos and create the user interface and menu because we are trying to
+follow the schedule
