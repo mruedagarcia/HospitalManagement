@@ -178,3 +178,57 @@ Caused by: org.eclipse.jgit.errors.NoRemoteRepositoryException: [200~https://gi
 
 !ENTRY org.eclipse.equinox.security 1 0 2022-03-11 19:11:46.767
 !MESSAGE New keyring password generated. 
+
+!ENTRY org.eclipse.egit.ui 4 0 2022-03-11 19:42:04.433
+!MESSAGE Transport Error: Cannot get remote repository refs.
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: [200~https://github.com/mruedagarcia/HospitalManagement~: not found.
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:189)
+	at org.eclipse.jgit.api.LsRemoteCommand.call(LsRemoteCommand.java:128)
+	at org.eclipse.egit.core.op.ListRemoteOperation.run(ListRemoteOperation.java:116)
+	at org.eclipse.egit.ui.internal.components.RefSpecPage$2.run(RefSpecPage.java:254)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+Caused by: org.eclipse.jgit.errors.NoRemoteRepositoryException: [200~https://github.com/mruedagarcia/HospitalManagement~: not found.
+	at org.eclipse.jgit.transport.TransportLocal$1.open(TransportLocal.java:100)
+	at org.eclipse.jgit.transport.TransportBundleFile$1.open(TransportBundleFile.java:74)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:521)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:274)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:244)
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:155)
+	... 4 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2022-03-11 19:43:33.369
+!MESSAGE Transport Error: Cannot get remote repository refs.
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: [200~https://github.com/mruedagarcia/HospitalManagement~: not found.
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:189)
+	at org.eclipse.jgit.api.LsRemoteCommand.call(LsRemoteCommand.java:128)
+	at org.eclipse.egit.core.op.ListRemoteOperation.run(ListRemoteOperation.java:116)
+	at org.eclipse.egit.ui.internal.components.RefSpecPage$2.run(RefSpecPage.java:254)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+Caused by: org.eclipse.jgit.errors.NoRemoteRepositoryException: [200~https://github.com/mruedagarcia/HospitalManagement~: not found.
+	at org.eclipse.jgit.transport.TransportLocal$1.open(TransportLocal.java:100)
+	at org.eclipse.jgit.transport.TransportBundleFile$1.open(TransportBundleFile.java:74)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:521)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:274)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:244)
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:155)
+	... 4 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2022-03-11 19:44:23.767
+!MESSAGE Transport Error: Cannot get remote repository refs.
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: [200~https://github.com/mruedagarcia/HospitalManagement~: not found.
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:189)
+	at org.eclipse.jgit.api.LsRemoteCommand.call(LsRemoteCommand.java:128)
+	at org.eclipse.egit.core.op.ListRemoteOperation.run(ListRemoteOperation.java:116)
+	at org.eclipse.egit.ui.internal.components.RefSpecPage$2.run(RefSpecPage.java:254)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+Caused by: org.eclipse.jgit.errors.NoRemoteRepositoryException: [200~https://github.com/mruedagarcia/HospitalManagement~: not found.
+	at org.eclipse.jgit.transport.TransportLocal$1.open(TransportLocal.java:100)
+	at org.eclipse.jgit.transport.TransportBundleFile$1.open(TransportBundleFile.java:74)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:521)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:274)
+	at org.eclipse.jgit.transport.Transport.open(Transport.java:244)
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:155)
+	... 4 more
