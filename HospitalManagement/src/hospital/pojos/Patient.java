@@ -2,6 +2,8 @@ package hospital.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -17,15 +19,35 @@ public class Patient implements Serializable{
 	private Integer phone;
 	private String name;
 	private String status;
+	//Many to one relationship
+	private Nurse nurse;
+	//many to many relationship
+	private List<Disease> diseases;
+	private List<Doctor> doctors;
+	private List<Medicine> medicines;
+	private List<Symptom> symptoms;
 	
 	public Patient() {
 		super();
 		// TODO Auto-generated constructor stub
+		diseases = new ArrayList<Disease>();
+		doctors = new ArrayList<Doctor>();
+		medicines = new ArrayList<Medicine>();
+		symptoms = new ArrayList<Symptom>();
 	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	//equals and hashcode
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(dob, email, id, name, phone, status);
+		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -35,13 +57,9 @@ public class Patient implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
-		return Objects.equals(dob, other.dob) && Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(phone, other.phone)
-				&& Objects.equals(status, other.status);
+		return Objects.equals(id, other.id);
 	}
-	public Integer getId() {
-		return id;
-	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -74,6 +92,54 @@ public class Patient implements Serializable{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+
+	public List<Disease> getDiseases() {
+		return diseases;
+	}
+
+
+	public void setDiseases(List<Disease> diseases) {
+		this.diseases = diseases;
+	}
+
+
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
+
+	public List<Medicine> getMedicines() {
+		return medicines;
+	}
+
+
+	public void setMedicines(List<Medicine> medicines) {
+		this.medicines = medicines;
+	}
+
+
+	public List<Symptom> getSymptoms() {
+		return symptoms;
+	}
+
+
+	public void setSymptoms(List<Symptom> symptoms) {
+		this.symptoms = symptoms;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", email=" + email + ", dob=" + dob + ", phone=" + phone + ", name=" + name
+				+ ", status=" + status + ", diseases=" + diseases + ", doctors=" + doctors + ", medicines=" + medicines
+				+ ", symptoms=" + symptoms + "]";
 	}
 	
 

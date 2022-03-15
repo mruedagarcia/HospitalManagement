@@ -1,6 +1,8 @@
 package hospital.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Medicine implements Serializable {
@@ -10,15 +12,18 @@ public class Medicine implements Serializable {
 	private static final long serialVersionUID = -4337318150581789480L;
 	private Integer id;
 	private String name;
+	//many to many relationship
+	private List<Patient> patients;
 
 	public Medicine() {
 		super();
 		// TODO Auto-generated constructor stub
+		patients = new ArrayList<Patient>();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -30,8 +35,10 @@ public class Medicine implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Medicine other = (Medicine) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		return Objects.equals(id, other.id);
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -47,6 +54,19 @@ public class Medicine implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+	@Override
+	public String toString() {
+		return "Medicine [id=" + id + ", name=" + name + ", patients=" + patients + "]";
 	}
 
 }
