@@ -10,10 +10,11 @@ public class JDBCManager {
 	public JDBCManager() {
 		try {
 			Class.forName("org.sqlite.JDBC");
+			//here we get the Connection
 			c = DriverManager.getConnection("jdbc:sqlite:./db/hospitaldepartment.db");
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
-			this.createTables();
+			this.createTables();//here we do the call of our DataBase's Tables
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,7 +29,7 @@ public class JDBCManager {
 		}
 	}
 
-	private void createTables() {
+	private void createTables() {//creation of tables
 		try {
 			Statement stmt = c.createStatement();
 			// PATIENTS

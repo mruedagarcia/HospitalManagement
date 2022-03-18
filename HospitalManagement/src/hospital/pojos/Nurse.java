@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Nurse implements Serializable {
-	/**
-		 * 
-		 */
+
 	private static final long serialVersionUID = -888446701244086278L;
 	private String name;
 	private Integer id;

@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Symptom implements Serializable {
-	/**
-		 * 
-		 */
+	
 	private static final long serialVersionUID = -9137519159299611555L;
 	private String name;
 	private Integer id;
