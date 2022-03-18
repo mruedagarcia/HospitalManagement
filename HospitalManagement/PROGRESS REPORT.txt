@@ -1,5 +1,4 @@
 PROGRESS REPORT
-We completed the DDL and the tables. We learn how to use github and created a repository. We start with the java program 
-and we share it with the members of the team and they have imported it. 
-Next week we want to continue with the pojos and create the user interface and menu because we are trying to
-follow the schedule
+We finish the principal parts of the pojos.  We did the jdbc class and the connection between the database and java.
+We also did the menu and a class for utilities. We also start the presentation and the mock up.
+Next week we want to continue doing the jdbc classes off all our entities and finish the uml and mock up.
