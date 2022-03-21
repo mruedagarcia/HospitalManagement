@@ -28,6 +28,10 @@ public class JDBCManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public Connection getConnection() {
+		return c;
+	}
 
 	private void createTables() {// creation of tables
 		try {
