@@ -12,7 +12,7 @@ public class Patient implements Serializable{
 	private static final long serialVersionUID = -1080532239335630835L;
 	private Integer id;
 	private String email;
-	private Date dob;
+	private DateOfBirth dob;
 	private Integer phone;
 	private String name;
 	private String status;
@@ -35,7 +35,7 @@ public class Patient implements Serializable{
 	
 	
 	
-	public Patient(String name, String email, String status, Integer phone, Date dob) {
+	public Patient(String name, String email, String status, Integer phone, DateOfBirth dob) {
 		super();
 		this.email = email;
 		this.dob = dob;
@@ -78,12 +78,29 @@ public class Patient implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getDob() {
+
+	public DateOfBirth getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+
+	public void setDob(DateOfBirth dob) {
 		this.dob = dob;
 	}
+
+
+
+	public Nurse getNurse() {
+		return nurse;
+	}
+
+
+
+	public void setNurse(Nurse nurse) {
+		this.nurse = nurse;
+	}
+
+
+
 	public Integer getPhone() {
 		return phone;
 	}

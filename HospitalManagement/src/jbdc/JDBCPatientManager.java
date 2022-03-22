@@ -8,8 +8,9 @@ import java.sql.Statement;
 import java.util.List;
 
 import hospital.pojos.Patient;
+import ifaces.PatientManager;
 
-public class JDBCPatientManager {
+public class JDBCPatientManager implements PatientManager{
 	
 	private JDBCManager manager;
 	
@@ -17,6 +18,7 @@ public class JDBCPatientManager {
 		this.manager = m;
 	}
 	
+	@Override
 	public void addPatient(Patient p) {
 		try {
 			String sql = "INSERT INTO patients (name, email, status, phone, Dob) VALUES (?,?,?,?,?)";
@@ -25,18 +27,20 @@ public class JDBCPatientManager {
 			prep.setString(2, p.getEmail());
 			prep.setString(3, p.getStatus());
 			prep.setInt(4, p.getPhone());
-			prep.setDate(5, p.getDob());
+			//prep.setDateOfBirth(5, p.getDob()); CAMBIAR
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	@Override
 	public List<Patient> searchPatientByDoctor(int doctorId){
 		//TODO complete
 		return null;
 	}
 	
+	@Override
 	public Patient getPatientById(int id) {
 		Patient p = null;
 		try {
@@ -48,8 +52,8 @@ public class JDBCPatientManager {
 				String email = rs.getString("email");
 				String status = rs.getString("status");
 				Integer phone = rs.getInt("phone");
-				Date date = rs.getDate("Dob"); //i don't know if it is util.date or sql.date
-				p = new Patient(name, email, status, phone, date);
+				//Date date = rs.getDate(); //i don't know if it is util.date or sql.date
+				//p = new Patient(name, email, status, phone, date);
 			}
 			rs.close();
 			stmt.close();
@@ -59,6 +63,7 @@ public class JDBCPatientManager {
 		return p;
 	}
 	
+	@Override
 	public void assign(int doctorId, int patientId) {
 		try {
 			String sql = "INSERT INTO examines(patientId, doctorId) VALUES (?,?)";
@@ -70,6 +75,7 @@ public class JDBCPatientManager {
 		}
 	}
 	
+	@Override
 	public void unassign(int doctorId, int patientId) {
 		try {
 			String sql = "DELETE FROM examines WHERE patientId=? AND doctorId=?";
@@ -81,6 +87,7 @@ public class JDBCPatientManager {
 		}
 	}
 	
+	@Override
 	public void deletePatient(int patientId) {
 		try {
 			String sql = "DELETE FROM patients WHERE id=?";
