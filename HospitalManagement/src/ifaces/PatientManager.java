@@ -18,4 +18,6 @@ public interface PatientManager {
 	public void assign(int patientId, int doctorId);
 	//Unassign a doctor to a patient
 	public void unassign(int patientId, int doctorId);
+	//Update a patient
+	public void updatePatient(Patient p);
 }

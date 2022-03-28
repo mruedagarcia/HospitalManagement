@@ -35,6 +35,18 @@ public class Patient implements Serializable{
 	
 	
 	
+	public Patient(Integer id, String name, String email, String status, Integer phone, Date dob) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.dob = dob;
+		this.phone = phone;
+		this.name = name;
+		this.status = status;
+	}
+
+
+
 	public Patient(String name, String email, String status, Integer phone, Date dob) {
 		super();
 		this.email = email;
