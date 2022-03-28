@@ -20,6 +20,15 @@ public class Doctor implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 	
+	public Doctor(Integer id, String name, String speciality) {
+		super();
+		this.name = name;
+		this.speciality = speciality;
+		this.id = id;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
