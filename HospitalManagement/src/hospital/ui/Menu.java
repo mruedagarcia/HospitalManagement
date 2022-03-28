@@ -2,12 +2,13 @@ package hospital.ui;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
-import hospital.pojos.DateOfBirth;
+import java.sql.Date;
+import java.time.LocalDate;
 import hospital.pojos.Patient;
 import ifaces.PatientManager;
 import jbdc.JDBCManager;
 import jbdc.JDBCPatientManager;
+
 
 public class Menu {
 
@@ -34,7 +35,8 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-
+					createPatient();
+					System.out.println("Patient registered");
 					break;
 				}
 				case 2: {
@@ -79,7 +81,8 @@ public class Menu {
 		String email = Utilities.readString("Email: ");
 		String status = Utilities.readString("Status: ");
 		Integer phone = Utilities.readInt("Phone: ");
-		DateOfBirth dob = Utilities.readDate("Date of birth:");
-		Patient p = new Patient(name, email, status, phone, dob);
+		LocalDate dob = Utilities.readDate();
+		Patient p = new Patient(name, email, status, phone, Date.valueOf(dob));
+		
 	}
 }

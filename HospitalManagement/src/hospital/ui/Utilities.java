@@ -3,10 +3,11 @@ package hospital.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Date;
 import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-import hospital.pojos.DateOfBirth;
+
 
 public class Utilities {
 	private static BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -38,21 +39,12 @@ public class Utilities {
 		}
 	}
 	
-	public static DateOfBirth readDate(String text) {
-		System.out.println(text);
+	public static LocalDate readDate() {
 		while(true) {
 			try {
-				int year;
-				year = readInt("Introduce year: ");
-				if(year<=0) {
-					do {
-						year=readInt("Incorrect year, please introduce a correct one:");
-						
-					}while(year<=0);
-				}
-				int month = readInt("Introduce month as a number:");
-				int day = readInt("Introduce a day: ");
-				DateOfBirth dob = new DateOfBirth(year, month, day);
+				String date = readString("Introduce a date (yyyy-mm-dd):");
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate dob = LocalDate.parse(date,dtf);
 				return dob;
 			}catch(DateTimeException e) {
 				System.out.println("Incorrect date");

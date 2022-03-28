@@ -11,7 +11,7 @@ public class JDBCManager {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			// here we get the Connection
-			c = DriverManager.getConnection("jdbc:sqlite:./db/hospitaldepartment.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/HospitalManagement.db");
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
 			this.createTables();// here we do the call of our DataBase's Tables
@@ -39,7 +39,7 @@ public class JDBCManager {
 			// PATIENTS
 			String sq1 = "CREATE TABLE patients (" + ("id      INTEGER PRIMARY KEY AUTOINCREMENT,")
 					+ ("name TEXT NOT NULL,") + ("email TEXT NOT NULL,") + ("status TEXT,")
-					+ ("phone INTEGER NOT NULL,") + ("Dob DATE,") + ("nurseID INTEGER");
+					+ ("phone INTEGER NOT NULL,") + ("Dob DATE,") + ("nurseID INTEGER NOT NULL REFERENCES nurse(id) ON DELETE RESTRICT");
 			stmt.executeUpdate(sq1);
 
 			// --------->NURSES

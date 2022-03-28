@@ -27,7 +27,7 @@ public class JDBCPatientManager implements PatientManager{
 			prep.setString(2, p.getEmail());
 			prep.setString(3, p.getStatus());
 			prep.setInt(4, p.getPhone());
-			//prep.setDateOfBirth(5, p.getDob()); CAMBIAR
+			//prep.setDate(5, p.getDob()); 
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class JDBCPatientManager implements PatientManager{
 				String email = rs.getString("email");
 				String status = rs.getString("status");
 				Integer phone = rs.getInt("phone");
-				//Date date = rs.getDate(); //i don't know if it is util.date or sql.date
+				//Date date = rs.getDate();
 				//p = new Patient(name, email, status, phone, date);
 			}
 			rs.close();
