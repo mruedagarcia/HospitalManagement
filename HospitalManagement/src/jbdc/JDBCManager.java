@@ -59,7 +59,8 @@ public class JDBCManager {
 
 			// --------->EXAMINES
 
-			sq1 = "CREATE TABLE examines(" + ("patientId INTEGER,") + ("doctorId INTEGER,") + ("isPrimary BOOLEAN");
+			sq1 = "CREATE TABLE examines(" + ("patientId INTEGER PRIMARY KEY,") + ("doctorId INTEGER PRIMARY KEY,") + ("FOREIGN KEY patientId"
+					+ "REFERENCES patients(id) ON DELETE CASCADE)" + "FOREIGN KEY");
 			stmt.executeUpdate(sq1);
 
 			// --------->DOCTORS

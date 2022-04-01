@@ -36,7 +36,7 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	@Override
-	public List<Patient> searchPatientByDoctor(int doctorId){
+	/*public List<Patient> searchPatientByDoctor(int doctorId){
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
@@ -58,9 +58,8 @@ public class JDBCPatientManager implements PatientManager{
 			e.printStackTrace();
 		}
 		return patients;
-	}
+	}*/
 	
-	@Override
 	public Patient getPatientById(int id) {
 		Patient p = null;
 		try {
@@ -100,21 +99,9 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	@Override
-	public void assign(int doctorId, int patientId) {
+	public void assignDoctor(int doctorId, int patientId) {
 		try {
 			String sql = "INSERT INTO examines(patientId, doctorId) VALUES (?,?)";
-			PreparedStatement p = manager.getConnection().prepareStatement(sql);
-			p.setInt(1,  patientId);
-			p.setInt(2,  doctorId);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void unassign(int doctorId, int patientId) {
-		try {
-			String sql = "DELETE FROM examines WHERE patientId=? AND doctorId=?";
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
 			p.setInt(1,  patientId);
 			p.setInt(2,  doctorId);
