@@ -1,3 +1,3 @@
 PROGRESS REPORT
-We correct errors in date methods and the path in the connection.
-Next week we are going to the presentation, and more methods and functions in Eclipse.
+Next week we have our Project Presentation and we have practically finished the presentation and
+we think all the methods about the Database, the UML and we have defined the interface.
