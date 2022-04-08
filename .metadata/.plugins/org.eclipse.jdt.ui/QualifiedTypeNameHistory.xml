@@ -10,7 +10,6 @@
     <fullyQualifiedTypeName name="ifaces.PatientManager"/>
     <fullyQualifiedTypeName name="java.time.DateTimeException"/>
     <fullyQualifiedTypeName name="hospital.pojos.DateOfBirth"/>
-    <fullyQualifiedTypeName name="hospital.pojos.Patient"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
@@ -20,4 +19,9 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="hospital.pojos.Doctor"/>
+    <fullyQualifiedTypeName name="hospital.pojos.Symptom"/>
+    <fullyQualifiedTypeName name="hospital.pojos.Disease"/>
+    <fullyQualifiedTypeName name="hospital.pojos.Medicine"/>
+    <fullyQualifiedTypeName name="hospital.pojos.Patient"/>
 </qualifiedTypeNameHistroy>
