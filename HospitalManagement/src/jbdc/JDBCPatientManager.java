@@ -8,7 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import hospital.pojos.Disease;
+import hospital.pojos.Doctor;
+import hospital.pojos.Medicine;
 import hospital.pojos.Patient;
+import hospital.pojos.Symptom;
 import ifaces.PatientManager;
 
 public class JDBCPatientManager implements PatientManager{
@@ -99,18 +103,6 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	@Override
-	public void assignDoctor(int doctorId, int patientId) {
-		try {
-			String sql = "INSERT INTO examines(patientId, doctorId) VALUES (?,?)";
-			PreparedStatement p = manager.getConnection().prepareStatement(sql);
-			p.setInt(1,  patientId);
-			p.setInt(2,  doctorId);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
 	public void deletePatient(int patientId) {
 		try {
 			String sql = "DELETE FROM patients WHERE id=?";
@@ -120,5 +112,47 @@ public class JDBCPatientManager implements PatientManager{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Patient> listAllPatients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Doctor> listMyDoctors(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Symptom> listMySymptoms(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Disease> listMyDiseases(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Medicine> listMyMedicines(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Patient searchPatientByNurse(int nurseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Patient searchPatientByDoctor(int doctorId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
