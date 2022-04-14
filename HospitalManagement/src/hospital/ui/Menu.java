@@ -1,26 +1,20 @@
 package hospital.ui;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import hospital.pojos.Patient;
-import ifaces.PatientManager;
 import jbdc.JDBCManager;
 import jbdc.JDBCPatientManager;
 
 
 public class Menu {
 
-	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	private static PatientManager patientManager;
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		System.out.println("Welcome to our Hospital");
 		JDBCManager jdbcManager = new JDBCManager();
-		patientManager = new JDBCPatientManager(jdbcManager);
+		new JDBCPatientManager(jdbcManager);
 		try {
 			do {
 

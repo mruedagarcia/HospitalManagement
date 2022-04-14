@@ -24,4 +24,5 @@
     <fullyQualifiedTypeName name="hospital.pojos.Disease"/>
     <fullyQualifiedTypeName name="hospital.pojos.Medicine"/>
     <fullyQualifiedTypeName name="hospital.pojos.Patient"/>
+    <fullyQualifiedTypeName name="hospital.pojos.Nurse"/>
 </qualifiedTypeNameHistroy>
