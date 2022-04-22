@@ -3,18 +3,26 @@ package hospital.ui;
 import java.sql.Date;
 import java.time.LocalDate;
 import hospital.pojos.Patient;
+import jbdc.JDBCDoctorManager;
 import jbdc.JDBCManager;
+import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
 
 
 public class Menu {
+	
+	private static JDBCPatientManager patientManager;
+	private static JDBCDoctorManager doctorManager;
+	private static JDBCNurseManager nurseManager;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		System.out.println("Welcome to our Hospital");
 		JDBCManager jdbcManager = new JDBCManager();
-		new JDBCPatientManager(jdbcManager);
+		patientManager = new JDBCPatientManager(jdbcManager);
+		doctorManager = new JDBCDoctorManager(jdbcManager);
+		nurseManager = new JDBCNurseManager(jdbcManager);
 		try {
 			do {
 
