@@ -73,10 +73,10 @@ public class JDBCPatientManager implements PatientManager{
 			while(rs.next()) {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
-				boolean status = rs.getBoolean("status");
+				boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
 				Date date = rs.getDate("date");
-				p = new Patient(name, email, status, phone, date);
+				p = new Patient(name, email, severe, phone, date);
 			}
 			rs.close();
 			stmt.close();
@@ -164,6 +164,7 @@ public class JDBCPatientManager implements PatientManager{
 			e.printStackTrace();
 		}
 		return doctors;
+		
 	}
 
 	@Override
