@@ -30,7 +30,7 @@ public class JDBCPatientManager implements PatientManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getEmail());
-			prep.setString(3, p.getStatus());
+			prep.setBoolean(3, p.getSevere());
 			prep.setInt(4, p.getPhone());
 			prep.setDate(5, p.getDob()); 
 			prep.executeUpdate();
@@ -40,11 +40,11 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	@Override
-	/*public List<Patient> searchPatientByDoctor(int doctorId){
+	/*public List<Patient> searchPatientByDoctor(int dId){
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients";
+			String sql = "SELECT * FROM patients WHERE doctorId="+dId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
@@ -73,7 +73,7 @@ public class JDBCPatientManager implements PatientManager{
 			while(rs.next()) {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
-				String status = rs.getString("status");
+				boolean status = rs.getBoolean("status");
 				Integer phone = rs.getInt("phone");
 				Date date = rs.getDate("date");
 				p = new Patient(name, email, status, phone, date);
@@ -93,7 +93,7 @@ public class JDBCPatientManager implements PatientManager{
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, p.getName());
 			ps.setString(2, p.getEmail());
-			ps.setString(3, p.getStatus());
+			ps.setBoolean(3, p.getSevere());
 			ps.setInt(4, p.getPhone());
 			ps.setDate(5, p.getDob());
 			ps.executeUpdate();
@@ -116,14 +116,54 @@ public class JDBCPatientManager implements PatientManager{
 
 	@Override
 	public List<Patient> listAllPatients() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM patients";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Integer id =rs.getInt("id");
+				String email =rs.getString("email");
+				Date dob = rs.getDate("dob");
+				Integer phone = rs.getInt("phone");
+				String name = rs.getString("name");
+				Boolean status = rs.getBoolean("status");
+				Patient p = new Patient(id, name, email, status, phone, dob);
+				patients.add(p);
+			}
+	
+			rs.close();
+			stmt.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
+		
+		
 	}
 
 	@Override
-	public List<Doctor> listMyDoctors(int patientId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Doctor> listMyDoctors(int pId) {
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctors WHERE patientId="+pId;
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String specialty = rs.getString("specialty");
+				Doctor d = new Doctor(id, name, specialty);
+				doctors.add(d);
+		}
+			rs.close();
+			stmt.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return doctors;
 	}
 
 	@Override
