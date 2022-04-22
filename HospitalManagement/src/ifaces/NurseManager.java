@@ -12,14 +12,14 @@ public interface NurseManager {
 	//Assign nurse to patient
 	public void assignNurse(int patientId, int nurseId);
 	//List nurse patients
-	public List<Patient> listMyPatients();
+	public List<Patient> listMyPatients(int nurseId);
 	//Search nurse by a patient
-	public Patient searchNurseByPatient(int patientId);
-	//Search patients of a doctor
-	public Patient searchPatientByDoctor(int doctorId);
+	public Nurse searchNurseByPatient(int patientId);
 	//Get nurse by id
-	public Patient getNurseById(int nurseId);
+	public Nurse getNurseById(int nurseId);
 	//Update a nurse
 	public void updateNurse(Nurse n);
+	//Update patient status
+	public boolean updatePatientStatus(int patientId);
 	
 }

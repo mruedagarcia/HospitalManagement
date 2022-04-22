@@ -42,7 +42,7 @@ public class JDBCManager {
 			+ "id      INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ "name TEXT NOT NULL,"
 			+ "email TEXT NOT NULL,"
-			+ "status TEXT,"
+			+ "severe BOOLEAN,"
 			+ "phone INTEGER NOT NULL,"
 			+ "Dob DATE," 
 			+ "nurseID INTEGER NOT NULL REFERENCES nurses(id) ON DELETE RESTRICT"

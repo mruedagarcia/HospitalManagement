@@ -39,6 +39,15 @@ public class Utilities {
 		}
 	}
 	
+	/*public static boolean readBoolean (String text) {
+		System.out.print(text);
+		while(true) {
+			try {
+				
+			}
+		}
+	}*/
+	
 	public static LocalDate readDate() {
 		while(true) {
 			try {

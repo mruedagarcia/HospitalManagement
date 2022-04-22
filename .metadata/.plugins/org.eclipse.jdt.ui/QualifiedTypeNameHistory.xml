@@ -6,7 +6,6 @@
     <fullyQualifiedTypeName name="jbdc.JDBCManager"/>
     <fullyQualifiedTypeName name="jbdc.JDBCPatientManager"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="ifaces.PatientManager"/>
     <fullyQualifiedTypeName name="java.time.DateTimeException"/>
     <fullyQualifiedTypeName name="hospital.pojos.DateOfBirth"/>
@@ -25,4 +24,5 @@
     <fullyQualifiedTypeName name="hospital.pojos.Medicine"/>
     <fullyQualifiedTypeName name="hospital.pojos.Patient"/>
     <fullyQualifiedTypeName name="hospital.pojos.Nurse"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
 </qualifiedTypeNameHistroy>

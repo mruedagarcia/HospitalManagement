@@ -15,7 +15,7 @@ public class Patient implements Serializable{
 	private Date dob;
 	private Integer phone;
 	private String name;
-	private String status;
+	private boolean severe;
 	//Many to one relationship
 	private Nurse nurse;
 	//many to many relationship
@@ -35,25 +35,25 @@ public class Patient implements Serializable{
 	
 	
 	
-	public Patient(Integer id, String name, String email, String status, Integer phone, Date dob) {
+	public Patient(Integer id, String name, String email, boolean severe, Integer phone, Date dob) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.dob = dob;
 		this.phone = phone;
 		this.name = name;
-		this.status = status;
+		this.severe = severe;
 	}
 
 
 
-	public Patient(String name, String email, String status, Integer phone, Date dob) {
+	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {
 		super();
 		this.email = email;
 		this.dob = dob;
 		this.phone = phone;
 		this.name = name;
-		this.status = status;
+		this.severe = severe;
 	}
 
 
@@ -125,11 +125,11 @@ public class Patient implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getStatus() {
-		return status;
+	public boolean getsevere() {
+		return severe;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setsevere(boolean severe) {
+		this.severe = severe;
 	}
 
 
@@ -176,7 +176,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", email=" + email + ", dob=" + dob + ", phone=" + phone + ", name=" + name
-				+ ", status=" + status + ", diseases=" + diseases + ", doctors=" + doctors + ", medicines=" + medicines
+				+ ", severe=" + severe + ", diseases=" + diseases + ", doctors=" + doctors + ", medicines=" + medicines
 				+ ", symptoms=" + symptoms + "]";
 	}
 	

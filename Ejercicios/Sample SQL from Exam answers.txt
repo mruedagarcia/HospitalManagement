@@ -1,0 +1,6 @@
+1) SELECT a.title, COUNT(DISTINCT as.id_song) FROM Album AS a JOIN Album_Songs AS as ON a.id = as.id_album GROUP BY a.id
+2) SELECT s.name, a.name FROM Songs AS s JOIN Artist AS a ON s.artist = a.id ORDER BY a.name ASC
+3) SELECT FROM a1.name, COUNT(a2.id) FROM Album AS a1 JOIN Album_Songs AS as ON a1.id = as.id_album JOIN Songs AS s ON s.id = as.id_song JOIN Artist AS a2 ON a2.id = s.artist GROUP BY a1.id
+4) DELETE FROM Songs WHERE s.artist = (SELECT id FROM Artists WHERE name LIKE '%A%E%' OR name LIKE '%E%A%')
+5) UPDATE Artist SET birthdate = DATEADD(year, 10, birthdate) WHERE birthdate <= (SELECT MIN(birthdate) FROM Artist)
+6) CREATE VIEW SongsFromEstopa AS SELECT s.id, s.name FROM Songs AS s JOIN Artists AS a ON a.id = s.artist WHERE a.name LIKE 'ESTOPA'

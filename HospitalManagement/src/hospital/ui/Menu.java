@@ -73,10 +73,10 @@ public class Menu {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String email = Utilities.readString("Email: ");
-		String status = Utilities.readString("Status: ");
+		boolean status = Utilities.readString("Severe: ");
 		Integer phone = Utilities.readInt("Phone: ");
 		LocalDate dob = Utilities.readDate();
-		Patient p = new Patient(name, email, status, phone, Date.valueOf(dob));
+		Patient p = new Patient(name, email, severe, phone, Date.valueOf(dob));
 		
 	}
 }
