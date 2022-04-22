@@ -39,14 +39,19 @@ public class Utilities {
 		}
 	}
 	
-	/*public static boolean readBoolean (String text) {
-		System.out.print(text);
+	public static boolean readBoolean (String t) throws IOException {
+		System.out.println(t);
 		while(true) {
-			try {
-				
+			String stringReaded;
+			stringReaded = console.readLine();
+			Boolean b;
+			if(stringReaded.equalsIgnoreCase("no")) {
+				b = false;
+			}else if(stringReaded.equalsIgnoreCase("yes")) {
+				b = true;
 			}
 		}
-	}*/
+	}
 	
 	public static LocalDate readDate() {
 		while(true) {
