@@ -1,3 +1,4 @@
-PROGRESS REPORT
-This week we finished all interfaces and we continue with the queries. We also finished the UML. And also I had the pleasure to see how Rodrigo changed 
-my background and we all laughed a lot
+PROGRESS REPORT:
+
+We finished some method of the class JDBCPatientManager and also we checked the methods if we did it properly
+Next we are going to work in other Manager Classes.
