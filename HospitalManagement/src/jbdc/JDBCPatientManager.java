@@ -160,7 +160,7 @@ public class JDBCPatientManager implements PatientManager{
 		}
 			rs.close();
 			stmt.close();
-			
+		    
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -216,8 +216,12 @@ public class JDBCPatientManager implements PatientManager{
 			String sql = "SELECT * FROM medicines WHERE medicineId="+pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
-				Medicine m = new Medicine();
-				medicines.add(m);
+				
+				/*Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				Medicine m = new Medicine(id,name);
+				medicines.add(m);*/
+				
 		}
 			rs.close();
 			stmt.close();
