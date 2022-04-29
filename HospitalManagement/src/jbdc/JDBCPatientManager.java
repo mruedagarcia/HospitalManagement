@@ -26,7 +26,8 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void addPatient(Patient p) {
 		try {
-			String sql = "INSERT INTO patients (name, email, status, phone, Dob) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO patients (name, emai"
+					+ "l, status, phone, Dob) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getEmail());
