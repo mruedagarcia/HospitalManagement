@@ -71,6 +71,8 @@ public class JDBCManager {
 			+ "diseaseId INTEGER," 
 			+ "symptomId INTEGER,"
 			+"FOREIGN KEY (diseaseId) REFERENCES diseases(id)"
+			+"FOREIGN KEY(symptomId) REFERENCES symptoms(id)"
+			+ "PRIMARY KEY (diseaseId, symptomId)"
 			+");";
 			stmt.executeUpdate(sq1);
 
@@ -109,6 +111,7 @@ public class JDBCManager {
 			+ "medicineId INTEGER,"
 			+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id),"
 			+ "FOREIGN KEY (medicineId) REFERENCES medicines(id)"
+			+ "PRIMARY KEY (diseaseId, medicineId)"
 			+ ");";
 			stmt.executeUpdate(sq1);
 
@@ -119,6 +122,7 @@ public class JDBCManager {
 			+ "symptomsId INTEGER,"
 			+ "FOREIGN KEY (patientId) REFERENCES patients(id),"
 			+ "FOREIGN KEY (symptomsId) REFERENCES symptoms(id)"
+			+ "PRIMARY KEY (patientId, symptomsId)"
 			+ ");";
 			stmt.executeUpdate(sq1);
 
@@ -129,6 +133,7 @@ public class JDBCManager {
 			+ "diseaseId INTEGER,"
 			+ "FOREIGN KEY (patientId) REFERENCES patients(id),"
 			+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id)"
+			+ "PRIMARY KEY (patientId, diseaseId)"
 			+ ");";
 			stmt.executeUpdate(sq1);
 

@@ -1,4 +1,5 @@
 PROGRESS REPORT:
 
-We finished some method of the class JDBCPatientManager and also we checked the methods if we did it properly
-Next we are going to work in other Manager Classes.
+We finished some method ONE METHOD OF 5 JOINS that was called listmyMedicines in the class JBDCPatientManager
+and we checked our tables and put the primary keys.
+And we are starting to finish the class JDBCPatientManager with all our methods that we are thinking.
