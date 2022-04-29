@@ -19,6 +19,11 @@ public class Medicine implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 
+	public Medicine(Integer id2, String name2) {
+		this.id = id2;
+		this.name = name2;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
