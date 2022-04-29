@@ -41,8 +41,8 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	@Override
-	/*public List<Patient> searchPatientByDoctor(int dId){
-		List<Patient> patients = new ArrayList<Patient>();
+	public Patient searchPatientByDoctor(int dId){
+		Patient p = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT * FROM patients WHERE doctorId="+dId;
@@ -51,19 +51,18 @@ public class JDBCPatientManager implements PatientManager{
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
-				String status = rs.getString("status");
+				Boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
 				Date dob = rs.getDate("date of birth");
-				Patient p = new Patient(id, name, email, status, phone, dob);
-				patients.add(p);
+				p = new Patient(id, name, email, severe, phone, dob);
 			}
 			rs.close();
 			stmt.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return patients;
-	}*/
+		return p;
+	}
 	
 	public Patient getPatientById(int id) {
 		Patient p = null;
@@ -173,10 +172,13 @@ public class JDBCPatientManager implements PatientManager{
 		List<Symptom> symptoms = new ArrayList<Symptom>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM symptoms WHERE symptomId="+pId;
+			String sql = "SELECT * FROM patients AS p JOIN suffers AS s ON p.id = s.patientId Join diseases AS d ON s.diseaseId ="
+					+ "d.id JOIN have AS h ON d.id=h.diseaseId JOIN symptoms AS symp ON h.symptomId = symp.id WHERE symp.id="+pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
-				Symptom s = new Symptom();
+				String name = rs.getString("name");
+				Integer id = rs.getInt("id");
+				Symptom s = new Symptom(name, id);
 				symptoms.add(s);
 		}
 			rs.close();
@@ -189,14 +191,17 @@ public class JDBCPatientManager implements PatientManager{
 	}
 
 	@Override
-	public List<Disease> listMyDiseases(int pId) {
+	public List<Disease> listMyDiseases(int dId) {
 		List<Disease> diseases = new ArrayList<Disease>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM diseases WHERE diseaseId="+pId;
+			String sql = "SELECT * FROM patients AS  p JOIN suffers AS s ON p.id = s.patientId JOIN diseases AS d ON s.diseaseId="
+					+ "d.id WHERE d.id="+dId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
-				Disease d = new Disease();
+				Integer id = rs.getInt(1);
+				String name = rs.getString("name");
+				Disease d = new Disease(id, name);
 				diseases.add(d);
 		}
 			rs.close();
@@ -213,14 +218,14 @@ public class JDBCPatientManager implements PatientManager{
 		List<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM medicines WHERE medicineId="+pId;
+			String sql = "SELECT * FROM patients AS p JOIN suffers AS s ON p.id = s.patientId JOIN diseases AS d ON s.diseaseId = d.id JOIN CanBeCured"
+					+ "AS c ON d.id =c.diseaseId JOIN medicines AS m ON c.medicineId = m.id WHERE p.id = "+pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
-				
-				/*Integer id = rs.getInt("id");
+				Integer id = rs.getInt(1);
 				String name = rs.getString("name");
 				Medicine m = new Medicine(id,name);
-				medicines.add(m);*/
+				medicines.add(m);
 				
 		}
 			rs.close();
@@ -237,16 +242,17 @@ public class JDBCPatientManager implements PatientManager{
 		Patient p = new Patient();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE patientId="+nurseId;
+			String sql = "SELECT * FROM patients AS p JOIN nurses AS n ON p.nurseId = n.id WHERE n.id="+nurseId;
+			//String sql = "SELECT * FROM patients AS p JOIN nurses AS n USING(nurseId)";
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
-				Integer id =rs.getInt("id");
-				String email =rs.getString("email");
-				Date dob = rs.getDate("dob");
-				Integer phone = rs.getInt("phone");
+				Integer id =rs.getInt(1);//when there are alias like p or n, we should put the number of the column instead of the attribute
 				String name = rs.getString("name");
-				Boolean status = rs.getBoolean("status");
-				p = new Patient(id, name, email, status, phone, dob);
+				String email =rs.getString("email");
+				Boolean severe = rs.getBoolean("severe");
+				Integer phone = rs.getInt("phone");
+				Date dob = rs.getDate("dob");
+				p = new Patient(id, name, email, severe, phone, dob);
 				
 		}
 			rs.close();
@@ -257,30 +263,7 @@ public class JDBCPatientManager implements PatientManager{
 		}
 		return p;
 	}
-
-	@Override
-	public Patient searchPatientByDoctor(int doctorId) {
-		Patient p = new Patient();
-		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE patientId="+doctorId;
-			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()){
-				Integer id =rs.getInt("id");
-				String email =rs.getString("email");
-				Date dob = rs.getDate("dob");
-				Integer phone = rs.getInt("phone");
-				String name = rs.getString("name");
-				Boolean status = rs.getBoolean("status");
-				p = new Patient(id, name, email, status, phone, dob);
-				
-		}
-			rs.close();
-			stmt.close();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return p;
+	public static void main(String[] args) {
+		//TODO 
 	}
 }

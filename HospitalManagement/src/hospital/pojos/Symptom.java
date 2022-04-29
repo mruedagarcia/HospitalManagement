@@ -15,8 +15,12 @@ public class Symptom implements Serializable {
 	
 	public Symptom() {
 		super();
-		// TODO Auto-generated constructor stub
 		patients = new ArrayList<Patient>();
+	}
+
+	public Symptom(String name2, Integer id2) {
+		this.name = name2;
+		this.id = id2;
 	}
 
 	@Override
