@@ -92,7 +92,7 @@ public class JDBCManager {
 			sq1 = "CREATE TABLE doctors ( " 
 			+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ "name TEXT NOT NULL,"
-			+ "speciality TEXT NOT NULL"
+			+ "specialty TEXT NOT NULL"
 			+");";
 			stmt.executeUpdate(sq1);
 

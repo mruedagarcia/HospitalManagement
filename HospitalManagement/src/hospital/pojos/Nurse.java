@@ -13,6 +13,15 @@ public class Nurse implements Serializable {
 	//one to many relationship
 	private List<Patient> patients;
 	
+	public Nurse() {
+		super();
+		// TODO Auto-generated constructor stub
+		patients = new ArrayList<Patient>();
+	}
+	
+	public Nurse(String name2) {
+		this.name = name2;
+	}
 	
 	public List<Patient> getPatients() {
 		return patients;
@@ -33,11 +42,6 @@ public class Nurse implements Serializable {
 		this.id = id;
 	}
 	
-	public Nurse() {
-		super();
-		// TODO Auto-generated constructor stub
-		patients = new ArrayList<Patient>();
-	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

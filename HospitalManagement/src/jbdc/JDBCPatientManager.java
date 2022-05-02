@@ -26,8 +26,7 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void addPatient(Patient p) {
 		try {
-			String sql = "INSERT INTO patients (name, emai"
-					+ "l, status, phone, Dob) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO patients (name, email, severe, phone, Dob) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getEmail());
@@ -89,7 +88,7 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void updatePatient(Patient p) {
 		try {
-			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " status=?" + " phone=?" + "date of birth=?";
+			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " severe=?" + " phone=?" + "date of birth=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, p.getName());
 			ps.setString(2, p.getEmail());
@@ -127,8 +126,8 @@ public class JDBCPatientManager implements PatientManager{
 				Date dob = rs.getDate("dob");
 				Integer phone = rs.getInt("phone");
 				String name = rs.getString("name");
-				Boolean status = rs.getBoolean("status");
-				Patient p = new Patient(id, name, email, status, phone, dob);
+				Boolean severe = rs.getBoolean("severe");
+				Patient p = new Patient(id, name, email, severe, phone, dob);
 				patients.add(p);
 			}
 	
@@ -148,7 +147,8 @@ public class JDBCPatientManager implements PatientManager{
 		List<Doctor> doctors = new ArrayList<Doctor>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctors WHERE patientId="+pId;
+			String sql = "SELECT * FROM patients AS p JOIN examines AS e ON p.id = e.patientId JOIN doctors AS d ON e.doctorId = d.id"
+					+ "WHERE patientId="+pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
@@ -172,7 +172,7 @@ public class JDBCPatientManager implements PatientManager{
 		List<Symptom> symptoms = new ArrayList<Symptom>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients AS p JOIN suffers AS s ON p.id = s.patientId Join diseases AS d ON s.diseaseId ="
+			String sql = "SELECT * FROM patients AS p JOIN suffers AS s ON p.id = s.patientId JOIN diseases AS d ON s.diseaseId ="
 					+ "d.id JOIN have AS h ON d.id=h.diseaseId JOIN symptoms AS symp ON h.symptomId = symp.id WHERE symp.id="+pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){

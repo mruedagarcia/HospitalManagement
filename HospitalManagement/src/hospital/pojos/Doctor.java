@@ -9,7 +9,7 @@ public class Doctor implements Serializable {
 	
 	private static final long serialVersionUID = 4406537107496347768L;
 	private String name;
-	private String speciality;
+	private String specialty;
 	private Integer id;
 	//many to many relationship
 	private List<Patient> patients;
@@ -20,14 +20,17 @@ public class Doctor implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 	
-	public Doctor(Integer id, String name, String speciality) {
+	public Doctor(Integer id, String name, String specialty) {
 		super();
 		this.name = name;
-		this.speciality = speciality;
+		this.specialty = specialty;
 		this.id = id;
 	}
 
-
+	public Doctor(String name, String specialty) {
+		this.name = name;
+		this.specialty = specialty;
+	}
 
 	@Override
 	public int hashCode() {
@@ -54,12 +57,12 @@ public class Doctor implements Serializable {
 		this.name = name;
 	}
 
-	public String getSpeciality() {
-		return speciality;
+	public String getSpecialty() {
+		return specialty;
 	}
 
-	public void setSpeciality(String speciality) {
-		this.speciality = speciality;
+	public void setSpeciality(String specialty) {
+		this.specialty = specialty;
 	}
 
 	public Integer getId() {
@@ -80,7 +83,7 @@ public class Doctor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Doctor [name=" + name + ", speciality=" + speciality + ", id=" + id + ", patients=" + patients + "]";
+		return "Doctor [name=" + name + ", specialty=" + specialty + ", id=" + id + ", patients=" + patients + "]";
 	}
 
 }
