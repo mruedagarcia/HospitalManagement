@@ -51,7 +51,7 @@ public class Menu {
 					break;
 				}
 				case 4: {
-					//createDoctor();
+					createDoctor();
 					break;
 				}
 				case 5: {
@@ -59,7 +59,7 @@ public class Menu {
 					break;
 				}
 				case 6: {
-					//createNurse();
+					createNurse();
 					break;
 				}
 				case 0: {
@@ -75,6 +75,24 @@ public class Menu {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void choosePatient()throws Exception{
+		System.out.println(patientManager.listAllPatients());
+		Integer patientId = Utilities.readInt("Choose a patient, type its id:");
+		patientMenu(patientId);
+	}
+	
+	public static void chooseDoctor()throws Exception{
+		System.out.println(doctorManager.listAllDoctors());
+		Integer doctorId = Utilities.readInt("Choose a doctor, type its id:");
+		doctorMenu(doctorId);
+	}
+	
+	public static void chooseNurse()throws Exception{
+		System.out.println(nurseManager.listAllNurses());
+		Integer nurseId = Utilities.readInt("Choose a nurse, type its id:");
+		patientMenu(nurseId);
 	}
 	
 	public static void createPatient()throws Exception{
@@ -128,6 +146,81 @@ public class Menu {
 					break;
 				}
 				case 4: {
+					
+					break;
+				}
+				case 0: {
+					System.exit(0);
+				}
+				default: {
+					break;// close the loop
+				}
+				}
+			}while(true);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void doctorMenu(Integer dId)throws Exception{
+		try {
+			do {
+
+				System.out.println("1.Change my data:");
+				System.out.println("2.See my patients:");
+				System.out.println("3.See all patients:");
+				System.out.println("4.Save treatment:");
+				System.out.println("0.Exit");
+				int choice = Utilities.readInt("----->Choose an option:<------\n");
+				switch (choice) {
+				case 1: {
+					
+					break;
+				}
+				case 2: {
+					
+					break;
+				}
+				case 3: {
+					
+					break;
+				}
+				case 4: {
+					
+					break;
+				}
+				case 0: {
+					System.exit(0);
+				}
+				default: {
+					break;// close the loop
+				}
+				}
+			}while(true);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void nurseMenu(Integer nId)throws Exception{
+		try {
+			do {
+
+				System.out.println("1.Change my data:");
+				System.out.println("2.See my patients:");
+				System.out.println("3.See all patients:");
+				System.out.println("0.Exit");
+				int choice = Utilities.readInt("----->Choose an option:<------\n");
+				switch (choice) {
+				case 1: {
+					
+					break;
+				}
+				case 2: {
+					
+					break;
+				}
+				case 3: {
 					
 					break;
 				}

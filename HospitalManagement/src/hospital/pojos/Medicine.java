@@ -12,6 +12,7 @@ public class Medicine implements Serializable {
 	private String name;
 	//many to many relationship
 	private List<Patient> patients;
+	private List<Disease> diseases;
 
 	public Medicine() {
 		super();

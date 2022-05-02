@@ -12,6 +12,7 @@ public class Symptom implements Serializable {
 	private Integer id;
 	//many to many relationship
 	private List<Patient> patients;
+	private List<Disease> diseases;
 	
 	public Symptom() {
 		super();
