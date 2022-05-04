@@ -1,6 +1,11 @@
 package jbdc;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import hospital.pojos.Nurse;
@@ -30,43 +35,123 @@ public class JDBCNurseManager implements NurseManager{
 
 	@Override
 	public List<Nurse> listAllNurses() {
-		// TODO Auto-generated method stub
-		return null;
+		List <Nurse> nurses = new ArrayList<Nurse>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sq1 = "SELECT * FROM nurses";
+			ResultSet rs = stmt.executeQuery(sq1);
+			while(rs.next()) {
+				String name = rs.getString("name");
+				Integer id = rs.getInt("id");
+				Nurse n1  = new Nurse(name,id);
+				nurses.add(n1);
+			}
+			rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return nurses;
 	}
 
 	@Override
 	public void assignNurse(int patientId, int nurseId) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sq1 = "INSERT INTO treat (patientId,nurseId) VALUES (?,?)";
+			PreparedStatement p = manager.getConnection().prepareStatement(sq1);
+			p.setInt(1, patientId);
+			p.setInt(2, nurseId);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
 	public List<Patient> listMyPatients(int nurseId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sq1 = "SELECT * FROM patients AS p JOIN treat AS t p.id = t.id JOIN nurses AS n ON t.nurseId = n.id"+
+			"WHERE n.id="+nurseId;
+			ResultSet rs = stmt.executeQuery(sq1);
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				Boolean severe = rs.getBoolean("severe");
+				Integer phone = rs.getInt("phone");
+				Date dob = rs.getDate("dob");
+				Patient p = new Patient(id,  name,  email,  severe,  phone,  dob);
+				patients.add(p);
+			}
+			rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
 	}
 
 	@Override
 	public Nurse searchNurseByPatient(int patientId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Nurse n = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sq1 = "SELECT * FROM nurse WHERE nurseId="+patientId;
+			ResultSet rs = stmt.executeQuery(sq1);
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				n = new Nurse(name, id);
+			}
+			rs.close();
+			stmt.close();
+		
+			}catch(Exception e) {
+		e.printStackTrace();
+			}
+			return n;
+		}
 
 	@Override
 	public Nurse getNurseById(int nurseId) {
-		// TODO Auto-generated method stub
-		return null;
+		Nurse n = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sq1 = "SELECT FROM nurses WHERE id="+nurseId;
+			ResultSet rs = stmt.executeQuery(sq1);
+			while(rs.next()) {
+				String name = rs.getString("name");
+				n = new Nurse(name);
+			}rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return n;
 	}
 
 	@Override
 	public void updateNurse(Nurse n) {
-		// TODO Auto-generated method stub
+		try {
+			String sq1 = "UPDATE nurse" + "SET name = ?";
+			PreparedStatement ps = manager.getConnection().prepareStatement(sq1);
+			ps.setString(1, n.getName());
+			ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public boolean updatePatientStatus(int patientId) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub . . . 
+		/*try {
+			String sq1 = "UPDATE patients" + "SET name = ?";
+		}*/
 		return false;
 	}
 
