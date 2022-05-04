@@ -125,7 +125,7 @@ public class Patient implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean getSevere() {
+	public boolean getSeverity() {
 		return severe;
 	}
 	public void setSevere(boolean severe) {

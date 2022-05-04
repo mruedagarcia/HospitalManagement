@@ -120,7 +120,7 @@ public class JDBCNurseManager implements NurseManager{
 		Nurse n = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sq1 = "SELECT FROM nurses WHERE id="+nurseId;
+			String sq1 = "SELECT * FROM nurses WHERE id="+nurseId;
 			ResultSet rs = stmt.executeQuery(sq1);
 			while(rs.next()) {
 				String name = rs.getString("name");
@@ -147,12 +147,18 @@ public class JDBCNurseManager implements NurseManager{
 	}
 
 	@Override
-	public boolean updatePatientStatus(int patientId) {
-		// TODO Auto-generated method stub . . . 
-		/*try {
-			String sq1 = "UPDATE patients" + "SET name = ?";
-		}*/
-		return false;
+	public void updatePatientStatus(Patient p) {
+	
+		try {
+			String sq1 = "UPDATE patients" + "SET severity = ?";
+			PreparedStatement ps = manager.getConnection().prepareStatement(sq1);
+			ps.setBoolean(1, p.getSeverity());
+			ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

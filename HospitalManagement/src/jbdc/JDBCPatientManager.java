@@ -30,7 +30,7 @@ public class JDBCPatientManager implements PatientManager{
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getEmail());
-			prep.setBoolean(3, p.getSevere());
+			prep.setBoolean(3, p.getSeverity());
 			prep.setInt(4, p.getPhone());
 			prep.setDate(5, p.getDob()); 
 			prep.executeUpdate();
@@ -92,7 +92,7 @@ public class JDBCPatientManager implements PatientManager{
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, p.getName());
 			ps.setString(2, p.getEmail());
-			ps.setBoolean(3, p.getSevere());
+			ps.setBoolean(3, p.getSeverity());
 			ps.setInt(4, p.getPhone());
 			ps.setDate(5, p.getDob());
 			ps.executeUpdate();

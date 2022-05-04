@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="doctors")
 public class Doctor implements Serializable {
 	
 	private static final long serialVersionUID = 4406537107496347768L;

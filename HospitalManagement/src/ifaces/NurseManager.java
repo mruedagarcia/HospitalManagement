@@ -20,6 +20,6 @@ public interface NurseManager {
 	//Update a nurse
 	public void updateNurse(Nurse n);
 	//Update patient status
-	public boolean updatePatientStatus(int patientId);
+	public void updatePatientStatus(Patient p);
 	
 }
