@@ -111,21 +111,32 @@ public class JDBCDoctorManager implements DoctorManager{
 			}
 		
 	}
-
+	
 	@Override
-	public void assignSymptomDiseaseMedicine(int symptomId, int diseaseId, int medicineId) {
-		// TODO Auto-generated method stub
+	public void assignSymptomDisease(int symptomId, int diseaseId){
+		try {
+			String sql = "INSERT INTO have (symptomId, diseaseId) VALUES (?,?)";
+			PreparedStatement p = manager.getConnection().prepareStatement(sql);
+			p.setInt(1, symptomId);
+			p.setInt(2, diseaseId);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		
+		
+	}
 	}
 
 	@Override
 	public Disease searchDiseaseBySymptoms(List<Symptom> symptoms) {
 		Disease d = new Disease();
+		ResultSet rs = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM diseases AS d JOIN have AS h ON d.id = h.diseaseId JOIN symptoms AS s ON h.symptomId = s.id WHERE";
-			//FINISH QUERY, HOW DO WE MATCH A LIST OF SYMPTOMS WITH A DISEASE
-			ResultSet rs = stmt.executeQuery(sql);
+			for (Symptom symptom : symptoms) {//for each symptom, we take each id in the list of Symptoms 
+				Integer id = symptom.getId();
+				String sql = "SELECT * FROM diseases AS d JOIN have AS h ON d.id = h.diseaseId WHERE d.id ="+id;
+				rs = stmt.executeQuery(sql);
+			}
 			while(rs.next()){
 				Integer id =rs.getInt(1);//when there are alias like p or n, we should put the number of the column instead of the attribute
 				String name = rs.getString("name");
@@ -142,12 +153,12 @@ public class JDBCDoctorManager implements DoctorManager{
 	}
 
 	@Override
-	public List<Medicine> searchMedicineByDisease(Disease d) { //should we put a list of diseases instead of only one disease?
+	public List<Medicine> searchMedicineByDisease(Disease d) { 
 		List<Medicine> medicines = new ArrayList<Medicine>();
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM medicines AS m JOIN CanBeCured AS c ON m.id = c.medicineId JOIN diseases AS d ON c.diseaseId = d.id WHERE";
-			//String sql = "SELECT * FROM patients AS p JOIN nurses AS n USING(nurseId)";
+			String sql = "SELECT * FROM medicines AS m JOIN CanBeCured AS c ON m.id = c.medicineId JOIN diseases AS d ON c.diseaseId = d.id"
+					+ "WHERE d.id="+d.getId();
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				Integer id =rs.getInt(1);//when there are alias like p or n, we should put the number of the column instead of the attribute
@@ -164,4 +175,17 @@ public class JDBCDoctorManager implements DoctorManager{
 		}
 		return medicines;
 }
+
+	@Override
+	public void assignDiseaseMedicine(int diseaseId, int medicineId) {
+		try {
+			String sql = "INSERT INTO CanBeCured (diseaseId, medicineId) VALUES (?,?)";
+			PreparedStatement p = manager.getConnection().prepareStatement(sql);
+			p.setInt(1, diseaseId);
+			p.setInt(2, medicineId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
