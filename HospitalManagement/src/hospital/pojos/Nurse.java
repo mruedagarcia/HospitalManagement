@@ -2,7 +2,12 @@ package hospital.pojos;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,9 +16,15 @@ import java.util.Objects;
 public class Nurse implements Serializable {
 
 	private static final long serialVersionUID = -888446701244086278L;
+	
+	@Id
+	@GeneratedValue(generator="nurses")
+	@TableGenerator(name="nurses", table="sqlite_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="nurses")
+	
 	private String name;
 	private Integer id;
 	//one to many relationship
+	@OneToMany(mappedBy ="nurse")
 	private List<Patient> patients;
 	
 	public Nurse() {

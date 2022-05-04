@@ -1,5 +1,3 @@
 PROGRESS REPORT:
 
-We finished some method ONE METHOD OF 5 JOINS that was called listmyMedicines in the class JBDCPatientManager
-and we checked our tables and put the primary keys.
-And we are starting to finish the class JDBCPatientManager with all our methods that we are thinking.
+We start with annotations of JPA and finished JDBC classes. We did the class of persistence, user and role

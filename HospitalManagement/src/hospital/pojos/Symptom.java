@@ -6,8 +6,7 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-@Entity
-@Table(name="symptoms")
+
 public class Symptom implements Serializable {
 	
 	private static final long serialVersionUID = -9137519159299611555L;

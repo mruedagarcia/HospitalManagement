@@ -11,11 +11,9 @@
  
 		<!-- Entity Class -->
 		<class>sample.db.pojos.Patient</class>
-		<class>sample.db.pojos.Disease</class>
 		<class>sample.db.pojos.Doctor</class>
-		<class>sample.db.pojos.Medicine</class>
 		<class>sample.db.pojos.Nurse</class>
-		<class>sample.db.pojos.Symptom</class>
+		
 
  
 		<properties>	
