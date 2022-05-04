@@ -19,6 +19,12 @@ public class Nurse implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 	
+	public Nurse(String name, Integer id) {
+		super();
+		this.name = name;
+		this.id = id;
+	}
+
 	public Nurse(String name2) {
 		this.name = name2;
 	}

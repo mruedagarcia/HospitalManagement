@@ -52,7 +52,7 @@ public class JDBCPatientManager implements PatientManager{
 				String email = rs.getString("email");
 				Boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
-				Date dob = rs.getDate("date of birth");
+				Date dob = rs.getDate("dob");
 				p = new Patient(id, name, email, severe, phone, dob);
 			}
 			rs.close();
