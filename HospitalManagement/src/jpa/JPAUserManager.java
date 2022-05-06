@@ -30,9 +30,9 @@ public class JPAUserManager implements UserManager {
 			Role doctor = new Role("Doctor");
 			Role patient = new Role("Patient");
 			Role nurse = new Role("Nurse");
-			this.newRole(doctor);
-			this.newRole(patient);
-			this.newRole(nurse);
+			this.createRole(doctor);
+			this.createRole(patient);
+			this.createRole(nurse);
 		}
 	}
 
@@ -42,45 +42,58 @@ public class JPAUserManager implements UserManager {
 	}
 
 	@Override
-	public void newUser(User u) {
+	public void createUser(User u) {
 		em.getTransaction().begin();
 		em.persist(u);
 		em.getTransaction().commit();
 	}
 
-	private void newRole(Role r) {
+	@Override
+	public void createRole(Role r) {
 		em.getTransaction().begin();
 		em.persist(r);
 		em.getTransaction().commit();
 	}
 
-	private void deleteUser(User u) {
+	@Override
+	public void deleteUser(User u) {
 
 		em.getTransaction().begin();
 		em.remove(u);
 		em.getTransaction().commit();
 	}
 
-	private void deleteRole(Role r) {
+	@Override
+	public void deleteRole(Role r) {
 
 		em.getTransaction().begin();
 		em.remove(r);
 		em.getTransaction().commit();
 	}
 
-	private void updateUser() {
+	@Override
+	public void updateUser(User u) {
+		// TODO Auto-generated method stub
+		// updatePassword
 
 	}
 
 	@Override
-	public Role getRole(String name) {
+	public void updateRole(Role r) {
+		// TODO Auto-generated method stub
+		// updateName
+	}
+
+	// READ METHODS
+	@Override
+	public Role getRole(String name) { // read only one Role
 		Query q = em.createNativeQuery("SELECT * FROM roles WHERE name = ?", Role.class);
 		q.setParameter(1, name);// we are changing the name of the Role
 		return (Role) q.getSingleResult();
 	}
 
 	@Override
-	public List<Role> getRoles() {
+	public List<Role> getRoles() { // read all
 		Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
 		List<Role> roles = (List<Role>) q.getResultList();
 		return roles;
