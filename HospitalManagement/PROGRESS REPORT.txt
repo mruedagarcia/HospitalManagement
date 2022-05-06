@@ -1,3 +1,3 @@
 PROGRESS REPORT:
-
-We start with annotations of JPA and finished JDBC classes. We did the class of persistence, user and role
+Today we start to do things about JPA in Role and User Classes and remove some anottations of our classes because we dont need it.
+Next day, we are going to continue with JPA 

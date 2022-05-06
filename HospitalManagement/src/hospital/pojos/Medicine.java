@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class Medicine implements Serializable {
-	
+
 	private static final long serialVersionUID = -4337318150581789480L;
 	private Integer id;
 	private String name;
-	//many to many relationship
+	// many to many relationship
 	private List<Patient> patients;
 	private List<Disease> diseases;
 
@@ -43,8 +43,6 @@ public class Medicine implements Serializable {
 		Medicine other = (Medicine) obj;
 		return Objects.equals(id, other.id);
 	}
-
-
 
 	public Integer getId() {
 		return id;

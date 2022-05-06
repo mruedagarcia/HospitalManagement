@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class Symptom implements Serializable {
-	
+
 	private static final long serialVersionUID = -9137519159299611555L;
 	private String name;
 	private Integer id;
-	//many to many relationship
+	// many to many relationship
 	private List<Patient> patients;
 	private List<Disease> diseases;
-	
+
 	public Symptom() {
 		super();
 		patients = new ArrayList<Patient>();
@@ -46,12 +46,15 @@ public class Symptom implements Serializable {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -68,6 +71,5 @@ public class Symptom implements Serializable {
 	public String toString() {
 		return "Symptom [name=" + name + ", id=" + id + ", patients=" + patients + "]";
 	}
-	
 
 }

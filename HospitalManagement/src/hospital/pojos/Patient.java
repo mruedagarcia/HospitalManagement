@@ -7,48 +7,41 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-@Entity
-@Table(name="patients")
-public class Patient implements Serializable{
+public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -1080532239335630835L;
-	
-	@Id
-	@GeneratedValue(generator="patients")
-	@TableGenerator(name="patients", table="sqlite_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="patients")
 	private Integer id;
 	private String email;
 	private Date dob;
 	private Integer phone;
 	private String name;
 	private boolean severe;
-	//Many to one relationship
 	private Nurse nurse;
-	//many to many relationship
-	@ManyToMany (mappedBy = "")
-	private List<Disease> diseases;
 	private List<Doctor> doctors;
+	// @Transient si no funciona pondremos esto en cada clase que NO utilice JPA
+	private List<Disease> diseases;
+
 	private List<Medicine> medicines;
 	private List<Symptom> symptoms;
-	
+
 	public Patient() {
 		super();
-		// TODO Auto-generated constructor stub
+
 		diseases = new ArrayList<Disease>();
 		doctors = new ArrayList<Doctor>();
 		medicines = new ArrayList<Medicine>();
 		symptoms = new ArrayList<Symptom>();
 	}
-	
-	
-	
+
 	public Patient(Integer id, String name, String email, boolean severe, Integer phone, Date dob) {
 		super();
 		this.id = id;
@@ -59,8 +52,6 @@ public class Patient implements Serializable{
 		this.severe = severe;
 	}
 
-
-
 	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {
 		super();
 		this.email = email;
@@ -70,14 +61,12 @@ public class Patient implements Serializable{
 		this.severe = severe;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
-	
-	//equals and hashcode
-	
+
+	// equals and hashcode
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -98,9 +87,11 @@ public class Patient implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -113,79 +104,69 @@ public class Patient implements Serializable{
 		this.dob = dob;
 	}
 
-
-
 	public Nurse getNurse() {
 		return nurse;
 	}
-
-
 
 	public void setNurse(Nurse nurse) {
 		this.nurse = nurse;
 	}
 
-
-
 	public Integer getPhone() {
 		return phone;
 	}
+
 	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public boolean getSeverity() {
 		return severe;
 	}
+
 	public void setSevere(boolean severe) {
 		this.severe = severe;
 	}
-
 
 	public List<Disease> getDiseases() {
 		return diseases;
 	}
 
-
 	public void setDiseases(List<Disease> diseases) {
 		this.diseases = diseases;
 	}
-
 
 	public List<Doctor> getDoctors() {
 		return doctors;
 	}
 
-
 	public void setDoctors(List<Doctor> doctors) {
 		this.doctors = doctors;
 	}
-
 
 	public List<Medicine> getMedicines() {
 		return medicines;
 	}
 
-
 	public void setMedicines(List<Medicine> medicines) {
 		this.medicines = medicines;
 	}
-
 
 	public List<Symptom> getSymptoms() {
 		return symptoms;
 	}
 
-
 	public void setSymptoms(List<Symptom> symptoms) {
 		this.symptoms = symptoms;
 	}
-
 
 	@Override
 	public String toString() {
@@ -193,6 +174,5 @@ public class Patient implements Serializable{
 				+ ", severe=" + severe + ", diseases=" + diseases + ", doctors=" + doctors + ", medicines=" + medicines
 				+ ", symptoms=" + symptoms + "]";
 	}
-	
 
 }

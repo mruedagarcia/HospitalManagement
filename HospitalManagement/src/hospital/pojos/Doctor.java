@@ -6,17 +6,22 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
-@Entity
-@Table(name="doctors")
 public class Doctor implements Serializable {
-	
+
 	private static final long serialVersionUID = 4406537107496347768L;
+
 	private String name;
 	private String specialty;
 	private Integer id;
-	//many to many relationship
+
 	private List<Patient> patients;
 
 	public Doctor() {
@@ -24,7 +29,7 @@ public class Doctor implements Serializable {
 		// TODO Auto-generated constructor stub
 		patients = new ArrayList<Patient>();
 	}
-	
+
 	public Doctor(Integer id, String name, String specialty) {
 		super();
 		this.name = name;

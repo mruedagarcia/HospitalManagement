@@ -11,9 +11,8 @@ import jbdc.JDBCManager;
 import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
 
-
 public class Menu {
-	
+
 	private static JDBCPatientManager patientManager;
 	private static JDBCDoctorManager doctorManager;
 	private static JDBCNurseManager nurseManager;
@@ -39,7 +38,7 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					//loginPatient();
+					// loginPatient();
 					break;
 				}
 				case 2: {
@@ -47,7 +46,7 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					//loginDoctor();
+					// loginDoctor();
 					break;
 				}
 				case 4: {
@@ -55,7 +54,7 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					//loginNurse();
+					// loginNurse();
 					break;
 				}
 				case 6: {
@@ -76,26 +75,26 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void choosePatient()throws Exception{
+
+	public static void choosePatient() throws Exception {
 		System.out.println(patientManager.listAllPatients());
 		Integer patientId = Utilities.readInt("Choose a patient, type its id:");
 		patientMenu(patientId);
 	}
-	
-	public static void chooseDoctor()throws Exception{
+
+	public static void chooseDoctor() throws Exception {
 		System.out.println(doctorManager.listAllDoctors());
 		Integer doctorId = Utilities.readInt("Choose a doctor, type its id:");
 		doctorMenu(doctorId);
 	}
-	
-	public static void chooseNurse()throws Exception{
+
+	public static void chooseNurse() throws Exception {
 		System.out.println(nurseManager.listAllNurses());
 		Integer nurseId = Utilities.readInt("Choose a nurse, type its id:");
 		patientMenu(nurseId);
 	}
-	
-	public static void createPatient()throws Exception{
+
+	public static void createPatient() throws Exception {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String email = Utilities.readString("Email: ");
@@ -104,9 +103,9 @@ public class Menu {
 		LocalDate dob = Utilities.readDate();
 		Patient p = new Patient(name, email, severe, phone, Date.valueOf(dob));
 		patientManager.addPatient(p);
-		//TODO go back
+		// TODO go back
 	}
-	
+
 	public static void createDoctor() {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
@@ -114,15 +113,15 @@ public class Menu {
 		Doctor d = new Doctor(name, specialty);
 		doctorManager.addDoctor(d);
 	}
-	
+
 	public static void createNurse() {
 		System.out.println("Type tour data:");
 		String name = Utilities.readString("Name: ");
 		Nurse n = new Nurse(name);
 		nurseManager.addNurse(n);
 	}
-	
-	public static void patientMenu(Integer pId)throws Exception{
+
+	public static void patientMenu(Integer pId) throws Exception {
 		try {
 			do {
 
@@ -134,19 +133,19 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					
+
 					break;
 				}
 				case 2: {
-					
+
 					break;
 				}
 				case 3: {
-					
+
 					break;
 				}
 				case 4: {
-					
+
 					break;
 				}
 				case 0: {
@@ -156,13 +155,13 @@ public class Menu {
 					break;// close the loop
 				}
 				}
-			}while(true);
-		}catch (Exception e) {
+			} while (true);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void doctorMenu(Integer dId)throws Exception{
+
+	public static void doctorMenu(Integer dId) throws Exception {
 		try {
 			do {
 
@@ -174,19 +173,19 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					
+
 					break;
 				}
 				case 2: {
-					
+
 					break;
 				}
 				case 3: {
-					
+
 					break;
 				}
 				case 4: {
-					
+
 					break;
 				}
 				case 0: {
@@ -196,13 +195,13 @@ public class Menu {
 					break;// close the loop
 				}
 				}
-			}while(true);
-		}catch (Exception e) {
+			} while (true);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void nurseMenu(Integer nId)throws Exception{
+
+	public static void nurseMenu(Integer nId) throws Exception {
 		try {
 			do {
 
@@ -213,15 +212,15 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					
+
 					break;
 				}
 				case 2: {
-					
+
 					break;
 				}
 				case 3: {
-					
+
 					break;
 				}
 				case 0: {
@@ -231,8 +230,8 @@ public class Menu {
 					break;// close the loop
 				}
 				}
-			}while(true);
-		}catch (Exception e) {
+			} while (true);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

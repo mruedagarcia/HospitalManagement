@@ -6,19 +6,17 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+public class Disease implements Serializable {
 
-public class Disease implements Serializable{
-	
 	private static final long serialVersionUID = -6837166362143027533L;
-	
-	
+
 	private Integer id;
 	private String name;
-	//many to many relationship
+	// many to many relationship
 	private List<Patient> patients;
 	private List<Symptom> symptoms;
 	private List<Medicine> medicines;
-	
+
 	public Disease() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -26,8 +24,8 @@ public class Disease implements Serializable{
 	}
 
 	public Disease(Integer id2, String name2) {
-		this.id=id2;
-		this.name=name2;
+		this.id = id2;
+		this.name = name2;
 	}
 
 	public Integer getId() {
@@ -58,5 +56,5 @@ public class Disease implements Serializable{
 	public String toString() {
 		return "Disease [id=" + id + ", name=" + name + ", patients=" + patients + "]";
 	}
-	
+
 }

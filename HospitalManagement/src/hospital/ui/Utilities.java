@@ -7,8 +7,6 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-
 public class Utilities {
 	private static BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
@@ -38,29 +36,29 @@ public class Utilities {
 			}
 		}
 	}
-	
-	public static boolean readBoolean (String t) throws IOException {
+
+	public static boolean readBoolean(String t) throws IOException {
 		System.out.println(t);
-		while(true) {
+		while (true) {
 			String stringReaded;
 			stringReaded = console.readLine();
 			Boolean b;
-			if(stringReaded.equalsIgnoreCase("no")) {
+			if (stringReaded.equalsIgnoreCase("no")) {
 				b = false;
-			}else if(stringReaded.equalsIgnoreCase("yes")) {
+			} else if (stringReaded.equalsIgnoreCase("yes")) {
 				b = true;
 			}
 		}
 	}
-	
+
 	public static LocalDate readDate() {
-		while(true) {
+		while (true) {
 			try {
 				String date = readString("Introduce a date (yyyy-mm-dd):");
 				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dob = LocalDate.parse(date,dtf);
+				LocalDate dob = LocalDate.parse(date, dtf);
 				return dob;
-			}catch(DateTimeException e) {
+			} catch (DateTimeException e) {
 				System.out.println("Incorrect date");
 			}
 		}

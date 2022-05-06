@@ -11,28 +11,21 @@ import javax.persistence.TableGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-@Entity 
-@Table(name = "nurses")
+
 public class Nurse implements Serializable {
 
 	private static final long serialVersionUID = -888446701244086278L;
-	
-	@Id
-	@GeneratedValue(generator="nurses")
-	@TableGenerator(name="nurses", table="sqlite_sequence", pkColumnName="name", valueColumnName="seq", pkColumnValue="nurses")
-	
+
 	private String name;
 	private Integer id;
-	//one to many relationship
-	@OneToMany(mappedBy ="nurse")
 	private List<Patient> patients;
-	
+
 	public Nurse() {
 		super();
 		// TODO Auto-generated constructor stub
 		patients = new ArrayList<Patient>();
 	}
-	
+
 	public Nurse(String name, Integer id) {
 		super();
 		this.name = name;
@@ -42,30 +35,36 @@ public class Nurse implements Serializable {
 	public Nurse(String name2) {
 		this.name = name2;
 	}
-	
+
 	public List<Patient> getPatients() {
 		return patients;
 	}
+
 	public void setPatients(List<Patient> patients) {
 		this.patients = patients;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -77,11 +76,10 @@ public class Nurse implements Serializable {
 		Nurse other = (Nurse) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	@Override
 	public String toString() {
 		return "Nurse [name=" + name + ", id=" + id + ", patients=" + patients + "]";
 	}
-
-	
 
 }
