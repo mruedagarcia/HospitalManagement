@@ -74,14 +74,14 @@ public class JPAUserManager implements UserManager {
 	@Override
 	public void updateUser(User u) {
 		// TODO Auto-generated method stub
-		// updatePassword
+		// TODO updatePassword
 
 	}
 
 	@Override
 	public void updateRole(Role r) {
 		// TODO Auto-generated method stub
-		// updateName
+		// TODO updateName
 	}
 
 	// READ METHODS
