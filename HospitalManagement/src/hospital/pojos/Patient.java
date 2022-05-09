@@ -128,7 +128,7 @@ public class Patient implements Serializable {
 		this.name = name;
 	}
 
-	public boolean getSeverity() {
+	public boolean getSevere() {
 		return severe;
 	}
 

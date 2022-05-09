@@ -152,7 +152,7 @@ public class JDBCNurseManager implements NurseManager{
 		try {
 			String sq1 = "UPDATE patients" + "SET severity = ?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sq1);
-			ps.setBoolean(1, p.getSeverity());
+			ps.setBoolean(1, p.getSevere());
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();

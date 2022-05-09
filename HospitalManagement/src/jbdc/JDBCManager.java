@@ -38,9 +38,9 @@ public class JDBCManager {
 		try {
 			Statement stmt = c.createStatement();
 			// PATIENTS
-			String sq1 = "CREATE TABLE patients (" + "id      INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "name TEXT NOT NULL," + "email TEXT NOT NULL," + "severe BOOLEAN," + "phone INTEGER NOT NULL,"
-					+ "Dob DATE," + "nurseID INTEGER NOT NULL REFERENCES nurses(id) ON DELETE RESTRICT" + ");";
+			String sq1 = "CREATE TABLE patients (" + "id      INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ "name TEXT NOT NULL, " + "email TEXT NOT NULL, " + "severe BOOLEAN, " + "phone INTEGER NOT NULL, "
+					+ "dob DATE, " + "nurseID INTEGER NOT NULL REFERENCES nurses(id) ON DELETE RESTRICT" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->NURSES
@@ -62,9 +62,9 @@ public class JDBCManager {
 
 			// --------->EXAMINES
 
-			sq1 = "CREATE TABLE examines(" + "patientId INTEGER" + "doctorId INTEGER"
-					+ "FOREIGN KEY (patientId) REFERENCES patients(id) ON DELETE CASCADE,"
-					+ "FOREIGN KEY (doctorId) REFERENCES doctors(id) ON DELETE CASCADE,"
+			sq1 = "CREATE TABLE examines(" + "patientId INTEGER, " + "doctorId INTEGER, "
+					+ "FOREIGN KEY (patientId) REFERENCES patients(id) ON DELETE CASCADE, "
+					+ "FOREIGN KEY (doctorId) REFERENCES doctors(id) ON DELETE CASCADE, "
 					+ "PRIMARY KEY (patientId, doctorId)" + ");";
 			stmt.executeUpdate(sq1);
 

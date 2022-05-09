@@ -11,6 +11,7 @@ public class Utilities {
 	private static BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 
 	public static int readInt(String text) {
+		
 		int number;
 		while (true) {
 			try {
@@ -45,8 +46,10 @@ public class Utilities {
 			Boolean b;
 			if (stringReaded.equalsIgnoreCase("no")) {
 				b = false;
+				return b;
 			} else if (stringReaded.equalsIgnoreCase("yes")) {
 				b = true;
+				return b;
 			}
 		}
 	}
