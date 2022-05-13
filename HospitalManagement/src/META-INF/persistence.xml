@@ -4,12 +4,12 @@
 	<!-- Persistence Provider -->
 	<!-- RESOURCE-LOCAL: Application-managed transactions -->
 	<!-- JTA: Container-managed transactions -->
-	<persistence-unit name="company-provider" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="HospitalManagement-provider" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 		<!-- Entity Class -->
-		<class>sample.db.pojos.Role</class>
-		<class>sample.db.pojos.User</class>
+		<class>hospital.pojos.Role</class>
+		<class>hospital.pojos.User</class>
 
 
 		<properties>

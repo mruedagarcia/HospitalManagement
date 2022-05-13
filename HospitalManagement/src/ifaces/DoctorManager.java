@@ -19,6 +19,9 @@ public interface DoctorManager {
 	// Update doctor
 	public void updateDoctor(Doctor d);
 
+	// Get a doctor by id
+	public Doctor getDoctorById(int dId);
+
 	// List all the patients of a doctor
 	public List<Patient> listMyPatients(int doctorId);
 

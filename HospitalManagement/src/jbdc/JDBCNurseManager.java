@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import hospital.pojos.Doctor;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import ifaces.NurseManager;
@@ -67,6 +68,7 @@ public class JDBCNurseManager implements NurseManager{
 		}
 
 	}
+	
 
 	@Override
 	public List<Patient> listMyPatients(int nurseId) {

@@ -16,9 +16,9 @@ public interface UserManager {
 
 	public void deleteRole(Role r);
 
-	public void updateUser(User u);
+	public void updateUser(User u,byte[] password);
 
-	public void updateRole(Role r);
+	public void updateRole(Role r,String name);
 
 	public Role getRole(String name);
 

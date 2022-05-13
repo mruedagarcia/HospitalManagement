@@ -11,6 +11,7 @@ import java.util.List;
 import hospital.pojos.Disease;
 import hospital.pojos.Doctor;
 import hospital.pojos.Medicine;
+import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import hospital.pojos.Symptom;
 import ifaces.DoctorManager;
@@ -123,6 +124,26 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 
 		}
+	}
+
+	@Override
+	public Doctor getDoctorById(int dId) {
+		Doctor d = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sq1 = "SELECT * FROM doctors WHERE id=" + dId;
+			ResultSet rs = stmt.executeQuery(sq1);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String specialty = rs.getString("specialty");
+				d = new Doctor(name, specialty);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return d;
 	}
 
 	@Override

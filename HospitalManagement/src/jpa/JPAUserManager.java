@@ -37,7 +37,7 @@ public class JPAUserManager implements UserManager {
 	}
 
 	@Override
-	public void disconnect() {
+	public void disconnect(){
 		em.close();
 	}
 
@@ -72,17 +72,19 @@ public class JPAUserManager implements UserManager {
 	}
 
 	@Override
-	public void updateUser(User u) {
-		// TODO Auto-generated method stub
-		// TODO updatePassword
+	public void updateUser(User u,byte[] password) {
+		em.getTransaction().begin();
+		u.setPassword(password);
+		em.getTransaction().commit();
 
 	}
 
 	@Override
-	public void updateRole(Role r) {
-		// TODO Auto-generated method stub
-		// TODO updateName
-	}
+	public void updateRole(Role r,String name) {
+		em.getTransaction().begin();
+		r.setName(name);
+		em.getTransaction().commit();
+		}
 
 	// READ METHODS
 	@Override

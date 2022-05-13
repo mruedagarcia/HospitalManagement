@@ -40,7 +40,7 @@ public class JDBCManager {
 			// PATIENTS
 			String sq1 = "CREATE TABLE patients (" + "id      INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, " + "email TEXT NOT NULL, " + "severe BOOLEAN, " + "phone INTEGER NOT NULL, "
-					+ "dob DATE, " + "nurseID INTEGER NOT NULL REFERENCES nurses(id) ON DELETE RESTRICT" + ");";
+					+ "dob DATE , " + "nurseID INTEGER REFERENCES nurses(id) ON DELETE RESTRICT" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->NURSES

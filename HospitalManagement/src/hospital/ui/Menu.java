@@ -6,16 +6,23 @@ import java.time.LocalDate;
 import hospital.pojos.Doctor;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
+import hospital.pojos.User;
+import ifaces.DoctorManager;
+import ifaces.NurseManager;
+import ifaces.PatientManager;
+import ifaces.UserManager;
 import jbdc.JDBCDoctorManager;
 import jbdc.JDBCManager;
 import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
+import jpa.JPAUserManager;
 
 public class Menu {
 
-	private static JDBCPatientManager patientManager;
-	private static JDBCDoctorManager doctorManager;
-	private static JDBCNurseManager nurseManager;
+	private static PatientManager patientManager;
+	private static DoctorManager doctorManager;
+	private static NurseManager nurseManager;
+	private static UserManager userManager;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -25,6 +32,7 @@ public class Menu {
 		patientManager = new JDBCPatientManager(jdbcManager);
 		doctorManager = new JDBCDoctorManager(jdbcManager);
 		nurseManager = new JDBCNurseManager(jdbcManager);
+		userManager = new JPAUserManager();
 		try {
 			do {
 
@@ -38,7 +46,8 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					// loginPatient();
+					choosePatient();
+					loginPatient();
 					break;
 				}
 				case 2: {
@@ -46,7 +55,8 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					// loginDoctor();
+					chooseDoctor();
+					loginDoctor();
 					break;
 				}
 				case 4: {
@@ -54,7 +64,8 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					// loginNurse();
+					chooseNurse();
+					loginNurse();
 					break;
 				}
 				case 6: {
@@ -62,6 +73,7 @@ public class Menu {
 					break;
 				}
 				case 0: {
+					System.out.println("~~~~~~Our department is closed~~~~~~");
 					jdbcManager.disconnect();
 					System.exit(0);// close the menu
 				}
@@ -125,6 +137,7 @@ public class Menu {
 		try {
 			do {
 
+				Patient p = patientManager.getPatientById(pId);
 				System.out.println("1.Change my data:");
 				System.out.println("2.See my doctors:");
 				System.out.println("3.See my symptoms:");
@@ -133,19 +146,20 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-
+					patientManager.updatePatient(p);
 					break;
 				}
 				case 2: {
-
+					patientManager.listMyDoctors(pId);
 					break;
 				}
 				case 3: {
-
+					patientManager.listMySymptoms(pId);
 					break;
 				}
 				case 4: {
-
+					patientManager.listMyMedicines(pId);
+					patientManager.listMyDiseases(pId);
 					break;
 				}
 				case 0: {
@@ -164,7 +178,7 @@ public class Menu {
 	public static void doctorMenu(Integer dId) throws Exception {
 		try {
 			do {
-
+				Doctor d = doctorManager.getDoctorById(dId);
 				System.out.println("1.Change my data:");
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
@@ -173,19 +187,21 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-
+					doctorManager.updateDoctor(d);
 					break;
 				}
 				case 2: {
-
+					doctorManager.listMyPatients(dId);
 					break;
 				}
 				case 3: {
-
+					patientManager.listAllPatients();
 					break;
 				}
 				case 4: {
-
+					// TODO
+					// doctorManager.assignSymptomDisease(, );
+					// doctorManager.assignDiseaseMedicine();
 					break;
 				}
 				case 0: {
@@ -204,7 +220,7 @@ public class Menu {
 	public static void nurseMenu(Integer nId) throws Exception {
 		try {
 			do {
-
+				Nurse n = nurseManager.getNurseById(nId);
 				System.out.println("1.Change my data:");
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
@@ -212,15 +228,15 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-
+					nurseManager.updateNurse(n);
 					break;
 				}
 				case 2: {
-
+					nurseManager.listMyPatients(nId);
 					break;
 				}
 				case 3: {
-
+					patientManager.listAllPatients();
 					break;
 				}
 				case 0: {
@@ -233,6 +249,45 @@ public class Menu {
 			} while (true);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public static void loginPatient() throws Exception {
+		String email = Utilities.readString("Introduce an email:");
+		String password = Utilities.readString("Introduce a password:");
+		User u = userManager.checkPassword(email, password);
+		while (true) {
+			if (u != null && u.getRole().getName().equals("patient")) {
+				System.out.println("login successful");
+				patientMenu(u.getId());
+				break;
+			}
+		}
+	}
+
+	public static void loginDoctor() throws Exception {
+		String email = Utilities.readString("Introduce an email:");
+		String password = Utilities.readString("Introduce a password:");
+		User u = userManager.checkPassword(email, password);
+		while (true) {
+			if (u != null && u.getRole().getName().equals("doctor")) {
+				System.out.println("login successful");
+				doctorMenu(u.getId());
+				break;
+			}
+		}
+	}
+
+	public static void loginNurse() throws Exception {
+		String email = Utilities.readString("Introduce an email:");
+		String password = Utilities.readString("Introduce a password:");
+		User u = userManager.checkPassword(email, password);
+		while (true) {
+			if (u != null && u.getRole().getName().equals("nurse")) {
+				System.out.println("login successful");
+				nurseMenu(u.getId());
+				break;
+			}
 		}
 	}
 }

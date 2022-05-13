@@ -10,11 +10,11 @@ import javax.persistence.*;
 @Table(name = "roles")
 
 public class Role implements Serializable {
+	private static final long serialVersionUID = 3815457760670380250L;
+
 	@Id
 	@GeneratedValue(generator = "roles")
 	@TableGenerator(name = "roles", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "roles")
-
-	private static final long serialVersionUID = 3815457760670380250L;
 	private Integer id;
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")

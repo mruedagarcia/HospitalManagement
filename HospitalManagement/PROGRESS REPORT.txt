@@ -1,3 +1,2 @@
 PROGRESS REPORT:
-Today we start to do things about JPA in Role and User Classes and remove some anottations of our classes because we dont need it.
-Next day, we are going to continue with JPA 
+This week we have almost finish the menus of Patient, Doctor and Nurse; and also we finished the loggin of all Users 

@@ -14,7 +14,6 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(generator = "users")
 	@TableGenerator(name = "users", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users")
-
 	private Integer id;
 	private String email;// poner el email en la tabla de doctors también y buscar un link entre ellos
 	@Lob
