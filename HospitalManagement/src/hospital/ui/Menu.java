@@ -1,11 +1,14 @@
 package hospital.ui;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.time.LocalDate;
 
 import hospital.pojos.Doctor;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
+import hospital.pojos.Role;
 import hospital.pojos.User;
 import ifaces.DoctorManager;
 import ifaces.NurseManager;
@@ -32,7 +35,7 @@ public class Menu {
 		patientManager = new JDBCPatientManager(jdbcManager);
 		doctorManager = new JDBCDoctorManager(jdbcManager);
 		nurseManager = new JDBCNurseManager(jdbcManager);
-		userManager = new JPAUserManager();
+		userManager = new JPAUserManager(); //initialize JPA
 		try {
 			do {
 
@@ -46,7 +49,7 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					choosePatient();
+					//choosePatient();
 					loginPatient();
 					break;
 				}
@@ -55,7 +58,7 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					chooseDoctor();
+					//chooseDoctor();
 					loginDoctor();
 					break;
 				}
@@ -64,7 +67,7 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					chooseNurse();
+					//chooseNurse();
 					loginNurse();
 					break;
 				}
@@ -113,9 +116,24 @@ public class Menu {
 		boolean severe = Utilities.readBoolean("Severe (yes/no): ");
 		Integer phone = Utilities.readInt("Phone: ");
 		LocalDate dob = Utilities.readDate();
+		String passwd = Utilities.readString("Password: ");
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(passwd.getBytes());
+			byte[] digest = md.digest();
+			User u = new User(email, digest);
+			Role role = userManager.getRole("patient");
+			// Remember to work with both sides
+			u.setRole(role);
+			role.addUser(u);
+			// Insert the user using userManager
+			userManager.createUser(u);
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		Patient p = new Patient(name, email, severe, phone, Date.valueOf(dob));
 		patientManager.addPatient(p);
-		// TODO go back
+		
 	}
 
 	public static void createDoctor() {

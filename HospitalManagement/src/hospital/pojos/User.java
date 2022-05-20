@@ -25,6 +25,11 @@ public class User implements Serializable {
 	public User() {
 		super();
 	}
+	
+	public User(String email, byte[] password) {
+		this.email=email;
+		this.password=password;
+	}
 
 	public Integer getId() {
 		return id;
