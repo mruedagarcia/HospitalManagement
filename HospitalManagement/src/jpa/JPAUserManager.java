@@ -27,9 +27,9 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().commit();
 		// Insert the roles needed only if they are not there already
 		if (this.getRoles().isEmpty()) {
-			Role doctor = new Role("Doctor");
-			Role patient = new Role("Patient");
-			Role nurse = new Role("Nurse");
+			Role doctor = new Role("doctor");
+			Role patient = new Role("patient");
+			Role nurse = new Role("nurse");
 			this.createRole(doctor);
 			this.createRole(patient);
 			this.createRole(nurse);
@@ -48,8 +48,7 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().commit();
 	}
 
-	@Override
-	public void createRole(Role r) {
+	private void createRole(Role r) {
 		em.getTransaction().begin();
 		em.persist(r);
 		em.getTransaction().commit();
@@ -91,7 +90,8 @@ public class JPAUserManager implements UserManager {
 	public Role getRole(String name) { // read only one Role
 		Query q = em.createNativeQuery("SELECT * FROM roles WHERE name = ?", Role.class);
 		q.setParameter(1, name);// we are changing the name of the Role
-		return (Role) q.getSingleResult();
+		Role r = (Role) q.getSingleResult();
+		return r;
 	}
 
 	@Override

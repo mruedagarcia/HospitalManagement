@@ -1,2 +1,2 @@
 PROGRESS REPORT:
-This week we have almost finish the menus of Patient, Doctor and Nurse; and also we finished the loggin of all Users 
+This week we correct errors and continue with the login system of JPA in the class menu.

@@ -10,8 +10,6 @@ public interface UserManager {
 
 	public void createUser(User u);
 
-	public void createRole(Role r);
-
 	public void deleteUser(User u);
 
 	public void deleteRole(Role r);
