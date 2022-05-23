@@ -218,7 +218,7 @@ public class Menu {
 				}
 				case 4: {
 					// TODO
-					// doctorManager.assignSymptomDisease(, );
+					// doctorManager.assignSymptomDisease( );
 					// doctorManager.assignDiseaseMedicine();
 					break;
 				}
@@ -234,6 +234,7 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public static void nurseMenu(Integer nId) throws Exception {
 		try {
