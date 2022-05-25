@@ -140,13 +140,45 @@ public class Menu {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String specialty = Utilities.readString("Specialty: ");
-		Doctor d = new Doctor(name, specialty);
+		String email = Utilities.readString("Email: ");
+		String passwd = Utilities.readString("Password: ");
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(passwd.getBytes());
+			byte[] digest = md.digest();
+			User u = new User(email, digest);
+			Role role = userManager.getRole("doctor");
+			// Remember to work with both sides
+			u.setRole(role);
+			role.addUser(u);
+			// Insert the user using userManager
+			userManager.createUser(u);
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		Doctor d = new Doctor(name, specialty, email);
 		doctorManager.addDoctor(d);
 	}
 
 	public static void createNurse() {
 		System.out.println("Type tour data:");
 		String name = Utilities.readString("Name: ");
+		String email = Utilities.readString("Email: ");
+		String passwd = Utilities.readString("Password: ");
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(passwd.getBytes());
+			byte[] digest = md.digest();
+			User u = new User(email, digest);
+			Role role = userManager.getRole("nurse");
+			// Remember to work with both sides
+			u.setRole(role);
+			role.addUser(u);
+			// Insert the user using userManager
+			userManager.createUser(u);
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		Nurse n = new Nurse(name);
 		nurseManager.addNurse(n);
 	}
@@ -200,7 +232,8 @@ public class Menu {
 				System.out.println("1.Change my data:");
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
-				System.out.println("4.Save treatment:");
+				System.out.println("4.Diagnosis:");
+				System.out.println("5.Save treatment:");
 				System.out.println("0.Exit");
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
@@ -217,9 +250,12 @@ public class Menu {
 					break;
 				}
 				case 4: {
-					// TODO
-					// doctorManager.assignSymptomDisease( );
-					// doctorManager.assignDiseaseMedicine();
+					
+					
+					break;
+				}
+				case 5:{
+					
 					break;
 				}
 				case 0: {

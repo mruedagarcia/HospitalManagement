@@ -11,6 +11,7 @@ public class Doctor implements Serializable {
 
 	private String name;
 	private String specialty;
+	private String email;
 	private Integer id;
 
 	private List<Patient> patients;
@@ -21,16 +22,18 @@ public class Doctor implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 
-	public Doctor(Integer id, String name, String specialty) {
+	public Doctor(Integer id, String name, String specialty, String email) {
 		super();
 		this.name = name;
 		this.specialty = specialty;
 		this.id = id;
+		this.email = email;
 	}
 
-	public Doctor(String name, String specialty) {
+	public Doctor(String name, String specialty, String email) {
 		this.name = name;
 		this.specialty = specialty;
+		this.email=email;
 	}
 
 	@Override
@@ -56,6 +59,14 @@ public class Doctor implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSpecialty() {

@@ -34,7 +34,8 @@ public class JDBCDoctorManager implements DoctorManager {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String specialty = rs.getString("specialty");
-				Doctor d = new Doctor(id, name, specialty);
+				String email = rs.getString("email");
+				Doctor d = new Doctor(id, name, specialty, email);
 				doctors.add(d);
 			}
 			rs.close();
@@ -48,10 +49,11 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void addDoctor(Doctor d) {
 		try {
-			String sql = "INSERT INTO doctors (name, specialty) VALUES (?,?)";
+			String sql = "INSERT INTO doctors (name, specialty, email) VALUES (?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, d.getName());
 			prep.setString(2, d.getSpecialty());
+			prep.setString(3, d.getEmail());
 			prep.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,10 +64,11 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void updateDoctor(Doctor d) {
 		try {
-			String sql = "UPDATE doctors" + " SET name=?" + " specialty=?";
+			String sql = "UPDATE doctors" + " SET name=?" + " specialty=?" + "email=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, d.getName());
 			ps.setString(2, d.getSpecialty());
+			ps.setString(3, d.getEmail());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,7 +139,8 @@ public class JDBCDoctorManager implements DoctorManager {
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String specialty = rs.getString("specialty");
-				d = new Doctor(name, specialty);
+				String email = rs.getString("email");
+				d = new Doctor(name, specialty, email);
 			}
 			rs.close();
 			stmt.close();
