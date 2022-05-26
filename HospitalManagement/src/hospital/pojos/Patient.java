@@ -17,9 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "dob", "address", "salary" })
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name = "Patient")
+//@XmlType(propOrder = { "dob", "address", "salary" })
 
 public class Patient implements Serializable {
 
@@ -55,6 +55,11 @@ public class Patient implements Serializable {
 		this.phone = phone;
 		this.name = name;
 		this.severe = severe;
+	}
+	
+	public void addSymptom(Symptom s) {
+		List<Symptom> symptoms = new ArrayList<>();
+		symptoms.add(s);
 	}
 
 	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {

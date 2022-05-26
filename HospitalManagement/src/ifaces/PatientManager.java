@@ -36,6 +36,9 @@ public interface PatientManager {
 
 	// Get patient by id
 	public Patient getPatientById(int patientId);
+	
+	// Get patient by name
+	public Patient getPatientByName(String name);
 
 	// Removes a patient from database
 	public void deletePatient(int patientId);

@@ -4,20 +4,25 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import hospital.pojos.Doctor;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import hospital.pojos.Role;
 import hospital.pojos.User;
+import hospital.pojos.Symptom;
 import ifaces.DoctorManager;
 import ifaces.NurseManager;
 import ifaces.PatientManager;
+import ifaces.SymptomManager;
 import ifaces.UserManager;
 import jbdc.JDBCDoctorManager;
 import jbdc.JDBCManager;
 import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
+import jbdc.JDBCSymptomManager;
 import jpa.JPAUserManager;
 
 public class Menu {
@@ -25,6 +30,7 @@ public class Menu {
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
 	private static NurseManager nurseManager;
+	private static SymptomManager symptomManager;
 	private static UserManager userManager;
 
 	public static void main(String[] args) {
@@ -35,6 +41,7 @@ public class Menu {
 		patientManager = new JDBCPatientManager(jdbcManager);
 		doctorManager = new JDBCDoctorManager(jdbcManager);
 		nurseManager = new JDBCNurseManager(jdbcManager);
+		symptomManager = new JDBCSymptomManager(jdbcManager);
 		userManager = new JPAUserManager(); //initialize JPA
 		try {
 			do {
@@ -49,7 +56,6 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					//choosePatient();
 					loginPatient();
 					break;
 				}
@@ -58,7 +64,6 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					//chooseDoctor();
 					loginDoctor();
 					break;
 				}
@@ -67,7 +72,6 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					//chooseNurse();
 					loginNurse();
 					break;
 				}
@@ -250,7 +254,18 @@ public class Menu {
 					break;
 				}
 				case 4: {
-					
+					String symptom;
+					List<Patient> patients = new ArrayList<Patient>();
+					patients = patientManager.listAllPatients();
+					System.out.println(patients);
+					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
+					Patient p = patientManager.getPatientByName(name);
+					do {
+						symptomManager.listAllSymptoms();
+						symptom = Utilities.readString("Introduce a symptom (write exit when you finished): ");
+						Symptom s = symptomManager.getSymptomByName(symptom);
+						p.addSymptom(s);
+					}while(symptom != "exit");
 					
 					break;
 				}
@@ -329,6 +344,8 @@ public class Menu {
 				System.out.println("login successful");
 				doctorMenu(u.getId());
 				break;
+			}else {
+				System.out.println("Email or password wrong");
 			}
 		}
 	}

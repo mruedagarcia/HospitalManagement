@@ -84,6 +84,28 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return p;
 	}
+	
+	public Patient getPatientByName(String patientName) {
+		Patient p = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM patients WHERE name=" + patientName;
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				boolean severe = rs.getBoolean("severe");
+				Integer phone = rs.getInt("phone");
+				Date date = rs.getDate("date");
+				p = new Patient(name, email, severe, phone, date);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
 
 	@Override
 	public void updatePatient(Patient p) {
@@ -179,7 +201,7 @@ public class JDBCPatientManager implements PatientManager {
 			while (rs.next()) {
 				String name = rs.getString("name");
 				Integer id = rs.getInt("id");
-				Symptom s = new Symptom(name, id);
+				Symptom s = new Symptom(id, name);
 				symptoms.add(s);
 			}
 			rs.close();
