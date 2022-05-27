@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-<<<<<<< HEAD
 import xml.SQLDateAdapter;
 
 
@@ -23,8 +22,6 @@ import xml.SQLDateAdapter;
 @XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "email", "dob", "name", "nurse", "doctors", "diseases", "medicines", "symptoms" }) 
 
-=======
->>>>>>> branch 'master' of https://github.com/mruedagarcia/HospitalManagement
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -1080532239335630835L;

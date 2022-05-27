@@ -28,12 +28,9 @@ public class Nurse implements Serializable {
 	private String name;
     @XmlAttribute
 	private Integer id;
-<<<<<<< HEAD
     @XmlElement
 	private String email;
     @XmlElement(name = "Patient")
-=======
->>>>>>> branch 'master' of https://github.com/mruedagarcia/HospitalManagement
 	private List<Patient> patients;
 
 	public Nurse() {
