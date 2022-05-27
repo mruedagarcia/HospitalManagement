@@ -7,19 +7,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import hospital.pojos.Disease;
 import hospital.pojos.Doctor;
+import hospital.pojos.Medicine;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import hospital.pojos.Role;
 import hospital.pojos.User;
 import hospital.pojos.Symptom;
+import ifaces.DiseaseManager;
 import ifaces.DoctorManager;
+import ifaces.MedicineManager;
 import ifaces.NurseManager;
 import ifaces.PatientManager;
 import ifaces.SymptomManager;
 import ifaces.UserManager;
+import jbdc.JDBCDiseaseManager;
 import jbdc.JDBCDoctorManager;
 import jbdc.JDBCManager;
+import jbdc.JDBCMedicineManager;
 import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
 import jbdc.JDBCSymptomManager;
@@ -31,6 +37,8 @@ public class Menu {
 	private static DoctorManager doctorManager;
 	private static NurseManager nurseManager;
 	private static SymptomManager symptomManager;
+	private static DiseaseManager diseaseManager;
+	private static MedicineManager medicineManager;
 	private static UserManager userManager;
 
 	public static void main(String[] args) {
@@ -42,6 +50,8 @@ public class Menu {
 		doctorManager = new JDBCDoctorManager(jdbcManager);
 		nurseManager = new JDBCNurseManager(jdbcManager);
 		symptomManager = new JDBCSymptomManager(jdbcManager);
+		diseaseManager = new JDBCDiseaseManager(jdbcManager);
+		medicineManager = new JDBCMedicineManager(jdbcManager);
 		userManager = new JPAUserManager(); //initialize JPA
 		try {
 			do {
@@ -237,7 +247,6 @@ public class Menu {
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
 				System.out.println("4.Diagnosis:");
-				System.out.println("5.Save treatment:");
 				System.out.println("0.Exit");
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
@@ -254,22 +263,36 @@ public class Menu {
 					break;
 				}
 				case 4: {
-					String symptom;
+					List<Disease> diseases = new ArrayList<Disease>();
+					List<Symptom> symptoms = new ArrayList<Symptom>();
+					List<Medicine> medicines = new ArrayList<Medicine>();
 					List<Patient> patients = new ArrayList<Patient>();
 					patients = patientManager.listAllPatients();
 					System.out.println(patients);
 					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
 					Patient p = patientManager.getPatientByName(name);
+					//doctorManager.assignDoctor(p.getId(), dId);
 					do {
-						symptomManager.listAllSymptoms();
-						symptom = Utilities.readString("Introduce a symptom (write exit when you finished): ");
-						Symptom s = symptomManager.getSymptomByName(symptom);
+						symptoms = symptomManager.listAllSymptoms();
+						System.out.println(symptoms);
+						name = Utilities.readString("Introduce the name of a symptom (write exit when you finished): ");
+						Symptom s = symptomManager.getSymptomByName(name);
 						p.addSymptom(s);
-					}while(symptom != "exit");
-					
-					break;
-				}
-				case 5:{
+					}while(!(name.equals("exit")));
+					do {
+						diseases = diseaseManager.listAllDiseases();
+						System.out.println(diseases);
+						name = Utilities.readString("Introduce the name of a disease (write exit when you have finished): ");
+						Disease di = diseaseManager.getDiseaseByName(name);
+						p.addDisease(di);
+					}while(!(name.equals("exit")));
+					do {
+						medicines = medicineManager.listAllMedicines();
+						System.out.println(medicines);
+						name = Utilities.readString("Introduce the name of a medicine (write exit when you have finished): ");
+						Disease di = diseaseManager.getDiseaseByName(name);
+						p.addDisease(di);
+					}while(!(name.equals("exit")));
 					
 					break;
 				}

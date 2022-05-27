@@ -58,7 +58,7 @@ public JDBCSymptomManager(JDBCManager m) {
 		Symptom s = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM symptoms WHERE name=" + symptomName;
+			String sql = "SELECT * FROM symptoms WHERE name='" + symptomName+"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String name = rs.getString("name");

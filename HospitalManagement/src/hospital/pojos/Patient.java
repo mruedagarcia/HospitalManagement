@@ -61,6 +61,11 @@ public class Patient implements Serializable {
 		List<Symptom> symptoms = new ArrayList<>();
 		symptoms.add(s);
 	}
+	
+	public void addDisease(Disease d) {
+		List<Disease> diseases = new ArrayList<>();
+		diseases.add(d);
+	}
 
 	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {
 		super();
