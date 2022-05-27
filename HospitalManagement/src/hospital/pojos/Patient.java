@@ -1,7 +1,6 @@
 package hospital.pojos;
 
 import java.io.Serializable;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+<<<<<<< HEAD
 import xml.SQLDateAdapter;
 
 
@@ -23,6 +23,8 @@ import xml.SQLDateAdapter;
 @XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "email", "dob", "name", "nurse", "doctors", "diseases", "medicines", "symptoms" }) 
 
+=======
+>>>>>>> branch 'master' of https://github.com/mruedagarcia/HospitalManagement
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -1080532239335630835L;
@@ -67,11 +69,6 @@ public class Patient implements Serializable {
 		this.phone = phone;
 		this.name = name;
 		this.severe = severe;
-	}
-	
-	public void addSymptom(Symptom s) {
-		List<Symptom> symptoms = new ArrayList<>();
-		symptoms.add(s);
 	}
 
 	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {

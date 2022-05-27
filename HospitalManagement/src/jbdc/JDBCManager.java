@@ -16,26 +16,8 @@ public class JDBCManager {
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
 			this.createTables();// here we do the call of our DataBase's Tables
-			
 
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void insertIntoTables() {
-		try {
-			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO symptoms (name) VALUES('headache', 'stomache', 'nasal congestion', 'tiredness', 'overall pain', 'bone pain', "
-					+ "'tachycardia', 'blackout', 'loss of smell', 'puke')";
-			stmt.executeUpdate(sql);
-			sql =  "INSERT INTO diseases (name) VALUES('migraines', 'stomach flu', 'cancer', 'COVID', 'heart disease', 'diabetes', "
-					+ "'flu', 'alzheimer', 'bronchitis', 'arthritis')";
-			stmt.executeUpdate(sql);
-			sql = "INSERT INTO medicines (name) VALUES('gelocatil', 'antibiotic', 'quimiotherapy', 'remdesivir', 'ibuprofen', 'insulin', "
-					+ "'benazepril', 'nolotil', 'enantyum', 'naproxeno')";
-			stmt.executeUpdate(sql);
-		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -63,7 +45,7 @@ public class JDBCManager {
 
 			// --------->NURSES
 
-			sq1 = "CREATE TABLE nurses(" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL," + "email TEXT NOT NULL" +");";
+			sq1 = "CREATE TABLE nurses(" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->MEDICINES
@@ -89,7 +71,7 @@ public class JDBCManager {
 			// --------->DOCTORS
 
 			sq1 = "CREATE TABLE doctors ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-					+ "specialty TEXT NOT NULL," + "email TEXT NOT NULL" +");";
+					+ "specialty TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->DISEASE

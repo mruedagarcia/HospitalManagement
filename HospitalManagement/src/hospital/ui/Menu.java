@@ -1,6 +1,5 @@
 package hospital.ui;
 
-import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
@@ -13,18 +12,23 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import hospital.pojos.Doctor;
+import hospital.pojos.Medicine;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import hospital.pojos.Role;
 import hospital.pojos.User;
 import hospital.pojos.Symptom;
+import ifaces.DiseaseManager;
 import ifaces.DoctorManager;
+import ifaces.MedicineManager;
 import ifaces.NurseManager;
 import ifaces.PatientManager;
 import ifaces.SymptomManager;
 import ifaces.UserManager;
+import jbdc.JDBCDiseaseManager;
 import jbdc.JDBCDoctorManager;
 import jbdc.JDBCManager;
+import jbdc.JDBCMedicineManager;
 import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
 import jbdc.JDBCSymptomManager;
@@ -37,6 +41,8 @@ public class Menu {
 	private static DoctorManager doctorManager;
 	private static NurseManager nurseManager;
 	private static SymptomManager symptomManager;
+	private static DiseaseManager diseaseManager;
+	private static MedicineManager medicineManager;
 	private static UserManager userManager;
 
 	public static void main(String[] args) {
@@ -48,6 +54,8 @@ public class Menu {
 		doctorManager = new JDBCDoctorManager(jdbcManager);
 		nurseManager = new JDBCNurseManager(jdbcManager);
 		symptomManager = new JDBCSymptomManager(jdbcManager);
+		diseaseManager = new JDBCDiseaseManager(jdbcManager);
+		medicineManager = new JDBCMedicineManager(jdbcManager);
 		userManager = new JPAUserManager(); //initialize JPA
 		try {
 			do {
@@ -150,24 +158,8 @@ public class Menu {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String specialty = Utilities.readString("Specialty: ");
-		String email = Utilities.readString("Email: ");
-		String passwd = Utilities.readString("Password: ");
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(passwd.getBytes());
-			byte[] digest = md.digest();
-			User u = new User(email, digest);
-			Role role = userManager.getRole("doctor");
-			// Remember to work with both sides
-			u.setRole(role);
-			role.addUser(u);
-			// Insert the user using userManager
-			userManager.createUser(u);
-		}catch(NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		Doctor d = new Doctor(name, specialty, email);
-		doctorManager.addDoctor(d);
+		
+		
 	}
 
 	public static void createNurse() {
@@ -269,8 +261,8 @@ public class Menu {
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
 				System.out.println("4.Diagnosis:");
-				System.out.println("5.Save treatment:");
 				System.out.println("0.Exit");
+				
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
@@ -286,22 +278,36 @@ public class Menu {
 					break;
 				}
 				case 4: {
-					String symptom;
+					List<Disease> diseases = new ArrayList<Disease>();
+					List<Symptom> symptoms = new ArrayList<Symptom>();
+					List<Medicine> medicines = new ArrayList<Medicine>();
 					List<Patient> patients = new ArrayList<Patient>();
 					patients = patientManager.listAllPatients();
 					System.out.println(patients);
 					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
 					Patient p = patientManager.getPatientByName(name);
+					//doctorManager.assignDoctor(p.getId(), dId);
 					do {
-						symptomManager.listAllSymptoms();
-						symptom = Utilities.readString("Introduce a symptom (write exit when you finished): ");
-						Symptom s = symptomManager.getSymptomByName(symptom);
+						symptoms = symptomManager.listAllSymptoms();
+						System.out.println(symptoms);
+						name = Utilities.readString("Introduce the name of a symptom (write exit when you finished): ");
+						Symptom s = symptomManager.getSymptomByName(name);
 						p.addSymptom(s);
-					}while(symptom != "exit");
-					
-					break;
-				}
-				case 5:{
+					}while(!(name.equals("exit")));
+					do {
+						diseases = diseaseManager.listAllDiseases();
+						System.out.println(diseases);
+						name = Utilities.readString("Introduce the name of a disease (write exit when you have finished): ");
+						Disease di = diseaseManager.getDiseaseByName(name);
+						p.addDisease(di);
+					}while(!(name.equals("exit")));
+					do {
+						medicines = medicineManager.listAllMedicines();
+						System.out.println(medicines);
+						name = Utilities.readString("Introduce the name of a medicine (write exit when you have finished): ");
+						Disease di = diseaseManager.getDiseaseByName(name);
+						p.addDisease(di);
+					}while(!(name.equals("exit")));
 					
 					break;
 				}

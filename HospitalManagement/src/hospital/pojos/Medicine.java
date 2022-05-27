@@ -21,6 +21,10 @@ public class Medicine implements Serializable {
 		// TODO Auto-generated constructor stub
 		patients = new ArrayList<Patient>();
 	}
+	
+	public Medicine(String name) {
+		this.name=name;
+	}
 
 	public Medicine(Integer id2, String name2) {
 		this.id = id2;

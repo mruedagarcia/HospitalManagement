@@ -28,9 +28,12 @@ public class Nurse implements Serializable {
 	private String name;
     @XmlAttribute
 	private Integer id;
+<<<<<<< HEAD
     @XmlElement
 	private String email;
     @XmlElement(name = "Patient")
+=======
+>>>>>>> branch 'master' of https://github.com/mruedagarcia/HospitalManagement
 	private List<Patient> patients;
 
 	public Nurse() {
@@ -39,17 +42,10 @@ public class Nurse implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 
-	public Nurse(String name, Integer id, String email) {
+	public Nurse(String name, Integer id) {
 		super();
 		this.name = name;
 		this.id = id;
-		this.email = email;
-	}
-	
-	public Nurse(String name, String email) {
-		super();
-		this.name = name;
-		this.email = email;
 	}
 
 	public Nurse(String name2) {
@@ -70,14 +66,6 @@ public class Nurse implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Integer getId() {
