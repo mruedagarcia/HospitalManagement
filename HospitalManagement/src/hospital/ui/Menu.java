@@ -4,20 +4,31 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import hospital.pojos.Disease;
 import hospital.pojos.Doctor;
+import hospital.pojos.Medicine;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import hospital.pojos.Role;
 import hospital.pojos.User;
+import hospital.pojos.Symptom;
+import ifaces.DiseaseManager;
 import ifaces.DoctorManager;
+import ifaces.MedicineManager;
 import ifaces.NurseManager;
 import ifaces.PatientManager;
+import ifaces.SymptomManager;
 import ifaces.UserManager;
+import jbdc.JDBCDiseaseManager;
 import jbdc.JDBCDoctorManager;
 import jbdc.JDBCManager;
+import jbdc.JDBCMedicineManager;
 import jbdc.JDBCNurseManager;
 import jbdc.JDBCPatientManager;
+import jbdc.JDBCSymptomManager;
 import jpa.JPAUserManager;
 
 public class Menu {
@@ -25,6 +36,9 @@ public class Menu {
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
 	private static NurseManager nurseManager;
+	private static SymptomManager symptomManager;
+	private static DiseaseManager diseaseManager;
+	private static MedicineManager medicineManager;
 	private static UserManager userManager;
 
 	public static void main(String[] args) {
@@ -35,6 +49,9 @@ public class Menu {
 		patientManager = new JDBCPatientManager(jdbcManager);
 		doctorManager = new JDBCDoctorManager(jdbcManager);
 		nurseManager = new JDBCNurseManager(jdbcManager);
+		symptomManager = new JDBCSymptomManager(jdbcManager);
+		diseaseManager = new JDBCDiseaseManager(jdbcManager);
+		medicineManager = new JDBCMedicineManager(jdbcManager);
 		userManager = new JPAUserManager(); //initialize JPA
 		try {
 			do {
@@ -49,7 +66,6 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					//choosePatient();
 					loginPatient();
 					break;
 				}
@@ -58,7 +74,6 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					//chooseDoctor();
 					loginDoctor();
 					break;
 				}
@@ -67,7 +82,6 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					//chooseNurse();
 					loginNurse();
 					break;
 				}
@@ -140,13 +154,50 @@ public class Menu {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String specialty = Utilities.readString("Specialty: ");
+<<<<<<< HEAD
 		
 		
+=======
+		String email = Utilities.readString("Email: ");
+		String passwd = Utilities.readString("Password: ");
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(passwd.getBytes());
+			byte[] digest = md.digest();
+			User u = new User(email, digest);
+			Role role = userManager.getRole("doctor");
+			// Remember to work with both sides
+			u.setRole(role);
+			role.addUser(u);
+			// Insert the user using userManager
+			userManager.createUser(u);
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		Doctor d = new Doctor(name, specialty, email);
+		doctorManager.addDoctor(d);
+>>>>>>> branch 'master' of https://github.com/mruedagarcia/HospitalManagement
 	}
 
 	public static void createNurse() {
 		System.out.println("Type tour data:");
 		String name = Utilities.readString("Name: ");
+		String email = Utilities.readString("Email: ");
+		String passwd = Utilities.readString("Password: ");
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(passwd.getBytes());
+			byte[] digest = md.digest();
+			User u = new User(email, digest);
+			Role role = userManager.getRole("nurse");
+			// Remember to work with both sides
+			u.setRole(role);
+			role.addUser(u);
+			// Insert the user using userManager
+			userManager.createUser(u);
+		}catch(NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		Nurse n = new Nurse(name);
 		nurseManager.addNurse(n);
 	}
@@ -200,8 +251,9 @@ public class Menu {
 				System.out.println("1.Change my data:");
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
-				System.out.println("4.Save treatment:");
+				System.out.println("4.Diagnosis:");
 				System.out.println("0.Exit");
+				
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
@@ -217,9 +269,37 @@ public class Menu {
 					break;
 				}
 				case 4: {
-					// TODO
-					// doctorManager.assignSymptomDisease( );
-					// doctorManager.assignDiseaseMedicine();
+					List<Disease> diseases = new ArrayList<Disease>();
+					List<Symptom> symptoms = new ArrayList<Symptom>();
+					List<Medicine> medicines = new ArrayList<Medicine>();
+					List<Patient> patients = new ArrayList<Patient>();
+					patients = patientManager.listAllPatients();
+					System.out.println(patients);
+					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
+					Patient p = patientManager.getPatientByName(name);
+					//doctorManager.assignDoctor(p.getId(), dId);
+					do {
+						symptoms = symptomManager.listAllSymptoms();
+						System.out.println(symptoms);
+						name = Utilities.readString("Introduce the name of a symptom (write exit when you finished): ");
+						Symptom s = symptomManager.getSymptomByName(name);
+						p.addSymptom(s);
+					}while(!(name.equals("exit")));
+					do {
+						diseases = diseaseManager.listAllDiseases();
+						System.out.println(diseases);
+						name = Utilities.readString("Introduce the name of a disease (write exit when you have finished): ");
+						Disease di = diseaseManager.getDiseaseByName(name);
+						p.addDisease(di);
+					}while(!(name.equals("exit")));
+					do {
+						medicines = medicineManager.listAllMedicines();
+						System.out.println(medicines);
+						name = Utilities.readString("Introduce the name of a medicine (write exit when you have finished): ");
+						Disease di = diseaseManager.getDiseaseByName(name);
+						p.addDisease(di);
+					}while(!(name.equals("exit")));
+					
 					break;
 				}
 				case 0: {
@@ -293,6 +373,8 @@ public class Menu {
 				System.out.println("login successful");
 				doctorMenu(u.getId());
 				break;
+			}else {
+				System.out.println("Email or password wrong");
 			}
 		}
 	}
