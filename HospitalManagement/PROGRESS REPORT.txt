@@ -1,2 +1,2 @@
 PROGRESS REPORT:
-This week we correct errors and continue with the login system of JPA in the class menu.
+We are trying to finish XML,testing our Doctor menu, we finished our user manual and also we start with the System Dessing

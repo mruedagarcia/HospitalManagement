@@ -140,8 +140,8 @@ public class Menu {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String specialty = Utilities.readString("Specialty: ");
-		Doctor d = new Doctor(name, specialty);
-		doctorManager.addDoctor(d);
+		
+		
 	}
 
 	public static void createNurse() {
