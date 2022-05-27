@@ -2,6 +2,9 @@ package xml;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
 import java.sql.Date;
 
 public class SQLDateAdapter extends XmlAdapter<String, Date>{
@@ -13,8 +16,10 @@ public class SQLDateAdapter extends XmlAdapter<String, Date>{
  }
  
  @Override
- public Date unmarshall (String string) throws Exception{
+ public Date unmarshal (String string) throws Exception{
 	 LocalDate localDate = LocalDate.parse(string,formatter);
 	 return Date.valueOf(localDate);
  }
+
+
 }
