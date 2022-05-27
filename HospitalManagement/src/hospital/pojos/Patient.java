@@ -17,25 +17,36 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlRootElement(name = "Patient")
-//@XmlType(propOrder = { "dob", "address", "salary" })
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "email", "dob", "name", "nurse", "doctors", "diseases", "medicines", "symptoms" }) //Pongo elementos o atributos
 
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -1080532239335630835L;
+	@XmlAttribute
 	private Integer id;
+	@XmlElement
 	private String email;
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
+	@XmlAttribute
 	private Integer phone;
+	@XmlElement
 	private String name;
+	@XmlAttribute
 	private boolean severe;
+	@XmlElement
 	private Nurse nurse;
+	@XmlElement(name = "Doctor")
 	private List<Doctor> doctors;
-	// @Transient si no funciona pondremos esto en cada clase que NO utilice JPA
+	@XmlElement(name = "Disease")
 	private List<Disease> diseases;
-
+	@XmlElement(name = "Medicine")
 	private List<Medicine> medicines;
+	@XmlElement(name = "Symptom")
 	private List<Symptom> symptoms;
 
 	public Patient() {
