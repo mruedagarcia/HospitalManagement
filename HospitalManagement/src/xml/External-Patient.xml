@@ -1,10 +1,9 @@
 <!DOCTYPE Patient [
-   <!ELEMENT Patient(email,dob,name,nurse,doctors,diseases,medicines,symptoms)>
+   <!ELEMENT Patient(email,dob,name,Nurse,doctors,diseases,medicines,symptoms)>
    <!ELEMENT email (#PCDATA)>
    <!ELEMENT dob (#PCDATA)>
    <!ELEMENT name (#PCDATA)>
-   <!ELEMENT nurse(Nurse+)> El +??
-   <!ELEMENT Nurse (name,email,Patients)> 
+   <!ELEMENT Nurse (name,email)> 
    <!ATTLIST Nurse id CDATA #REQUIRED>
    <!ELEMENT doctors(Doctor+)> 
    <!ELEMENT Doctor (name,specialty,email,patients)> 
@@ -18,7 +17,6 @@
     <email>lolasanchezmaresca@gmail.com</email>
 	<dob>2002-10-24</dob>
 	<name>Lola</name>
-	<nurse>
 	    <Nurse id="1">
 		    <name>Cristina</name>
 			<email>cristina@gmail.com</email>
@@ -27,4 +25,4 @@
 			    
 			</Patients>    
 		</Nurse>	
-	</nurse>
+	</Nurses>
