@@ -179,11 +179,6 @@ public class Menu {
 		}
 		Doctor d = new Doctor(name, specialty, email);
 		doctorManager.addDoctor(d);
-		
-		
-	
-		
-		
 	}
 
 	public static void createNurse() {
@@ -313,7 +308,7 @@ public class Menu {
 					System.out.println(patients);
 					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
 					Patient p = patientManager.getPatientByName(name);
-					//doctorManager.assignDoctor(p.getId(), dId);
+					doctorManager.assignDoctor(p, dId);
 					do {
 						symptoms = symptomManager.listAllSymptoms();
 						System.out.println(symptoms);
@@ -407,6 +402,7 @@ public class Menu {
 					System.out.println(patients);
 					String name = Utilities.readString("Introduce the name of the patient to treat:" );
 					Patient p = patientManager.getPatientByName(name);
+					nurseManager.assignNurse(p.getId(), nId);
 					nurseManager.updatePatientStatus(p);
 				}
 				case 5: {

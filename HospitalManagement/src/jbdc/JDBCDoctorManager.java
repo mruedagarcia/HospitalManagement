@@ -104,11 +104,11 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public void assignDoctor(int patientId, int doctorId) {
+	public void assignDoctor(Patient pa, int doctorId) {
 		try {
 			String sql = "INSERT INTO examines (patientId, doctorId) VALUES (?,?)";
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
-			p.setInt(1, patientId);
+			p.setInt(1, pa.getId());
 			p.setInt(2, doctorId);
 		} catch (SQLException e) {
 			e.printStackTrace();

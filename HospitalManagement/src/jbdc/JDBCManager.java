@@ -96,26 +96,30 @@ public class JDBCManager {
 		try {
 			Statement stmt = c.createStatement();
 			// PATIENTS
-			String sq1 = "CREATE TABLE patients (" + "id      INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String sq1 = "CREATE TABLE patients (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, " + "email TEXT NOT NULL, " + "severe BOOLEAN, " + "phone INTEGER NOT NULL, "
 					+ "dob DATE , " + "nurseID INTEGER REFERENCES nurses(id) ON DELETE RESTRICT" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->NURSES
 
-			sq1 = "CREATE TABLE nurses(" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL" + ");";
+			sq1 = "CREATE TABLE nurses(" + "id INTEGER PRIMARY KEY AUTOINCREMENT," 
+					+ "name TEXT NOT NULL," 
+					+ "email TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->MEDICINES
 
-			sq1 = "CREATE TABLE medicines (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL" + ");";
+			sq1 = "CREATE TABLE medicines (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," 
+					+ "name TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->HAVE
 
 			sq1 = "CREATE TABLE have (" + "diseaseId INTEGER," + "symptomId INTEGER,"
-					+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id)"
-					+ "FOREIGN KEY(symptomId) REFERENCES symptoms(id)" + "PRIMARY KEY (diseaseId, symptomId)" + ");";
+					+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id),"
+					+ "FOREIGN KEY(symptomId) REFERENCES symptoms(id)," 
+					+ "PRIMARY KEY (diseaseId, symptomId)" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->EXAMINES
@@ -128,20 +132,24 @@ public class JDBCManager {
 
 			// --------->DOCTORS
 
-			sq1 = "CREATE TABLE doctors ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-					+ "specialty TEXT NOT NULL" + ");";
+			sq1 = "CREATE TABLE doctors ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," 
+					+ "name TEXT NOT NULL,"
+					+ "specialty TEXT NOT NULL," 
+					+ "email TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->DISEASE
 
-			sq1 = "CREATE TABLE diseases (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL" + ");";
+			sq1 = "CREATE TABLE diseases (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," 
+					+ "name TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->CAN BE CURED
 
 			sq1 = "CREATE TABLE CanBeCured (" + "diseaseId INTEGER," + "medicineId INTEGER,"
 					+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id),"
-					+ "FOREIGN KEY (medicineId) REFERENCES medicines(id)" + "PRIMARY KEY (diseaseId, medicineId)"
+					+ "FOREIGN KEY (medicineId) REFERENCES medicines(id)," 
+					+ "PRIMARY KEY (diseaseId, medicineId)"
 					+ ");";
 			stmt.executeUpdate(sq1);
 
@@ -149,19 +157,22 @@ public class JDBCManager {
 
 			sq1 = "CREATE TABLE shows (" + "patientId INTEGER," + "symptomsId INTEGER,"
 					+ "FOREIGN KEY (patientId) REFERENCES patients(id),"
-					+ "FOREIGN KEY (symptomsId) REFERENCES symptoms(id)" + "PRIMARY KEY (patientId, symptomsId)" + ");";
+					+ "FOREIGN KEY (symptomsId) REFERENCES symptoms(id)," 
+					+ "PRIMARY KEY (patientId, symptomsId)" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->SUFFERS
 
 			sq1 = "CREATE TABLE suffers (" + "patientId INTEGER," + "diseaseId INTEGER,"
 					+ "FOREIGN KEY (patientId) REFERENCES patients(id),"
-					+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id)" + "PRIMARY KEY (patientId, diseaseId)" + ");";
+					+ "FOREIGN KEY (diseaseId) REFERENCES diseases(id)," 
+					+ "PRIMARY KEY (patientId, diseaseId)" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->SYMPTOMS
 
-			sq1 = "CREATE TABLE symptoms (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL" + ");";
+			sq1 = "CREATE TABLE symptoms (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," 
+					+ "name TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			

@@ -46,7 +46,6 @@ public class Utilities {
 			Boolean b;
 			if (stringReaded.equalsIgnoreCase("no")) {
 				b = false;
-				stringReaded = console.readLine();
 				return b;
 			} else if (stringReaded.equalsIgnoreCase("yes")) {
 				b = true;

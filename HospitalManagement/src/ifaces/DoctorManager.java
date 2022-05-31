@@ -26,7 +26,7 @@ public interface DoctorManager {
 	public List<Patient> listMyPatients(int doctorId);
 
 	// Assign a doctor to a patient
-	public void assignDoctor(int patientId, int doctorId);
+	public void assignDoctor(Patient pa, int doctorId);
 
 	// The doctor relates a symptom to a disease to a medicine
 	public void assignSymptomDisease(int symptomId, int diseaseId);
