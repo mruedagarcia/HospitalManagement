@@ -154,12 +154,9 @@ public class Menu {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
 		String specialty = Utilities.readString("Specialty: ");
-<<<<<<< HEAD
-		
-		
-=======
 		String email = Utilities.readString("Email: ");
 		String passwd = Utilities.readString("Password: ");
+		
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(passwd.getBytes());
@@ -176,7 +173,7 @@ public class Menu {
 		}
 		Doctor d = new Doctor(name, specialty, email);
 		doctorManager.addDoctor(d);
->>>>>>> branch 'master' of https://github.com/mruedagarcia/HospitalManagement
+		
 	}
 
 	public static void createNurse() {
