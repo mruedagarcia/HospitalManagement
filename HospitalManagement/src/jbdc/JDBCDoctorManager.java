@@ -215,5 +215,51 @@ public class JDBCDoctorManager implements DoctorManager {
 		}
 
 	}
+
+	@Override
+	public List<Doctor> listAllDoctor() {
+		List<Doctor> diseases = new ArrayList<Doctor>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctor";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				String speciality = rs.getString("speciality");
+				Doctor d = new Doctor(id, name,speciality);
+				diseases.add(d);
+			}
+
+			rs.close();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return diseases;
+	}
+
+	@Override
+	public Doctor getDoctorByName(String doctorName) {
+		Doctor d = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM doctors WHERE name='" + doctorName+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				d = new Doctor(name);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
+	}
+
 	
-}
+	
+

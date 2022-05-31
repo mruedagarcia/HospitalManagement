@@ -264,4 +264,54 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return p;
 	}
-}
+
+	@Override
+	public Patient getPatientByName(String patientName) {
+		Patient p = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM patients WHERE name='" + patientName +"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				boolean severe = rs.getBoolean("severe");
+				Integer phone = rs.getInt("phone");
+				Date date = rs.getDate("dob");
+				p = new Patient(name, email, severe, phone, date);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+	
+
+	@Override
+	public List<Patient> listAllPatient() {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM patients";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String email = rs.getString("email");
+				Date dob = rs.getDate("dob");
+				Integer phone = rs.getInt("phone");
+				String name = rs.getString("name");
+				Boolean severe = rs.getBoolean("severe");
+				Patient p = new Patient(id, name, email, severe, phone, dob);
+				patients.add(p);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
+	}
+	}
+

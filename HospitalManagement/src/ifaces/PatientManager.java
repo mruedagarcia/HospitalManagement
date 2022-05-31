@@ -5,6 +5,7 @@ import java.util.List;
 import hospital.pojos.Disease;
 import hospital.pojos.Doctor;
 import hospital.pojos.Medicine;
+import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 import hospital.pojos.Symptom;
 
@@ -38,11 +39,14 @@ public interface PatientManager {
 	public Patient getPatientById(int patientId);
 	
 	// Get patient by name
-	public Patient getPatientByName(String name);
+	public Patient getPatientByName(String patientName);
 
 	// Removes a patient from database
 	public void deletePatient(int patientId);
 
 	// Update a patient
 	public void updatePatient(Patient p);
+	public List<Patient>listAllPatient();
+
+
 }

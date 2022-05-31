@@ -191,5 +191,14 @@ public class Patient implements Serializable {
 				+ ", severe=" + severe + ", diseases=" + diseases + ", doctors=" + doctors + ", medicines=" + medicines
 				+ ", symptoms=" + symptoms + "]";
 	}
+	public void addSymptom(Symptom s) {
+		List<Symptom> symptoms = new ArrayList<>();
+		symptoms.add(s);
+	}
+
+	public void addDisease(Disease d) {
+		List<Disease> diseases = new ArrayList<>();
+		diseases.add(d);
+	}
 
 }

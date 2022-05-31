@@ -20,6 +20,14 @@ public class Symptom implements Serializable {
 		super();
 		patients = new ArrayList<Patient>();
 	}
+	public Symptom(Integer id,String name) {
+		this.id = id;
+		this.name = name;
+	}
+	public Symptom(String name) {
+
+		this.name = name;
+	}
 
 	public Symptom(String name2, Integer id2) {
 		this.name = name2;

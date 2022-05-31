@@ -50,7 +50,15 @@ public class Doctor implements Serializable {
 		this.specialty = specialty;
 		this.email=email;
 	}
-
+	public Doctor (Integer id,String name,String speciality) {
+		this.name = name;
+		this.id = id;
+		this.specialty = speciality;
+	}
+	public Doctor (String name) {
+		this.name = name;
+		
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -2,6 +2,7 @@ package ifaces;
 
 import java.util.List;
 
+import hospital.pojos.Medicine;
 import hospital.pojos.Nurse;
 import hospital.pojos.Patient;
 
@@ -28,5 +29,7 @@ public interface NurseManager {
 
 	// Update patient status
 	public void updatePatientStatus(Patient p);
+	
+	public Nurse getNurseByName(String nurseName);
 
 }

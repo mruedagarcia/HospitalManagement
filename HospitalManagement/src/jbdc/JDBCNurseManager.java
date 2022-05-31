@@ -34,26 +34,7 @@ public class JDBCNurseManager implements NurseManager{
 		
 	}
 
-	@Override
-	public List<Nurse> listAllNurses() {
-		List <Nurse> nurses = new ArrayList<Nurse>();
-		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sq1 = "SELECT * FROM nurses";
-			ResultSet rs = stmt.executeQuery(sq1);
-			while(rs.next()) {
-				String name = rs.getString("name");
-				Integer id = rs.getInt("id");
-				Nurse n1  = new Nurse(name,id);
-				nurses.add(n1);
-			}
-			rs.close();
-			stmt.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return nurses;
-	}
+	
 
 	@Override
 	public void assignNurse(int patientId, int nurseId) {
@@ -162,5 +143,45 @@ public class JDBCNurseManager implements NurseManager{
 		
 		
 	}
+	@Override
+	public List<Nurse> listAllNurses() {
+		List <Nurse> nurses = new ArrayList<Nurse>();
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sq1 = "SELECT * FROM nurses";
+			ResultSet rs = stmt.executeQuery(sq1);
+			while(rs.next()) {
+				String name = rs.getString("name");
+				Integer id = rs.getInt("id");
+				Nurse n1  = new Nurse(name,id);
+				nurses.add(n1);
+			}
+			rs.close();
+			stmt.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return nurses;
+	}
 
-}
+	@Override
+	public Nurse getNurseByName(String nurseName) {
+		Nurse n= null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM nurses WHERE name='" + nurseName+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				n = new Nurse(name);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return n;
+	}
+	}
+
+
