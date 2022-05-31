@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -20,7 +21,7 @@ import xml.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "email", "dob", "name", "nurse", "doctors", "diseases", "medicines", "symptoms" }) 
+@XmlType(propOrder = { "email", "dob", "name"}) 
 
 public class Patient implements Serializable {
 
@@ -36,17 +37,17 @@ public class Patient implements Serializable {
 	private Integer phone;
 	@XmlElement
 	private String name;
-	@XmlAttribute
+	@XmlTransient
 	private boolean severe;
-	@XmlElement
+	@XmlTransient
 	private Nurse nurse;
-	@XmlElement(name = "Doctor")
+	@XmlTransient
 	private List<Doctor> doctors;
-	@XmlElement(name = "Disease")
+	@XmlTransient
 	private List<Disease> diseases;
-	@XmlElement(name = "Medicine")
+	@XmlTransient
 	private List<Medicine> medicines;
-	@XmlElement(name = "Symptom")
+	@XmlTransient
 	private List<Symptom> symptoms;
 
 	public Patient() {

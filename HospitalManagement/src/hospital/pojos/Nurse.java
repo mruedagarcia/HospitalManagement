@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlAttribute;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Nurse")
-@XmlType(propOrder = { "name", "email", "patients"}) 
+@XmlType(propOrder = { "name", "email"}) 
 
 public class Nurse implements Serializable {
 
@@ -30,7 +31,7 @@ public class Nurse implements Serializable {
 	private Integer id;
     @XmlElement
 	private String email;
-    @XmlElement(name = "Patient")
+    @XmlTransient
 	private List<Patient> patients;
 
 	public Nurse() {

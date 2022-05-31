@@ -1,0 +1,40 @@
+<!DOCTYPE Patient [
+   <!ELEMENT Patient (email,dob,name)>
+   <!ELEMENT email (#PCDATA)>
+   <!ELEMENT dob (#PCDATA)>
+   <!ELEMENT name (#PCDATA)>
+   <!ATTLIST Patient id CDATA #REQUIRED
+                    phone CDATA #REQUIRED>
+]>
+
+<Patient id="1" phone="606443498">
+    <email>lolasanchezmaresca@gmail.com</email>
+	<dob>2002-10-24</dob>
+	<name>Lola</name>
+</Patient>
+
+<!DOCTYPE Doctor [
+   <!ELEMENT Doctor (name,specialty,email)>
+   <!ELEMENT name (#PCDATA)>
+   <!ELEMENT specialty (#PCDATA)>
+   <!ELEMENT email (#PCDATA)>
+   <!ATTLIST Doctor id CDATA #REQUIRED>
+]>
+
+<Doctor id="2">
+   <name>Pablo</name>
+   <specialty>cardiologist</specialty>
+   <email>pablomartin@gmail.com</email>  
+</Doctor>
+
+<!DOCTYPE Nurse [
+   <!ELEMENT Nurse (name,email)>
+   <!ELEMENT name (#PCDATA)>
+   <!ELEMENT email (#PCDATA)>
+   <!ATTLIST id CDATA #REQUIRED>
+]>
+
+<Nurse id="3">
+   <name>Paula</name>
+   <email>paulagutierrez@gmail.com</email>  
+</Nurse>
