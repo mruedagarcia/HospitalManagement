@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JDBCManager {
 	private Connection c = null;
@@ -16,8 +18,64 @@ public class JDBCManager {
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
 			this.createTables();// here we do the call of our DataBase's Tables
+			this.insertIntoTables();
 
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void insertIntoTables() {
+		try {
+			List<String> s = new ArrayList<String>();
+			s.add("headache");
+			s.add("stomache");
+			s.add("nasal congestion");
+			s.add("tiredness");
+			s.add("overall pain");
+			s.add("bone pain");
+			s.add("tachycardia");
+			s.add("blackout");
+			s.add("loss of smell");
+			s.add("puke");
+			List<String> d = new ArrayList<String>();
+			d.add("migraines");
+			d.add("stomach flu");
+			d.add("cancer");
+			d.add("COVID");
+			d.add("heart disease");
+			d.add("diabetes");
+			d.add("flu");
+			d.add("alzheimer");
+			d.add("bronchitis");
+			d.add("arthritis");
+			List<String> m = new ArrayList<String>();
+			m.add("ibuprofen");
+			m.add("gelocatil");
+			m.add("antibiotic");
+			m.add("quimiotherapy");
+			m.add("remdesivir");
+			m.add("insulin");
+			m.add("benazepril");
+			m.add("nolotil");
+			m.add("enantyum");
+			m.add("naproxeno");
+			
+			Statement stmt = c.createStatement();
+			for (String name : s) {// for each symptom, we take each id in the list of Symptoms
+				String sql = "INSERT INTO symptoms (name) VALUES ('" + name + "');";
+				stmt.executeUpdate(sql);
+			}
+			for (String name : d) {// for each symptom, we take each id in the list of Symptoms
+				String sql = "INSERT INTO diseases (name) VALUES ('" + name + "');";
+				stmt.executeUpdate(sql);
+			}
+			for (String name : m) {// for each symptom, we take each id in the list of Symptoms
+				String sql = "INSERT INTO medicines (name) VALUES ('" + name + "');";
+				stmt.executeUpdate(sql);
+			}
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

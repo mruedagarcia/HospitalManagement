@@ -6,31 +6,48 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import xml.SQLDateAdapter;
+
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "email", "dob", "name"}) 
 
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -1080532239335630835L;
+	@XmlAttribute
 	private Integer id;
+	@XmlElement
 	private String email;
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
+	@XmlAttribute
 	private Integer phone;
+	@XmlElement
 	private String name;
+	@XmlTransient
 	private boolean severe;
+	@XmlTransient
 	private Nurse nurse;
+	@XmlTransient
 	private List<Doctor> doctors;
-	// @Transient si no funciona pondremos esto en cada clase que NO utilice JPA
+	@XmlTransient
 	private List<Disease> diseases;
-
+	@XmlTransient
 	private List<Medicine> medicines;
+	@XmlTransient
 	private List<Symptom> symptoms;
 
 	public Patient() {
