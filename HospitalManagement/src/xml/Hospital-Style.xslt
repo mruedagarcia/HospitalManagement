@@ -3,22 +3,17 @@
 
 <xsl:template match="/">
    <html>
-   <p><b><xsl:value-of select="//name" /></b></p>
-   <p><b>Contents: </b><xsl:value-of select="//content" /></p>
-   <p><b>Paid authors:</b></p>
    <table border="1">
-      <th>Author</th>
-      <th>Date of Birth</th>
-      <th>Address</th>
-      <xsl:for-each select="Report/Authors/Employee">
-      <xsl:sort select="@name" />
-         <xsl:if test="salary &gt; 0">
+      <th>Id</th>
+      <th>Doctor</th>
+      <th>Specialty</th>
+      <xsl:for-each select="Doctor">
+      <xsl:sort select="@id" data-type="number"/>
             <tr>
-            <td><i><xsl:value-of select="@name" /></i></td>
-            <td><xsl:value-of select="dob" /></td>
-            <td><xsl:value-of select="address" /></td>
+            <td><i><xsl:value-of select="@id" /></i></td>
+            <td><xsl:value-of select="@name" /></td>
+            <td><xsl:value-of select="specialty" /></td>
             </tr>
-         </xsl:if>
       </xsl:for-each>
    </table>
    </html>
