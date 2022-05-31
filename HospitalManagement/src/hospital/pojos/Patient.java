@@ -1,41 +1,52 @@
 package hospital.pojos;
 
 import java.io.Serializable;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlRootElement(name = "Patient")
-//@XmlType(propOrder = { "dob", "address", "salary" })
+import xml.SQLDateAdapter;
+
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "email", "dob", "name", "nurse", "doctors", "diseases", "medicines", "symptoms" }) 
 
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -1080532239335630835L;
+	@XmlAttribute
 	private Integer id;
+	@XmlElement
 	private String email;
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
+	@XmlAttribute
 	private Integer phone;
+	@XmlElement
 	private String name;
+	@XmlAttribute
 	private boolean severe;
+	@XmlElement
 	private Nurse nurse;
+	@XmlElement(name = "Doctor")
 	private List<Doctor> doctors;
-	// @Transient si no funciona pondremos esto en cada clase que NO utilice JPA
+	@XmlElement(name = "Disease")
 	private List<Disease> diseases;
-
+	@XmlElement(name = "Medicine")
 	private List<Medicine> medicines;
+	@XmlElement(name = "Symptom")
 	private List<Symptom> symptoms;
 
 	public Patient() {
@@ -55,16 +66,6 @@ public class Patient implements Serializable {
 		this.phone = phone;
 		this.name = name;
 		this.severe = severe;
-	}
-	
-	public void addSymptom(Symptom s) {
-		List<Symptom> symptoms = new ArrayList<>();
-		symptoms.add(s);
-	}
-	
-	public void addDisease(Disease d) {
-		List<Disease> diseases = new ArrayList<>();
-		diseases.add(d);
 	}
 
 	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {

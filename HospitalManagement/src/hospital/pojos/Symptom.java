@@ -21,13 +21,9 @@ public class Symptom implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 
-	public Symptom(Integer id, String name) {
-		this.name = name;
-		this.id = id;
-	}
-	
-	public Symptom(String name) {
-		this.name = name;
+	public Symptom(String name2, Integer id2) {
+		this.name = name2;
+		this.id = id2;
 	}
 
 	@Override

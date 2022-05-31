@@ -24,10 +24,9 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public void addNurse(Nurse n) {
 		try {
-			String sql = "INSERT INTO nurses (name, email) VALUES (?,?)";
+			String sql = "INSERT INTO nurses (name) VALUES (?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, n.getName());
-			prep.setString(2, n.getEmail());
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -45,8 +44,7 @@ public class JDBCNurseManager implements NurseManager{
 			while(rs.next()) {
 				String name = rs.getString("name");
 				Integer id = rs.getInt("id");
-				String email = rs.getString("email");
-				Nurse n1  = new Nurse(name,id, email);
+				Nurse n1  = new Nurse(name,id);
 				nurses.add(n1);
 			}
 			rs.close();
@@ -108,8 +106,7 @@ public class JDBCNurseManager implements NurseManager{
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
-				String email = rs.getString("email");
-				n = new Nurse(name, id, email);
+				n = new Nurse(name, id);
 			}
 			rs.close();
 			stmt.close();
@@ -129,8 +126,7 @@ public class JDBCNurseManager implements NurseManager{
 			ResultSet rs = stmt.executeQuery(sq1);
 			while(rs.next()) {
 				String name = rs.getString("name");
-				String email = rs.getString("email");
-				n = new Nurse(name, email);
+				n = new Nurse(name);
 			}rs.close();
 			stmt.close();
 		}catch(Exception e) {
@@ -142,7 +138,7 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public void updateNurse(Nurse n) {
 		try {
-			String sq1 = "UPDATE nurse" + "SET name = ?" + "email = ?";
+			String sq1 = "UPDATE nurse" + "SET name = ?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sq1);
 			ps.setString(1, n.getName());
 			ps.executeUpdate();

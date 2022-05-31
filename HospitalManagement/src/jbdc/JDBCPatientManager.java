@@ -26,7 +26,7 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void addPatient(Patient p) {
 		try {
-			String sql = "INSERT INTO patients (name, email, severe, phone, dob) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO patients (name, email, severe, phone, Dob) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getEmail());
@@ -74,29 +74,7 @@ public class JDBCPatientManager implements PatientManager {
 				String email = rs.getString("email");
 				boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
-				Date date = rs.getDate("dob");
-				p = new Patient(name, email, severe, phone, date);
-			}
-			rs.close();
-			stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return p;
-	}
-	
-	public Patient getPatientByName(String patientName) {
-		Patient p = null;
-		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE name='" + patientName +"'";
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				String name = rs.getString("name");
-				String email = rs.getString("email");
-				boolean severe = rs.getBoolean("severe");
-				Integer phone = rs.getInt("phone");
-				Date date = rs.getDate("dob");
+				Date date = rs.getDate("date");
 				p = new Patient(name, email, severe, phone, date);
 			}
 			rs.close();
@@ -110,7 +88,7 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void updatePatient(Patient p) {
 		try {
-			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " severe=?" + " phone=?" + "dob=?";
+			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " severe=?" + " phone=?" + "date of birth=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, p.getName());
 			ps.setString(2, p.getEmail());
@@ -175,8 +153,7 @@ public class JDBCPatientManager implements PatientManager {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String specialty = rs.getString("specialty");
-				String email = rs.getString("email");
-				Doctor d = new Doctor(id, name, specialty, email);
+				Doctor d = new Doctor(id, name, specialty);
 				doctors.add(d);
 			}
 			rs.close();
@@ -201,7 +178,7 @@ public class JDBCPatientManager implements PatientManager {
 			while (rs.next()) {
 				String name = rs.getString("name");
 				Integer id = rs.getInt("id");
-				Symptom s = new Symptom(id, name);
+				Symptom s = new Symptom(name, id);
 				symptoms.add(s);
 			}
 			rs.close();

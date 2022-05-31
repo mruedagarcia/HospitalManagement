@@ -7,18 +7,30 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAttribute;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Nurse")
+@XmlType(propOrder = { "name", "email", "patients"}) 
+
 public class Nurse implements Serializable {
 
 	private static final long serialVersionUID = -888446701244086278L;
-
+    @XmlElement
 	private String name;
+    @XmlAttribute
 	private Integer id;
+    @XmlElement
 	private String email;
+    @XmlElement(name = "Patient")
 	private List<Patient> patients;
 
 	public Nurse() {
@@ -27,17 +39,10 @@ public class Nurse implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 
-	public Nurse(String name, Integer id, String email) {
+	public Nurse(String name, Integer id) {
 		super();
 		this.name = name;
 		this.id = id;
-		this.email = email;
-	}
-	
-	public Nurse(String name, String email) {
-		super();
-		this.name = name;
-		this.email = email;
 	}
 
 	public Nurse(String name2) {
@@ -58,14 +63,6 @@ public class Nurse implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Integer getId() {

@@ -2,7 +2,6 @@ package jbdc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -104,7 +103,7 @@ public class JDBCManager {
 
 			// --------->NURSES
 
-			sq1 = "CREATE TABLE nurses(" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL," + "email TEXT NOT NULL" +");";
+			sq1 = "CREATE TABLE nurses(" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->MEDICINES
@@ -130,7 +129,7 @@ public class JDBCManager {
 			// --------->DOCTORS
 
 			sq1 = "CREATE TABLE doctors ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-					+ "specialty TEXT NOT NULL," + "email TEXT NOT NULL" +");";
+					+ "specialty TEXT NOT NULL" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->DISEASE
