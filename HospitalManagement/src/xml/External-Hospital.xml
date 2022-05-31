@@ -27,6 +27,12 @@
    <email>pablomartin@gmail.com</email>  
 </Doctor>
 
+<Doctor id="4">
+   <name>Jacobo</name>
+   <specialty>neumologist</specialty>
+   <email>jacobosanchez@gmail.com</email>  
+</Doctor>
+
 <!DOCTYPE Nurse [
    <!ELEMENT Nurse (name,email)>
    <!ELEMENT name (#PCDATA)>

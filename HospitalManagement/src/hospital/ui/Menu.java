@@ -344,8 +344,8 @@ public class Menu {
 					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 					String nameFileXml = Utilities.readString("Introduce the name of the xml file(.xml): ");
 					File file = new File(nameFileXml);
-					marshaller.marshal(p, file);
-					marshaller.marshal(p, System.out);
+					marshaller.marshal(d, file);
+					marshaller.marshal(d, System.out);
 				}
 				case 6:{
 					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
