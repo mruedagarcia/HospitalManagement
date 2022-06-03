@@ -14,7 +14,7 @@ private JDBCManager manager;
 public JDBCSymptomManager(JDBCManager m) {
 	this.manager=m;
 }
-	@Override
+	/*@Override
 	public void addSymptom(Symptom s) {
 		try {
 			String sql = "INSERT INTO symptoms (name) VALUES(?)";
@@ -25,7 +25,8 @@ public JDBCSymptomManager(JDBCManager m) {
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
+
 	@Override
 	public List<Symptom> listAllSymptoms() {
 		List<Symptom> symptoms = new ArrayList<Symptom>();

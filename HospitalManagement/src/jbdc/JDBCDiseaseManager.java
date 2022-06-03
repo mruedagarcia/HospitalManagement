@@ -15,7 +15,7 @@ public class JDBCDiseaseManager implements DiseaseManager{
 	public JDBCDiseaseManager(JDBCManager m) {
 		this.manager=m;
 	}
-	@Override
+	/*@Override
 	public void addDisease(Disease d) {
 		try {
 			String sql = "INSERT INTO diseases (name) VALUES(?)";
@@ -26,7 +26,8 @@ public class JDBCDiseaseManager implements DiseaseManager{
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
+	
 	@Override
 	public List<Disease> listAllDiseases() {
 		List<Disease> diseases = new ArrayList<Disease>();

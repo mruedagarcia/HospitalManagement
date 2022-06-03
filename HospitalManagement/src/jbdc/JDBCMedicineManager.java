@@ -15,7 +15,7 @@ public JDBCMedicineManager(JDBCManager m) {
 	this.manager=m;
 }
 
-@Override
+/*@Override
 public void addMedicine(Medicine m) {
 	try {
 		String sql = "INSERT INTO medicines (name) VALUES(?)";
@@ -26,7 +26,7 @@ public void addMedicine(Medicine m) {
 		e.printStackTrace();
 	}
 	
-}
+}*/
 
 @Override
 public List<Medicine> listAllMedicines() {
