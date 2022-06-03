@@ -74,7 +74,7 @@ public class JDBCPatientManager implements PatientManager {
 				String email = rs.getString("email");
 				boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
-				Date date = rs.getDate("date");
+				Date date = rs.getDate("dob");
 				p = new Patient(name, email, severe, phone, date);
 			}
 			rs.close();
@@ -88,7 +88,7 @@ public class JDBCPatientManager implements PatientManager {
 	@Override
 	public void updatePatient(Patient p) {
 		try {
-			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " severe=?" + " phone=?" + "date of birth=?";
+			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " severe=?" + " phone=?" + " dob=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, p.getName());
 			ps.setString(2, p.getEmail());
@@ -147,7 +147,7 @@ public class JDBCPatientManager implements PatientManager {
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT * FROM patients AS p JOIN examines AS e ON p.id = e.patientId JOIN doctors AS d ON e.doctorId = d.id"
-					+ "WHERE p.id=" + pId;
+					+ " WHERE p.id=" + pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
@@ -219,7 +219,7 @@ public class JDBCPatientManager implements PatientManager {
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT * FROM patients AS p JOIN suffers AS s ON p.id = s.patientId JOIN diseases AS d ON s.diseaseId = d.id JOIN CanBeCured"
-					+ "AS c ON d.id =c.diseaseId JOIN medicines AS m ON c.medicineId = m.id WHERE p.id = " + pId;
+					+ " AS c ON d.id =c.diseaseId JOIN medicines AS m ON c.medicineId = m.id WHERE p.id = " + pId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Integer id = rs.getInt(1);

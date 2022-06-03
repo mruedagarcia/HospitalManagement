@@ -55,6 +55,13 @@ public class Doctor implements Serializable {
 		this.id = id;
 		this.specialty = speciality;
 	}
+	
+	public void addPatient(Patient p) {
+		if (!(patients.contains(p))) {
+			patients.add(p);
+		}
+	}
+	
 	public Doctor (String name) {
 		this.name = name;
 		

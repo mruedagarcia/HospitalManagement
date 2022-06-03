@@ -111,7 +111,7 @@ public class Menu {
 		}
 	}
 
-	public static void choosePatient() throws Exception {
+	/*public static void choosePatient() throws Exception {
 		System.out.println(patientManager.listAllPatients());
 		Integer patientId = Utilities.readInt("Choose a patient, type its id:");
 		patientMenu(patientId);
@@ -127,7 +127,7 @@ public class Menu {
 		System.out.println(nurseManager.listAllNurses());
 		Integer nurseId = Utilities.readInt("Choose a nurse, type its id:");
 		patientMenu(nurseId);
-	}
+	}*/
 
 	public static void createPatient() throws Exception {
 		System.out.println("Type your data:");
@@ -224,16 +224,20 @@ public class Menu {
 					break;
 				}
 				case 2: {
-					patientManager.listMyDoctors(pId);
+					List<Doctor> doctors = new ArrayList<Doctor>();
+					doctors = patientManager.listMyDoctors(pId);
+					System.out.println(doctors);
 					break;
 				}
 				case 3: {
-					patientManager.listMySymptoms(pId);
+					List<Symptom> symptoms = new ArrayList<Symptom>();
+					symptoms = patientManager.listMySymptoms(pId);
+					System.out.println(symptoms);
 					break;
 				}
 				case 4: {
-					patientManager.listMyMedicines(pId);
-					patientManager.listMyDiseases(pId);
+					System.out.println(patientManager.listMyMedicines(pId));
+					System.out.println(patientManager.listMyDiseases(pId));
 					break;
 				}
 				case 5: {
@@ -298,11 +302,11 @@ public class Menu {
 					break;
 				}
 				case 2: {
-					doctorManager.listMyPatients(dId);
+					System.out.println(doctorManager.listMyPatients(dId));
 					break;
 				}
 				case 3: {
-					patientManager.listAllPatients();
+					System.out.println(patientManager.listAllPatients());
 					break;
 				}
 				case 4: {
@@ -315,6 +319,9 @@ public class Menu {
 					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
 					Patient p = patientManager.getPatientByName(name);
 					doctorManager.assignDoctor(p, dId);
+					Doctor doctor = doctorManager.getDoctorById(dId);
+					doctor.addPatient(p);
+					p.addDoctor(doctor);
 					do {
 						symptoms = symptomManager.listAllSymptoms();
 						System.out.println(symptoms);

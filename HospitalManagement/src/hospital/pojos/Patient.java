@@ -77,6 +77,12 @@ public class Patient implements Serializable {
 		this.name = name;
 		this.severe = severe;
 	}
+	
+	public void addDoctor(Doctor d) {
+		if (!(doctors.contains(d))) {
+			doctors.add(d);
+		}
+	}
 
 	public Integer getId() {
 		return id;

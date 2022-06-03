@@ -82,7 +82,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT * FROM patients AS p JOIN examines AS e ON p.id = e.patientId JOIN doctors AS d ON e.doctorId = d.id"
-					+ "WHERE d.id=" + doctorId;
+					+ " WHERE d.id=" + doctorId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
