@@ -273,12 +273,13 @@ public class JDBCPatientManager implements PatientManager {
 			String sql = "SELECT * FROM patients WHERE name='" + patientName +"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
+				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
 				Date date = rs.getDate("dob");
-				p = new Patient(name, email, severe, phone, date);
+				p = new Patient(id, name, email, severe, phone, date);
 			}
 			rs.close();
 			stmt.close();

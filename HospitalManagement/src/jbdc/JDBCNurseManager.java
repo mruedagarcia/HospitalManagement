@@ -172,6 +172,7 @@ public class JDBCNurseManager implements NurseManager{
 			String sql = "SELECT * FROM nurses WHERE name='" + nurseName+"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
+				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				n = new Nurse(name);
 			}

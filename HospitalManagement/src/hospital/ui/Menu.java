@@ -58,7 +58,7 @@ public class Menu {
 		symptomManager = new JDBCSymptomManager(jdbcManager);
 		diseaseManager = new JDBCDiseaseManager(jdbcManager);
 		medicineManager = new JDBCMedicineManager(jdbcManager);
-		userManager = new JPAUserManager(); //initialize JPA
+		userManager = new JPAUserManager(); // initialize JPA
 		try {
 			do {
 
@@ -148,12 +148,12 @@ public class Menu {
 			role.addUser(u);
 			// Insert the user using userManager
 			userManager.createUser(u);
-		}catch(NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		Patient p = new Patient(name, email, severe, phone, Date.valueOf(dob));
 		patientManager.addPatient(p);
-		
+
 	}
 
 	public static void createDoctor() {
@@ -162,7 +162,7 @@ public class Menu {
 		String specialty = Utilities.readString("Specialty: ");
 		String email = Utilities.readString("Email: ");
 		String passwd = Utilities.readString("Password: ");
-		
+
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(passwd.getBytes());
@@ -174,7 +174,7 @@ public class Menu {
 			role.addUser(u);
 			// Insert the user using userManager
 			userManager.createUser(u);
-		}catch(NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		Doctor d = new Doctor(name, specialty, email);
@@ -197,7 +197,7 @@ public class Menu {
 			role.addUser(u);
 			// Insert the user using userManager
 			userManager.createUser(u);
-		}catch(NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		Nurse n = new Nurse(name);
@@ -236,27 +236,33 @@ public class Menu {
 					patientManager.listMyDiseases(pId);
 					break;
 				}
-				case 5:{
+				case 5: {
 					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
 					Marshaller marshaller = jaxbContext.createMarshaller();
-					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 					String nameFileXml = Utilities.readString("Introduce the name of the xml file(.xml): ");
 					File file = new File(nameFileXml);
 					marshaller.marshal(p, file);
 					marshaller.marshal(p, System.out);
 				}
-				case 6:{
+				case 6: {
 					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
 					Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");//TENGO QUE COMPROBAR QUE SEA UN FILE DEL QUE SE HAYA HECHO MARSHALL
+					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");// TENGO QUE
+																										// COMPROBAR QUE
+																										// SEA UN FILE
+																										// DEL QUE SE
+																										// HAYA HECHO
+																										// MARSHALL
 					File file = new File(nameFile);
 					Patient patient = (Patient) unmarshaller.unmarshal(file);
-                    patientManager.addPatient(patient);
+					patientManager.addPatient(patient);
 				}
-				case 7:{
+				case 7: {
 					String XmlFile = Utilities.readString("Introduce the name of the Xml File: ");
 					String XsltFile = Utilities.readString("Introduce the name of the Xslt File: ");
-					String HtmlFile = Utilities.readString("Introduce the name of the Htlm File that you want to create: ");
+					String HtmlFile = Utilities
+							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
 				}
 				case 0: {
@@ -284,7 +290,7 @@ public class Menu {
 				System.out.println("6.Import patient from a Xml file");
 				System.out.println("7.Save as Html");
 				System.out.println("0.Exit");
-				
+
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
@@ -315,45 +321,53 @@ public class Menu {
 						name = Utilities.readString("Introduce the name of a symptom (write exit when you finished): ");
 						Symptom s = symptomManager.getSymptomByName(name);
 						p.addSymptom(s);
-					}while(!(name.equals("exit")));
+					} while (!(name.equals("exit")));
 					do {
 						diseases = diseaseManager.listAllDiseases();
 						System.out.println(diseases);
-						name = Utilities.readString("Introduce the name of a disease (write exit when you have finished): ");
+						name = Utilities
+								.readString("Introduce the name of a disease (write exit when you have finished): ");
 						Disease di = diseaseManager.getDiseaseByName(name);
 						p.addDisease(di);
-					}while(!(name.equals("exit")));
+					} while (!(name.equals("exit")));
 					do {
 						medicines = medicineManager.listAllMedicines();
 						System.out.println(medicines);
-						name = Utilities.readString("Introduce the name of a medicine (write exit when you have finished): ");
+						name = Utilities
+								.readString("Introduce the name of a medicine (write exit when you have finished): ");
 						Disease di = diseaseManager.getDiseaseByName(name);
 						p.addDisease(di);
-					}while(!(name.equals("exit")));
-					
+					} while (!(name.equals("exit")));
+
 					break;
 				}
-				case 5:{
-					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+				case 5: {
+					JAXBContext jaxbContext = JAXBContext.newInstance(Doctor.class);
 					Marshaller marshaller = jaxbContext.createMarshaller();
-					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 					String nameFileXml = Utilities.readString("Introduce the name of the xml file(.xml): ");
 					File file = new File(nameFileXml);
 					marshaller.marshal(d, file);
 					marshaller.marshal(d, System.out);
 				}
-				case 6:{
+				case 6: {
 					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
 					Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");//TENGO QUE COMPROBAR QUE SEA UN FILE DEL QUE SE HAYA HECHO MARSHALL
+					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");// TENGO QUE
+																										// COMPROBAR QUE
+																										// SEA UN FILE
+																										// DEL QUE SE
+																										// HAYA HECHO
+																										// MARSHALL
 					File file = new File(nameFile);
 					Patient patient = (Patient) unmarshaller.unmarshal(file);
-                    patientManager.addPatient(patient);
+					patientManager.addPatient(patient);
 				}
-				case 7:{
+				case 7: {
 					String XmlFile = Utilities.readString("Introduce the name of the Xml File: ");
 					String XsltFile = Utilities.readString("Introduce the name of the Xslt File: ");
-					String HtmlFile = Utilities.readString("Introduce the name of the Htlm File that you want to create: ");
+					String HtmlFile = Utilities
+							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
 				}
 				case 0: {
@@ -368,12 +382,11 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
-	
 
 	public static void nurseMenu(Integer nId) throws Exception {
 		try {
 			do {
-				List<Patient>patients = new ArrayList<Patient>();
+				List<Patient> patients = new ArrayList<Patient>();
 				Nurse n = nurseManager.getNurseById(nId);
 				System.out.println("1.Change my data:");
 				System.out.println("2.See my patients:");
@@ -397,10 +410,10 @@ public class Menu {
 					patientManager.listAllPatients();
 					break;
 				}
-				case 4:{
+				case 4: {
 					patients = patientManager.listAllPatients();
 					System.out.println(patients);
-					String name = Utilities.readString("Introduce the name of the patient to treat:" );
+					String name = Utilities.readString("Introduce the name of the patient to treat:");
 					Patient p = patientManager.getPatientByName(name);
 					nurseManager.assignNurse(p.getId(), nId);
 					nurseManager.updatePatientStatus(p);
@@ -408,7 +421,7 @@ public class Menu {
 				case 5: {
 					JAXBContext jaxbContext = JAXBContext.newInstance(Nurse.class);
 					Marshaller marshaller = jaxbContext.createMarshaller();
-					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
+					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");
 					File file = new File(nameFile);
 					marshaller.marshal(n, file);
@@ -420,12 +433,13 @@ public class Menu {
 					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");
 					File file = new File(nameFile);
 					Nurse nurse = (Nurse) unmarshaller.unmarshal(file);
-                    nurseManager.addNurse(nurse);
+					nurseManager.addNurse(nurse);
 				}
-				case 7:{
+				case 7: {
 					String XmlFile = Utilities.readString("Introduce the name of the Xml File: ");
 					String XsltFile = Utilities.readString("Introduce the name of the Xslt File: ");
-					String HtmlFile = Utilities.readString("Introduce the name of the Htlm File that you want to create: ");
+					String HtmlFile = Utilities
+							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
 				}
 				case 0: {
@@ -455,16 +469,18 @@ public class Menu {
 	}
 
 	public static void loginDoctor() throws Exception {
-		String email = Utilities.readString("Introduce an email:");
-		String password = Utilities.readString("Introduce a password:");
-		User u = userManager.checkPassword(email, password);
 		while (true) {
+			String email = Utilities.readString("Introduce an email:");
+			String password = Utilities.readString("Introduce a password:");
+			User u = userManager.checkPassword(email, password);
+
 			if (u != null && u.getRole().getName().equals("doctor")) {
 				System.out.println("login successful");
 				doctorMenu(u.getId());
 				break;
-			}else {
+			} else {
 				System.out.println("Email or password wrong");
+
 			}
 		}
 	}
