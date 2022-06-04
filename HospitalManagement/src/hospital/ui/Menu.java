@@ -216,6 +216,7 @@ public class Menu {
 				System.out.println("5.Export patient to a Xml file");
 				System.out.println("6.Import patient from a Xml file");
 				System.out.println("7.Save as Html");
+				System.out.println("8.Delete account");
 				System.out.println("0.Exit");
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
@@ -269,6 +270,11 @@ public class Menu {
 							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
 				}
+				case 8: {
+					patientManager.deletePatient(pId);
+					System.out.println("Account deleted");
+					break;
+				}
 				case 0: {
 					System.exit(0);
 				}
@@ -293,6 +299,7 @@ public class Menu {
 				System.out.println("5.Export patient to a Xml file");
 				System.out.println("6.Import patient from a Xml file");
 				System.out.println("7.Save as Html");
+				System.out.println("8.Delete account");
 				System.out.println("0.Exit");
 
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
@@ -379,6 +386,10 @@ public class Menu {
 							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
 				}
+				case 8: {
+					doctorManager.deleteDoctor(dId);
+					System.out.println("Account deleted");
+				}
 				case 0: {
 					System.exit(0);
 				}
@@ -392,6 +403,7 @@ public class Menu {
 		}
 	}
 
+	
 	public static void nurseMenu(Integer nId) throws Exception {
 		try {
 			do {
@@ -404,6 +416,7 @@ public class Menu {
 				System.out.println("5.Export nurse to a Xml file");
 				System.out.println("6.Import nurse from a Xml file");
 				System.out.println("7.Save as Html");
+				System.out.println("8.Delete account");
 				System.out.println("0.Exit");
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
@@ -450,6 +463,10 @@ public class Menu {
 					String HtmlFile = Utilities
 							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
+				}
+				case 8: {
+					nurseManager.deleteNurse(nId);
+					System.out.println("Account deleted");
 				}
 				case 0: {
 					System.exit(0);

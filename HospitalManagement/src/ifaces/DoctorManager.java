@@ -46,4 +46,6 @@ public interface DoctorManager {
 	public void assignSymptom(Patient p, Symptom s);
 
 	public void assignDisease(Patient p, Disease d);
+
+	public void deleteDoctor(int doctorId);
 }

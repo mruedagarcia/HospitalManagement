@@ -73,7 +73,18 @@ public class JDBCDoctorManager implements DoctorManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	@Override
+	public void deleteDoctor(int doctorId) {
+		try {
+			String sql = "DELETE FROM doctors WHERE id=?";
+			PreparedStatement p = manager.getConnection().prepareStatement(sql);
+			p.setInt(1, doctorId);
+			p.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

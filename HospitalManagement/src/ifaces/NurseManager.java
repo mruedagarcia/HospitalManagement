@@ -32,4 +32,6 @@ public interface NurseManager {
 	
 	public Nurse getNurseByName(String nurseName);
 
+	public void deleteNurse(int nurseId);
+
 }

@@ -126,7 +126,18 @@ public class JDBCNurseManager implements NurseManager{
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	@Override
+	public void deleteNurse(int nurseId) {
+		try {
+			String sql = "DELETE FROM nurses WHERE id=?";
+			PreparedStatement p = manager.getConnection().prepareStatement(sql);
+			p.setInt(1, nurseId);
+			p.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -140,9 +151,8 @@ public class JDBCNurseManager implements NurseManager{
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
 	@Override
 	public List<Nurse> listAllNurses() {
 		List <Nurse> nurses = new ArrayList<Nurse>();
