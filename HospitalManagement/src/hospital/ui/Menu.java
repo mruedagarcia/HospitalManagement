@@ -327,6 +327,7 @@ public class Menu {
 						System.out.println(symptoms);
 						name = Utilities.readString("Introduce the name of a symptom (write exit when you finished): ");
 						Symptom s = symptomManager.getSymptomByName(name);
+						doctorManager.assignSymptom(p, s);
 						p.addSymptom(s);
 					} while (!(name.equals("exit")));
 					do {
@@ -335,6 +336,7 @@ public class Menu {
 						name = Utilities
 								.readString("Introduce the name of a disease (write exit when you have finished): ");
 						Disease di = diseaseManager.getDiseaseByName(name);
+						doctorManager.assignDisease(p, di);
 						p.addDisease(di);
 					} while (!(name.equals("exit")));
 					do {

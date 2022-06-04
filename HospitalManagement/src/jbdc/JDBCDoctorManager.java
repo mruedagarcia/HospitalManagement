@@ -115,6 +115,30 @@ public class JDBCDoctorManager implements DoctorManager {
 		}
 
 	}
+	
+	@Override
+	public void assignSymptom(Patient p, Symptom s) {
+		try {
+			String sql = "INSERT INTO shows (patientId, symptomsId) VALUES (?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setInt(2, s.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void assignDisease(Patient p, Disease d) {
+		try {
+			String sql = "INSERT INTO suffers (patientId, diseaseId) VALUES (?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setInt(2, d.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void assignSymptomDisease(int symptomId, int diseaseId) {

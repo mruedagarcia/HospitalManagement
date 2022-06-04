@@ -42,4 +42,8 @@ public interface DoctorManager {
 	public List<Doctor>listAllDoctor();
 	
 	public Doctor getDoctorByName(String doctorName);
+
+	public void assignSymptom(Patient p, Symptom s);
+
+	public void assignDisease(Patient p, Disease d);
 }
