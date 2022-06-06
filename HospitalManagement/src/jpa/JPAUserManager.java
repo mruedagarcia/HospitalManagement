@@ -32,7 +32,6 @@ public class JPAUserManager implements UserManager {
 			Role nurse = new Role("nurse");
 			this.createRole(doctor);
 			this.createRole(patient);
-			
 			this.createRole(nurse);
 		}
 	}

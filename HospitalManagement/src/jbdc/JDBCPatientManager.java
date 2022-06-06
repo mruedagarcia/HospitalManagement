@@ -155,6 +155,7 @@ public class JDBCPatientManager implements PatientManager {
 				String specialty = rs.getString("specialty");
 				Doctor d = new Doctor(id, name, specialty);
 				doctors.add(d);
+
 			}
 			rs.close();
 			stmt.close();
@@ -270,7 +271,7 @@ public class JDBCPatientManager implements PatientManager {
 		Patient p = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE name='" + patientName +"'";
+			String sql = "SELECT * FROM patients WHERE name='" + patientName + "'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
@@ -288,7 +289,6 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return p;
 	}
-	
 
 	@Override
 	public List<Patient> listAllPatient() {
@@ -314,5 +314,4 @@ public class JDBCPatientManager implements PatientManager {
 		}
 		return patients;
 	}
-	}
-
+}

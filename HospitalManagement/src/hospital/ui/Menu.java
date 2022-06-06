@@ -111,23 +111,20 @@ public class Menu {
 		}
 	}
 
-	/*public static void choosePatient() throws Exception {
-		System.out.println(patientManager.listAllPatients());
-		Integer patientId = Utilities.readInt("Choose a patient, type its id:");
-		patientMenu(patientId);
-	}
-
-	public static void chooseDoctor() throws Exception {
-		System.out.println(doctorManager.listAllDoctors());
-		Integer doctorId = Utilities.readInt("Choose a doctor, type its id:");
-		doctorMenu(doctorId);
-	}
-
-	public static void chooseNurse() throws Exception {
-		System.out.println(nurseManager.listAllNurses());
-		Integer nurseId = Utilities.readInt("Choose a nurse, type its id:");
-		patientMenu(nurseId);
-	}*/
+	/*
+	 * public static void choosePatient() throws Exception {
+	 * System.out.println(patientManager.listAllPatients()); Integer patientId =
+	 * Utilities.readInt("Choose a patient, type its id:"); patientMenu(patientId);
+	 * }
+	 * 
+	 * public static void chooseDoctor() throws Exception {
+	 * System.out.println(doctorManager.listAllDoctors()); Integer doctorId =
+	 * Utilities.readInt("Choose a doctor, type its id:"); doctorMenu(doctorId); }
+	 * 
+	 * public static void chooseNurse() throws Exception {
+	 * System.out.println(nurseManager.listAllNurses()); Integer nurseId =
+	 * Utilities.readInt("Choose a nurse, type its id:"); patientMenu(nurseId); }
+	 */
 
 	public static void createPatient() throws Exception {
 		System.out.println("Type your data:");
@@ -273,11 +270,9 @@ public class Menu {
 				case 8: {
 					patientManager.deletePatient(pId);
 					System.out.println("Account deleted");
-					break;
-				}
-				case 0: {
 					System.exit(0);
 				}
+
 				default: {
 					break;// close the loop
 				}
@@ -403,7 +398,6 @@ public class Menu {
 		}
 	}
 
-	
 	public static void nurseMenu(Integer nId) throws Exception {
 		try {
 			do {
