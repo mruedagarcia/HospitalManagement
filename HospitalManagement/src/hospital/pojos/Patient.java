@@ -65,6 +65,10 @@ public class Patient implements Serializable {
 		this.phone = phone;
 		this.name = name;
 		this.severe = severe;
+		diseases = new ArrayList<Disease>();
+		doctors = new ArrayList<Doctor>();
+		medicines = new ArrayList<Medicine>();
+		symptoms = new ArrayList<Symptom>();
 	}
 
 	public Patient(String name, String email, boolean severe, Integer phone, Date dob) {
@@ -74,6 +78,10 @@ public class Patient implements Serializable {
 		this.phone = phone;
 		this.name = name;
 		this.severe = severe;
+		diseases = new ArrayList<Disease>();
+		doctors = new ArrayList<Doctor>();
+		medicines = new ArrayList<Medicine>();
+		symptoms = new ArrayList<Symptom>();
 	}
 
 	public void addDoctor(Doctor d) {

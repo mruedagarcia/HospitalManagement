@@ -7,6 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import hospital.pojos.Disease;
+import hospital.pojos.Medicine;
+import hospital.pojos.Symptom;
+
 public class JDBCManager {
 	private Connection c = null;
 
@@ -18,7 +22,7 @@ public class JDBCManager {
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
 			this.createTables();// here we do the call of our DataBase's Tables
-			this.insertIntoTables();
+			//this.insertIntoTables();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,14 +69,18 @@ public class JDBCManager {
 			for (String name : s) {// for each symptom, we take each id in the list of Symptoms
 				String sql = "INSERT INTO symptoms (name) VALUES ('" + name + "');";
 				stmt.executeUpdate(sql);
+				Symptom symptom = new Symptom(name);
+				
 			}
 			for (String name : d) {// for each symptom, we take each id in the list of Symptoms
 				String sql = "INSERT INTO diseases (name) VALUES ('" + name + "');";
 				stmt.executeUpdate(sql);
+				Disease disease = new Disease(name);
 			}
 			for (String name : m) {// for each symptom, we take each id in the list of Symptoms
 				String sql = "INSERT INTO medicines (name) VALUES ('" + name + "');";
 				stmt.executeUpdate(sql);
+				Medicine medicine = new Medicine(name);
 			}
 
 		} catch (Exception e) {

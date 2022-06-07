@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import hospital.pojos.Doctor;
 import hospital.pojos.Patient;
 import hospital.pojos.Symptom;
 import ifaces.SymptomManager;
@@ -25,7 +26,7 @@ public class JDBCSymptomManager implements SymptomManager {
 	 * 
 	 * }
 	 */
-
+	
 	@Override
 	public List<Symptom> listAllSymptoms() {
 		List<Symptom> symptoms = new ArrayList<Symptom>();

@@ -114,21 +114,6 @@ public class Menu {
 		}
 	}
 
-	/*
-	 * public static void choosePatient() throws Exception {
-	 * System.out.println(patientManager.listAllPatients()); Integer patientId =
-	 * Utilities.readInt("Choose a patient, type its id:"); patientMenu(patientId);
-	 * }
-	 * 
-	 * public static void chooseDoctor() throws Exception {
-	 * System.out.println(doctorManager.listAllDoctors()); Integer doctorId =
-	 * Utilities.readInt("Choose a doctor, type its id:"); doctorMenu(doctorId); }
-	 * 
-	 * public static void chooseNurse() throws Exception {
-	 * System.out.println(nurseManager.listAllNurses()); Integer nurseId =
-	 * Utilities.readInt("Choose a nurse, type its id:"); patientMenu(nurseId); }
-	 */
-
 	public static void createPatient() throws Exception {
 		System.out.println("Type your data:");
 		String name = Utilities.readString("Name: ");
@@ -285,6 +270,10 @@ public class Menu {
 					System.out.println("Account deleted");
 					System.exit(0);
 				}
+				
+				case 0: {
+					System.exit(0);
+				}
 
 				default: {
 					break;// close the loop
@@ -336,7 +325,6 @@ public class Menu {
 					System.out.println(patients);
 					int id = Utilities.readInt("Introduce the id of the patient to diagnose:");
 					Patient p = patientManager.getPatientById(id);
-					// System.out.println(p);
 					doctorManager.assignDoctor(p, dId);
 					p.addDoctor(d);
 					int id_;
@@ -347,10 +335,11 @@ public class Menu {
 						symptoms = symptomManager.listAllSymptoms();
 						System.out.println(symptoms);
 						id_ = Utilities.readInt("Introduce the id of a symptom (write 0 when you have finished): ");
-						Symptom s = symptomManager.getSymptomById(id);
-						doctorManager.assignSymptom(p, s);
+						Symptom s = symptomManager.getSymptomById(id_);
+						System.out.println(s);
 						p.addSymptom(s);
-					} while (id != 0);
+						doctorManager.assignSymptom(p, s);
+					} while (id_ != 0);
 					do {
 						diseases = diseaseManager.listAllDiseases();
 						System.out.println(diseases);
@@ -358,7 +347,7 @@ public class Menu {
 						Disease di = diseaseManager.getDiseaseById(id_);
 						doctorManager.assignDisease(p, di);
 						p.addDisease(di);
-					} while (id != 0);
+					} while (id_ != 0);
 					do {
 						medicines = medicineManager.listAllMedicines();
 						System.out.println(medicines);
@@ -366,7 +355,7 @@ public class Menu {
 						Medicine med = medicineManager.getMedicineById(id_);
 						doctorManager.assignMedicine(p, med);
 						p.addMedicine(med);
-					} while (id != 0);
+					} while (id_ != 0);
 
 					break;
 				}

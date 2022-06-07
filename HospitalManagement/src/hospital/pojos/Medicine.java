@@ -24,11 +24,13 @@ public class Medicine implements Serializable {
 	
 	public Medicine(String name) {
 		this.name=name;
+		patients = new ArrayList<Patient>();
 	}
 
 	public Medicine(Integer id2, String name2) {
 		this.id = id2;
 		this.name = name2;
+		patients = new ArrayList<Patient>();
 	}
 
 	@Override

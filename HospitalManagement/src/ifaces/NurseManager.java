@@ -25,7 +25,7 @@ public interface NurseManager {
 	public Nurse getNurseById(int nurseId);
 
 	// Update a nurse
-	public void updateNurse(int nId, String name, String email);
+	public void updateNurse(Integer nId, String name, String email);
 
 	// Update patient status
 	public void updatePatientStatus(int pId, Boolean severe);

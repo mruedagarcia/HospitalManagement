@@ -25,11 +25,13 @@ public class Disease implements Serializable {
 	public Disease(String name){
 		super();
 		this.name = name;
+		patients = new ArrayList<Patient>();
 	}
 
 	public Disease(Integer id2, String name2) {
 		this.id = id2;
 		this.name = name2;
+		patients = new ArrayList<Patient>();
 	}
 
 	public Integer getId() {

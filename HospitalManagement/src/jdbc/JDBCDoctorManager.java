@@ -97,7 +97,7 @@ public class JDBCDoctorManager implements DoctorManager {
 					+ " WHERE d.id=" + doctorId;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("idPatient");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				Boolean severe = rs.getBoolean("severe");
@@ -122,7 +122,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
 			p.setInt(1, pa.getId());
 			p.setInt(2, doctorId);
-			p.executeUpdate();
+			//p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -136,7 +136,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setInt(2, s.getId());
-			prep.executeUpdate();
+			//prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -149,7 +149,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setInt(2, d.getId());
-			prep.executeUpdate();
+			//prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -162,7 +162,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setInt(2, m.getId());
-			prep.executeUpdate();
+			//prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -175,7 +175,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
 			p.setInt(1, symptomId);
 			p.setInt(2, diseaseId);
-			p.executeUpdate();
+			//p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 

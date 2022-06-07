@@ -43,17 +43,20 @@ public class Doctor implements Serializable {
 		this.specialty = specialty;
 		this.id = id;
 		this.email = email;
+		patients = new ArrayList<Patient>();
 	}
 
 	public Doctor(String name, String specialty, String email) {
 		this.name = name;
 		this.specialty = specialty;
 		this.email=email;
+		patients = new ArrayList<Patient>();
 	}
 	public Doctor (Integer id,String name,String speciality) {
 		this.name = name;
 		this.id = id;
 		this.specialty = speciality;
+		patients = new ArrayList<Patient>();
 	}
 	
 	public void addPatient(Patient p) {

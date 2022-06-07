@@ -58,7 +58,7 @@ public class JDBCNurseManager implements NurseManager {
 					+ " WHERE n.id=" + nurseId;
 			ResultSet rs = stmt.executeQuery(sq1);
 			while (rs.next()) {
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("idPatient");
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				Boolean severe = rs.getBoolean("severe");
@@ -188,14 +188,14 @@ public class JDBCNurseManager implements NurseManager {
 	}
 
 	@Override
-	public void updateNurse(int nId, String name, String email) {
+	public void updateNurse(Integer nId, String name, String email) {
 		try {
 			String sql = "UPDATE nurses SET name=?, email=? WHERE id=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, email);
 			ps.setInt(3, nId);
-
+			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
