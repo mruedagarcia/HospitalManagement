@@ -1,5 +1,7 @@
 package ifaces;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import hospital.pojos.Disease;
@@ -45,7 +47,7 @@ public interface PatientManager {
 	public void deletePatient(int patientId);
 
 	// Update a patient
-	public void updatePatient(Patient p);
+	public void updatePatient(Integer pId,String name,String email,Boolean severe, Integer phone,Date dob);
 	public List<Patient>listAllPatient();
 
 

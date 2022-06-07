@@ -1,4 +1,4 @@
-package jbdc;
+package jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,25 +9,22 @@ import java.util.List;
 import hospital.pojos.Disease;
 import ifaces.DiseaseManager;
 
-public class JDBCDiseaseManager implements DiseaseManager{
+public class JDBCDiseaseManager implements DiseaseManager {
 
 	private JDBCManager manager;
+
 	public JDBCDiseaseManager(JDBCManager m) {
-		this.manager=m;
+		this.manager = m;
 	}
-	/*@Override
-	public void addDisease(Disease d) {
-		try {
-			String sql = "INSERT INTO diseases (name) VALUES(?)";
-			PreparedStatement p = manager.getConnection().prepareStatement(sql);
-			p.setString(1, d.getName());
-			p.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}*/
-	
+	/*
+	 * @Override public void addDisease(Disease d) { try { String sql =
+	 * "INSERT INTO diseases (name) VALUES(?)"; PreparedStatement p =
+	 * manager.getConnection().prepareStatement(sql); p.setString(1, d.getName());
+	 * p.executeUpdate(); }catch(Exception e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 */
+
 	@Override
 	public List<Disease> listAllDiseases() {
 		List<Disease> diseases = new ArrayList<Disease>();
@@ -51,12 +48,13 @@ public class JDBCDiseaseManager implements DiseaseManager{
 		return diseases;
 
 	}
+
 	@Override
 	public Disease getDiseaseByName(String diseaseName) {
 		Disease d = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM diseases WHERE name='" + diseaseName+"'";
+			String sql = "SELECT * FROM diseases WHERE name = " + diseaseName;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String name = rs.getString("name");

@@ -27,13 +27,13 @@ import ifaces.NurseManager;
 import ifaces.PatientManager;
 import ifaces.SymptomManager;
 import ifaces.UserManager;
-import jbdc.JDBCDiseaseManager;
-import jbdc.JDBCDoctorManager;
-import jbdc.JDBCManager;
-import jbdc.JDBCMedicineManager;
-import jbdc.JDBCNurseManager;
-import jbdc.JDBCPatientManager;
-import jbdc.JDBCSymptomManager;
+import jdbc.JDBCDiseaseManager;
+import jdbc.JDBCDoctorManager;
+import jdbc.JDBCManager;
+import jdbc.JDBCMedicineManager;
+import jdbc.JDBCNurseManager;
+import jdbc.JDBCPatientManager;
+import jdbc.JDBCSymptomManager;
 import jpa.JPAUserManager;
 import xml.Xml2HtmlPatient;
 
@@ -218,7 +218,12 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					patientManager.updatePatient(p);
+					String name = Utilities.readString("Introduce a new name: ");
+					String email = Utilities.readString("Introduce a new email: ");
+					boolean severe = Utilities.readBoolean("Introduce a new severe (yes/no): ");
+					Integer phone = Utilities.readInt("Introduce a new phone: ");
+					LocalDate dob = Utilities.readDate();
+					patientManager.updatePatient(pId, name, email, severe, phone, Date.valueOf(dob));
 					break;
 				}
 				case 2: {
@@ -300,8 +305,8 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					String name = Utilities.readString("Introduce the new name: ");
-					String specialty = Utilities.readString("Introduce tour new specialty: ");
+					String name = Utilities.readString("Introduce your new name: ");
+					String specialty = Utilities.readString("Introduce your new specialty: ");
 					String email = Utilities.readString("Introduce your new email: ");
 					doctorManager.updateDoctor(dId, name, specialty, email);
 					break;
@@ -314,19 +319,21 @@ public class Menu {
 					System.out.println(patientManager.listAllPatients());
 					break;
 				}
-				case 4: {
+				case 4: { // assigning doctors w/ patients & assigning symptoms, medicines and diseases
 					List<Disease> diseases = new ArrayList<Disease>();
 					List<Symptom> symptoms = new ArrayList<Symptom>();
 					List<Medicine> medicines = new ArrayList<Medicine>();
 					List<Patient> patients = new ArrayList<Patient>();
 					patients = patientManager.listAllPatients();
 					System.out.println(patients);
-					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
-					Patient p = patientManager.getPatientByName(name);
+					int id = Utilities.readInt("Introduce the id of the patient to diagnose:");
+					Patient p = patientManager.getPatientById(id);
+					// System.out.println(p);
 					doctorManager.assignDoctor(p, dId);
-					//Doctor doctor = doctorManager.getDoctorById(dId);
-					//doctor.addPatient(p);
-					//p.addDoctor(doctor);
+					String name = "";
+					// Doctor doctor = doctorManager.getDoctorById(dId);
+					// doctor.addPatient(p);
+					// p.addDoctor(doctor);
 					do {
 						symptoms = symptomManager.listAllSymptoms();
 						System.out.println(symptoms);
@@ -349,8 +356,8 @@ public class Menu {
 						System.out.println(medicines);
 						name = Utilities
 								.readString("Introduce the name of a medicine (write exit when you have finished): ");
-						Disease di = diseaseManager.getDiseaseByName(name);
-						p.addDisease(di);
+						Medicine med = medicineManager.getMedicineByName(name);
+						p.addMedicine(med);
 					} while (!(name.equals("exit")));
 
 					break;
@@ -418,24 +425,27 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					nurseManager.updateNurse(n);
+					String name = Utilities.readString("Introduce a new name: ");
+					String email = Utilities.readString("Introduce a new email: ");
+					nurseManager.updateNurse(nId, name, email);
 					break;
 				}
 				case 2: {
-					nurseManager.listMyPatients(nId);
+					System.out.println(nurseManager.listMyPatients(nId));
 					break;
 				}
 				case 3: {
-					patientManager.listAllPatients();
+					System.out.println(patientManager.listAllPatients());
 					break;
 				}
 				case 4: {
 					patients = patientManager.listAllPatients();
 					System.out.println(patients);
-					String name = Utilities.readString("Introduce the name of the patient to treat:");
-					Patient p = patientManager.getPatientByName(name);
-					nurseManager.assignNurse(p.getId(), nId);
-					nurseManager.updatePatientStatus(p);
+					int id = Utilities.readInt("Introduce the id of the patient to treat:");
+					nurseManager.assignNurse(id, nId);
+					Boolean severe = Utilities.readBoolean("Introduce the severity:(yes/no)");
+					nurseManager.updatePatientStatus(id, severe);
+					break;
 				}
 				case 5: {
 					JAXBContext jaxbContext = JAXBContext.newInstance(Nurse.class);
@@ -487,25 +497,29 @@ public class Menu {
 				System.out.println("login successful");
 				patientMenu(u.getId());
 				break;
+			} else {
+				System.out.println("Email or password wrong");
+				break;
+
 			}
 		}
 	}
 
 	public static void loginDoctor() throws Exception {
+		String email = Utilities.readString("Introduce an email:");
+		String password = Utilities.readString("Introduce a password:");
+		User u = userManager.checkPassword(email, password);
 		while (true) {
-			String email = Utilities.readString("Introduce an email:");
-			String password = Utilities.readString("Introduce a password:");
-			User u = userManager.checkPassword(email, password);
-
 			if (u != null && u.getRole().getName().equals("doctor")) {
 				System.out.println("login successful");
 				doctorMenu(u.getId());
 				break;
 			} else {
 				System.out.println("Email or password wrong");
-
+				break;
 			}
 		}
+
 	}
 
 	public static void loginNurse() throws Exception {
@@ -516,6 +530,9 @@ public class Menu {
 			if (u != null && u.getRole().getName().equals("nurse")) {
 				System.out.println("login successful");
 				nurseMenu(u.getId());
+				break;
+			} else {
+				System.out.println("Email or password wrong");
 				break;
 			}
 		}

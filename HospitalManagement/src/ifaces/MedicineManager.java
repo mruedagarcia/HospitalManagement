@@ -7,6 +7,7 @@ import hospital.pojos.Medicine;
 
 public interface MedicineManager {
 //public void addMedicine(Medicine m);
-	public List<Medicine>listAllMedicines();
-	public Medicine getDiseaseByName(String medicineName);
+	public List<Medicine> listAllMedicines();
+
+	public Medicine getMedicineByName(String medicineName);
 }

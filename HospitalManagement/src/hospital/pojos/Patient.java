@@ -17,11 +17,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import xml.SQLDateAdapter;
 
-
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "email", "dob", "name"}) 
+@XmlType(propOrder = { "email", "dob", "name" })
 
 public class Patient implements Serializable {
 
@@ -77,7 +75,7 @@ public class Patient implements Serializable {
 		this.name = name;
 		this.severe = severe;
 	}
-	
+
 	public void addDoctor(Doctor d) {
 		if (!(doctors.contains(d))) {
 			doctors.add(d);
@@ -197,14 +195,16 @@ public class Patient implements Serializable {
 				+ ", severe=" + severe + ", diseases=" + diseases + ", doctors=" + doctors + ", medicines=" + medicines
 				+ ", symptoms=" + symptoms + "]";
 	}
+
 	public void addSymptom(Symptom s) {
-		List<Symptom> symptoms = new ArrayList<>();
 		symptoms.add(s);
 	}
 
 	public void addDisease(Disease d) {
-		List<Disease> diseases = new ArrayList<>();
 		diseases.add(d);
 	}
 
+	public void addMedicine(Medicine m) {
+		medicines.add(m);
+	}
 }

@@ -1,4 +1,4 @@
-package jbdc;
+package jdbc;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;

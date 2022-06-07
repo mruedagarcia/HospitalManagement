@@ -1,4 +1,4 @@
-package jbdc;
+package jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,23 +9,20 @@ import java.util.List;
 import hospital.pojos.Symptom;
 import ifaces.SymptomManager;
 
-public class JDBCSymptomManager implements SymptomManager{
-private JDBCManager manager;
-public JDBCSymptomManager(JDBCManager m) {
-	this.manager=m;
-}
-	/*@Override
-	public void addSymptom(Symptom s) {
-		try {
-			String sql = "INSERT INTO symptoms (name) VALUES(?)";
-			PreparedStatement p = manager.getConnection().prepareStatement(sql);
-			p.setString(1, s.getName());
-			p.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}*/
+public class JDBCSymptomManager implements SymptomManager {
+	private JDBCManager manager;
+
+	public JDBCSymptomManager(JDBCManager m) {
+		this.manager = m;
+	}
+	/*
+	 * @Override public void addSymptom(Symptom s) { try { String sql =
+	 * "INSERT INTO symptoms (name) VALUES(?)"; PreparedStatement p =
+	 * manager.getConnection().prepareStatement(sql); p.setString(1, s.getName());
+	 * p.executeUpdate(); }catch(Exception e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 */
 
 	@Override
 	public List<Symptom> listAllSymptoms() {
@@ -49,12 +46,13 @@ public JDBCSymptomManager(JDBCManager m) {
 		}
 		return symptoms;
 	}
+
 	@Override
 	public Symptom getSymptomByName(String symptomName) {
 		Symptom s = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM symptoms WHERE name='" + symptomName+"'";
+			String sql = "SELECT * FROM symptoms WHERE name = " + symptomName;
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String name = rs.getString("name");

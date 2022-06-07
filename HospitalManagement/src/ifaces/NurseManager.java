@@ -25,11 +25,11 @@ public interface NurseManager {
 	public Nurse getNurseById(int nurseId);
 
 	// Update a nurse
-	public void updateNurse(Nurse n);
+	public void updateNurse(int nId, String name, String email);
 
 	// Update patient status
-	public void updatePatientStatus(Patient p);
-	
+	public void updatePatientStatus(int pId, Boolean severe);
+
 	public Nurse getNurseByName(String nurseName);
 
 	public void deleteNurse(int nurseId);

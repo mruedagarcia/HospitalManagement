@@ -1,4 +1,4 @@
-package jbdc;
+package jdbc;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -75,7 +75,7 @@ public class JDBCPatientManager implements PatientManager {
 				boolean severe = rs.getBoolean("severe");
 				Integer phone = rs.getInt("phone");
 				Date date = rs.getDate("dob");
-				p = new Patient(name, email, severe, phone, date);
+				p = new Patient(id, name, email, severe, phone, date);
 			}
 			rs.close();
 			stmt.close();
@@ -86,19 +86,22 @@ public class JDBCPatientManager implements PatientManager {
 	}
 
 	@Override
-	public void updatePatient(Patient p) {
+	public void updatePatient(Integer pId, String name, String email, Boolean severe, Integer phone, Date dob) {
+
 		try {
-			String sql = "UPDATE patients" + " SET name=?" + " email=?" + " severe=?" + " phone=?" + " dob=?";
+			String sql = "UPDATE patients SET name=? email=? severe=? phone=? dob=? WHERE id=";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
-			ps.setString(1, p.getName());
-			ps.setString(2, p.getEmail());
-			ps.setBoolean(3, p.getSevere());
-			ps.setInt(4, p.getPhone());
-			ps.setDate(5, p.getDob());
+			ps.setString(1, name);
+			ps.setString(2, email);
+			ps.setBoolean(3, severe);
+			ps.setInt(4, phone);
+			ps.setDate(5, dob);
+			ps.setInt(6, pId);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
