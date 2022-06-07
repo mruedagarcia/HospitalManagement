@@ -1,14 +1,27 @@
-<!DOCTYPE Patient [
-   <!ELEMENT Patient (email,dob,name)>
-   <!ELEMENT email (#PCDATA)>
-   <!ELEMENT dob (#PCDATA)>
-   <!ELEMENT name (#PCDATA)>
-   <!ATTLIST Patient id CDATA #REQUIRED
-                    phone CDATA #REQUIRED>
+<!DOCTYPE Patients [
+	<!ELEMENT Patients (patients)>
+	<!ELEMENT patients (Patient+)>
+	<!ELEMENT Patient (email,dob,name)>
+	<!ELEMENT email (#PCDATA)>
+	<!ELEMENT dob (#PCDATA)>
+	<!ELEMENT name (#PCDATA)>
+	<!ATTLIST Patient
+		id CDATA #REQUIRED
+		phone CDATA #REQUIRED
+	>
 ]>
 
-<Patient id="1" phone="606443498">
-    <email>lolasanchezmaresca@gmail.com</email>
-	<dob>2002-10-24</dob>
-	<name>Lola</name>
-</Patient>
+<Patients>
+	<patients>
+		<Patient id="2" phone="696516876">
+			<email>jsoldom@gmail.com</email>
+			<dob>2002-12-23</dob>
+			<name>Jaime</name>
+		</Patient>
+		<Patient id="1" phone="606443498">
+			<email>lolasanchezmaresca@gmail.com</email>
+			<dob>2002-10-24</dob>
+			<name>Lola</name>
+		</Patient>
+	</patients>
+</Patients>
