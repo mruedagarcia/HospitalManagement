@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Patients>
+    <Patient id="1" phone="666666666">
+        <email>meri@gmail.com</email>
+        <dob>2002-12--23</dob>
+        <name>meri</name>
+    </Patient>
+    <Patient id="2" phone="606333638">
+        <email>lola@gmail.com</email>
+        <dob>2002-03--24</dob>
+        <name>lola</name>
+    </Patient>
+</Patients>

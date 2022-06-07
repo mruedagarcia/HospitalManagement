@@ -12,6 +12,7 @@ import hospital.pojos.Disease;
 import hospital.pojos.Doctor;
 import hospital.pojos.Medicine;
 import hospital.pojos.Patient;
+import hospital.pojos.Patients;
 import hospital.pojos.Symptom;
 import ifaces.PatientManager;
 

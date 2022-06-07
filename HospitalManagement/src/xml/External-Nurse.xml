@@ -1,0 +1,21 @@
+<!DOCTYPE Nurses [
+	<!ELEMENT Nurses (nurses)>
+	<!ELEMENT nurses (Nurse+)>
+	<!ELEMENT Nurse (name,email)>
+	<!ATTLIST Nurse id CDATA #REQUIRED>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT email (#PCDATA)>
+]>
+
+<Nurses>
+	<nurses>
+		<Nurse id="4">
+			<name>Julia</name>
+			<email>julia@gmail.com</email>
+		</Nurse>
+		<Nurse id="5">
+			<name>Fran</name>
+			<email>fran@gmail.com</email>
+		</Nurse>
+	</nurses>
+</Nurses>

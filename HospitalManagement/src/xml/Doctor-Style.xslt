@@ -11,7 +11,7 @@
       <xsl:sort select="@id" data-type="number"/>
             <tr>
             <td><i><xsl:value-of select="@id" /></i></td>
-            <td><xsl:value-of select="@name" /></td>
+            <td><xsl:value-of select="name" /></td>
             <td><xsl:value-of select="specialty" /></td>
             </tr>
       </xsl:for-each>

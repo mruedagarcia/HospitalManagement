@@ -14,9 +14,12 @@ import javax.xml.bind.Unmarshaller;
 
 import hospital.pojos.Disease;
 import hospital.pojos.Doctor;
+import hospital.pojos.Doctors;
 import hospital.pojos.Medicine;
 import hospital.pojos.Nurse;
+import hospital.pojos.Nurses;
 import hospital.pojos.Patient;
+import hospital.pojos.Patients;
 import hospital.pojos.Role;
 import hospital.pojos.User;
 import hospital.pojos.Symptom;
@@ -210,8 +213,8 @@ public class Menu {
 				System.out.println("2.See my doctors:");
 				System.out.println("3.See my symptoms:");
 				System.out.println("4.See my medical history:");
-				System.out.println("5.Export patient to a Xml file");
-				System.out.println("6.Import patient from a Xml file");
+				System.out.println("5.Export patients to a Xml file");
+				System.out.println("6.Import patients from a Xml file");
 				System.out.println("7.Save as Html");
 				System.out.println("8.Delete account");
 				System.out.println("0.Exit");
@@ -244,32 +247,36 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Patients.class);
 					Marshaller marshaller = jaxbContext.createMarshaller();
 					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-					String nameFileXml = Utilities.readString("Introduce the name of the xml file(.xml): ");
+					List<Patient> allPatients = patientManager.listAllPatients();// we list them
+					String nameFileXml = Utilities
+							.readString("Introduce the name of the xml file(./src/xml/nameFile.xml): ");
 					File file = new File(nameFileXml);
-					marshaller.marshal(p, file);
-					marshaller.marshal(p, System.out);
+					Patients patients = new Patients(allPatients);
+					marshaller.marshal(patients, file);
+					marshaller.marshal(patients, System.out);
+					break;
 				}
 				case 6: {
-					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Patients.class);
 					Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");// TENGO QUE
-																										// COMPROBAR QUE
-																										// SEA UN FILE
-																										// DEL QUE SE
-																										// HAYA HECHO
-																										// MARSHALL
-					File file = new File(nameFile);
-					Patient patient = (Patient) unmarshaller.unmarshal(file);
-					patientManager.addPatient(patient);
+					String nameFile = Utilities.readString("Introduce the name of the file(./src/xml/nameFile.xml): ");
+					File file = new File(nameFile);// we read the file with the name
+					Patients patients = (Patients) unmarshaller.unmarshal(file);// we recuperate the information of the
+																				// file readed
+					List<Patient> ps = patients.getPatients();
+					for (Patient patient : ps) {
+						patientManager.addPatient(patient);
+					}
+					break;
 				}
 				case 7: {
 					String XmlFile = Utilities.readString("Introduce the name of the Xml File: ");
 					String XsltFile = Utilities.readString("Introduce the name of the Xslt File: ");
 					String HtmlFile = Utilities
-							.readString("Introduce the name of the Htlm File that you want to create: ");
+							.readString("Introduce the name of the Htlm File that you want to create (.html): ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
 					break;
 				}
@@ -297,8 +304,8 @@ public class Menu {
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
 				System.out.println("4.Diagnosis:");
-				System.out.println("5.Export patient to a Xml file");
-				System.out.println("6.Import patient from a Xml file");
+				System.out.println("5.Export doctors to a Xml file");
+				System.out.println("6.Import doctors from a Xml file");
 				System.out.println("7.Save as Html");
 				System.out.println("8.Delete account");
 				System.out.println("0.Exit");
@@ -364,37 +371,43 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					JAXBContext jaxbContext = JAXBContext.newInstance(Doctor.class);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Doctors.class);
 					Marshaller marshaller = jaxbContext.createMarshaller();
 					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-					String nameFileXml = Utilities.readString("Introduce the name of the xml file(.xml): ");
+					List<Doctor> allDoctors = doctorManager.listAllDoctors();// we list them
+					String nameFileXml = Utilities
+							.readString("Introduce the name of the xml file(./src/xml/nameFile.xml): ");
 					File file = new File(nameFileXml);
-					marshaller.marshal(d, file);
-					marshaller.marshal(d, System.out);
+					Doctors doctors = new Doctors(allDoctors);// we put allDoctor in our pojo Doctors
+					marshaller.marshal(doctors, file);// marshall of the doctor to the file
+					marshaller.marshal(doctors, System.out);
+					break;
 				}
 				case 6: {
-					JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Doctors.class);
 					Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");// TENGO QUE
-																										// COMPROBAR QUE
-																										// SEA UN FILE
-																										// DEL QUE SE
-																										// HAYA HECHO
-																										// MARSHALL
-					File file = new File(nameFile);
-					Patient patient = (Patient) unmarshaller.unmarshal(file);
-					patientManager.addPatient(patient);
+					String nameFile = Utilities.readString("Introduce the name of the file(./src/xml/nameFile.xml): ");
+					File file = new File(nameFile);// we read the file with the name
+					Doctors doctors = (Doctors) unmarshaller.unmarshal(file);// we recuperate the information of the
+																				// file readed
+					List<Doctor> ds = doctors.getDoctors();
+					for (Doctor doctor : ds) {
+						doctorManager.addDoctor(doctor);
+					}
+					break;
 				}
 				case 7: {
 					String XmlFile = Utilities.readString("Introduce the name of the Xml File: ");
 					String XsltFile = Utilities.readString("Introduce the name of the Xslt File: ");
 					String HtmlFile = Utilities
-							.readString("Introduce the name of the Htlm File that you want to create: ");
+							.readString("Introduce the name of the Htlm File that you want to create (.html): ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
+					break;
 				}
 				case 8: {
 					doctorManager.deleteDoctor(dId);
 					System.out.println("Account deleted");
+					break;
 				}
 				case 0: {
 					System.exit(0);
@@ -418,8 +431,8 @@ public class Menu {
 				System.out.println("2.See my patients:");
 				System.out.println("3.See all patients:");
 				System.out.println("4.Update patient status");
-				System.out.println("5.Export nurse to a Xml file");
-				System.out.println("6.Import nurse from a Xml file");
+				System.out.println("5.Export nurses to a Xml file");
+				System.out.println("6.Import nurses from a Xml file");
 				System.out.println("7.Save as Html");
 				System.out.println("8.Delete account");
 				System.out.println("0.Exit");
@@ -449,32 +462,43 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					JAXBContext jaxbContext = JAXBContext.newInstance(Nurse.class);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Nurses.class);
 					Marshaller marshaller = jaxbContext.createMarshaller();
 					marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");
-					File file = new File(nameFile);
-					marshaller.marshal(n, file);
-					marshaller.marshal(n, System.out);
+					List<Nurse> allNurses = nurseManager.listAllNurses();// we list them
+					String nameFileXml = Utilities
+							.readString("Introduce the name of the xml file(./src/xml/nameFile.xml): ");
+					File file = new File(nameFileXml);
+					Nurses nurses = new Nurses(allNurses);
+					marshaller.marshal(nurses, file);
+					marshaller.marshal(nurses, System.out);
+					break;
 				}
 				case 6: {
-					JAXBContext jaxbContext = JAXBContext.newInstance(Nurse.class);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Nurses.class);
 					Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-					String nameFile = Utilities.readString("Introduce the name of the file(.xml): ");
-					File file = new File(nameFile);
-					Nurse nurse = (Nurse) unmarshaller.unmarshal(file);
-					nurseManager.addNurse(nurse);
+					String nameFile = Utilities.readString("Introduce the name of the file(./src/xml/nameFile.xml): ");
+					File file = new File(nameFile);// we read the file with the name
+					Nurses nurses = (Nurses) unmarshaller.unmarshal(file);// we recuperate the information of the
+																			// file readed
+					List<Nurse> ns = nurses.getNurses();
+					for (Nurse nurse : ns) {
+						nurseManager.addNurse(nurse);
+					}
+					break;
 				}
 				case 7: {
 					String XmlFile = Utilities.readString("Introduce the name of the Xml File: ");
 					String XsltFile = Utilities.readString("Introduce the name of the Xslt File: ");
 					String HtmlFile = Utilities
-							.readString("Introduce the name of the Htlm File that you want to create: ");
+							.readString("Introduce the name of the Htlm File that you want to create (.html): ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
+					break;
 				}
 				case 8: {
 					nurseManager.deleteNurse(nId);
 					System.out.println("Account deleted");
+					break;
 				}
 				case 0: {
 					System.exit(0);

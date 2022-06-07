@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Doctors>
+    <Doctor id="1">
+        <name>marina</name>
+        <specialty>cardio</specialty>
+        <email>marina@gmail.com</email>
+    </Doctor>
+    <Doctor id="2">
+        <name>mencia</name>
+        <specialty>cardio</specialty>
+        <email>mencia@gmail.com</email>
+    </Doctor>
+    <Doctor id="3">
+        <name>marina</name>
+        <specialty>cardio</specialty>
+        <email>marina@gmail.com</email>
+    </Doctor>
+    <Doctor id="4">
+        <name>mencia</name>
+        <specialty>cardio</specialty>
+        <email>mencia@gmail.com</email>
+    </Doctor>
+</Doctors>

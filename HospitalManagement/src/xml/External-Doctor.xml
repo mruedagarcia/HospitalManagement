@@ -1,0 +1,25 @@
+<!DOCTYPE Doctors [
+   <!ELEMENT Doctors (doctors)>
+   <!ELEMENT doctors (Doctor+)>
+   <!ELEMENT Doctor (name,specialty,email)>
+   <!ATTLIST Doctor id CDATA #REQUIRED>
+   <!ELEMENT name (#PCDATA)>
+   <!ELEMENT specialty (#PCDATA)>
+   <!ELEMENT email (#PCDATA)>
+]>
+
+<Doctors>
+ <doctors>
+ <Doctor id="2">
+   <name>Pablo</name>
+   <specialty>cardiologist</specialty>
+   <email>pablomartin@gmail.com</email>  
+ </Doctor>
+
+ <Doctor id="4">
+   <name>Jacobo</name>
+   <specialty>neumologist</specialty>
+   <email>jacobosanchez@gmail.com</email>  
+ </Doctor>
+ </doctors>
+</Doctors>
