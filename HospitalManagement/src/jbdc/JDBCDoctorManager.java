@@ -62,13 +62,14 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public void updateDoctor(Doctor d) {
+	public void updateDoctor(Integer dId, String name, String specialty, String email) {
 		try {
-			String sql = "UPDATE doctors" + " SET name=?" + " specialty=?" + "email=?";
+			String sql = "UPDATE doctors SET name=? specialty=? email=? WHERE id=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
-			ps.setString(1, d.getName());
-			ps.setString(2, d.getSpecialty());
-			ps.setString(3, d.getEmail());
+			ps.setString(1, name);
+			ps.setString(2, specialty);
+			ps.setString(3, email);
+			ps.setInt(4, dId);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,6 +122,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
 			p.setInt(1, pa.getId());
 			p.setInt(2, doctorId);
+			p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -134,6 +136,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setInt(2, s.getId());
+			prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -146,6 +149,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setInt(2, d.getId());
+			prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -158,6 +162,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
 			p.setInt(1, symptomId);
 			p.setInt(2, diseaseId);
+			p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -245,6 +250,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement p = manager.getConnection().prepareStatement(sql);
 			p.setInt(1, diseaseId);
 			p.setInt(2, medicineId);
+			p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

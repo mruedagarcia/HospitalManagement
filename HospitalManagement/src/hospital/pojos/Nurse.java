@@ -40,14 +40,16 @@ public class Nurse implements Serializable {
 		patients = new ArrayList<Patient>();
 	}
 
-	public Nurse(String name, Integer id) {
+	public Nurse(String name, Integer id, String email) {
 		super();
 		this.name = name;
 		this.id = id;
+		this.email = email;
 	}
 
-	public Nurse(String name2) {
+	public Nurse(String name2, String email) {
 		this.name = name2;
+		this.email = email;
 	}
 
 	public List<Patient> getPatients() {
@@ -60,6 +62,14 @@ public class Nurse implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setName(String name) {
@@ -93,7 +103,7 @@ public class Nurse implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Nurse [name=" + name + ", id=" + id + ", patients=" + patients + "]";
+		return "Nurse [name=" + name + ", id=" + id + ", email=" + email + ", patients=" + patients + "]";
 	}
 
 }

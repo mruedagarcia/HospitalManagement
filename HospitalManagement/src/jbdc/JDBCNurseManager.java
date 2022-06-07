@@ -24,9 +24,10 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public void addNurse(Nurse n) {
 		try {
-			String sql = "INSERT INTO nurses (name) VALUES (?)";
+			String sql = "INSERT INTO nurses (name, email) VALUES (?,?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, n.getName());
+			prep.setString(2, n.getEmail());
 			prep.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -57,7 +58,7 @@ public class JDBCNurseManager implements NurseManager{
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sq1 = "SELECT * FROM patients AS p JOIN treat AS t p.id = t.id JOIN nurses AS n ON t.nurseId = n.id"+
-			"WHERE n.id="+nurseId;
+			" WHERE n.id="+nurseId;
 			ResultSet rs = stmt.executeQuery(sq1);
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
@@ -87,7 +88,8 @@ public class JDBCNurseManager implements NurseManager{
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
-				n = new Nurse(name, id);
+				String email = rs.getString("email");
+				n = new Nurse(name, id, email);
 			}
 			rs.close();
 			stmt.close();
@@ -107,7 +109,8 @@ public class JDBCNurseManager implements NurseManager{
 			ResultSet rs = stmt.executeQuery(sq1);
 			while(rs.next()) {
 				String name = rs.getString("name");
-				n = new Nurse(name);
+				String email = rs.getString("email");
+				n = new Nurse(name, email);
 			}rs.close();
 			stmt.close();
 		}catch(Exception e) {
@@ -119,9 +122,10 @@ public class JDBCNurseManager implements NurseManager{
 	@Override
 	public void updateNurse(Nurse n) {
 		try {
-			String sq1 = "UPDATE nurse" + "SET name = ?";
+			String sq1 = "UPDATE nurse" + " SET name = ?" + " SET email = ?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sq1);
 			ps.setString(1, n.getName());
+			ps.setString(2, n.getEmail());
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -144,7 +148,7 @@ public class JDBCNurseManager implements NurseManager{
 	public void updatePatientStatus(Patient p) {
 	
 		try {
-			String sq1 = "UPDATE patients" + "SET severity = ?";
+			String sq1 = "UPDATE patients" + " SET severity = ?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sq1);
 			ps.setBoolean(1, p.getSevere());
 			ps.executeUpdate();
@@ -163,7 +167,8 @@ public class JDBCNurseManager implements NurseManager{
 			while(rs.next()) {
 				String name = rs.getString("name");
 				Integer id = rs.getInt("id");
-				Nurse n1  = new Nurse(name,id);
+				String email = rs.getString("email");
+				Nurse n1  = new Nurse(name,id, email);
 				nurses.add(n1);
 			}
 			rs.close();
@@ -184,7 +189,8 @@ public class JDBCNurseManager implements NurseManager{
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
-				n = new Nurse(name);
+				String email = rs.getString("email");
+				n = new Nurse(name, email);
 			}
 			rs.close();
 			stmt.close();

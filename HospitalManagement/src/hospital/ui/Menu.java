@@ -197,7 +197,7 @@ public class Menu {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		Nurse n = new Nurse(name);
+		Nurse n = new Nurse(name, email);
 		nurseManager.addNurse(n);
 	}
 
@@ -300,7 +300,10 @@ public class Menu {
 				int choice = Utilities.readInt("----->Choose an option:<------\n");
 				switch (choice) {
 				case 1: {
-					doctorManager.updateDoctor(d);
+					String name = Utilities.readString("Introduce the new name: ");
+					String specialty = Utilities.readString("Introduce tour new specialty: ");
+					String email = Utilities.readString("Introduce your new email: ");
+					doctorManager.updateDoctor(dId, name, specialty, email);
 					break;
 				}
 				case 2: {
@@ -321,9 +324,9 @@ public class Menu {
 					String name = Utilities.readString("Introduce the name of the patient you want to diagnose: ");
 					Patient p = patientManager.getPatientByName(name);
 					doctorManager.assignDoctor(p, dId);
-					Doctor doctor = doctorManager.getDoctorById(dId);
-					doctor.addPatient(p);
-					p.addDoctor(doctor);
+					//Doctor doctor = doctorManager.getDoctorById(dId);
+					//doctor.addPatient(p);
+					//p.addDoctor(doctor);
 					do {
 						symptoms = symptomManager.listAllSymptoms();
 						System.out.println(symptoms);

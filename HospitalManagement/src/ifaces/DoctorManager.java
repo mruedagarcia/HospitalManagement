@@ -17,7 +17,7 @@ public interface DoctorManager {
 	public void addDoctor(Doctor d);
 
 	// Update doctor
-	public void updateDoctor(Doctor d);
+	public void updateDoctor(Integer dId, String name, String specialty, String email);
 
 	// Get a doctor by id
 	public Doctor getDoctorById(int dId);
