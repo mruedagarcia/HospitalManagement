@@ -140,9 +140,9 @@ public class JDBCManager {
 			sq1 = "CREATE TABLE examines(" 
 					+ " patientId INTEGER," 
 					+ " doctorId INTEGER,"
-					+ " FOREIGN KEY (patientId) REFERENCES patients(id), "
-					+ " FOREIGN KEY (doctorId) REFERENCES doctors(id), "
-					+ " PRIMARY KEY (patientId, doctorId)" 
+					+ " FOREIGN KEY(patientId) REFERENCES patients(id), "
+					+ " FOREIGN KEY(doctorId) REFERENCES doctors(id), "
+					+ " PRIMARY KEY(patientId, doctorId)" 
 					+ ");";
 			stmt.executeUpdate(sq1);
 
