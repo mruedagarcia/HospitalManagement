@@ -89,7 +89,7 @@ public class JDBCPatientManager implements PatientManager {
 	public void updatePatient(Integer pId, String name, String email, Boolean severe, Integer phone, Date dob) {
 
 		try {
-			String sql = "UPDATE patients SET name=? email=? severe=? phone=? dob=? WHERE id=";
+			String sql = "UPDATE patients SET name=?, email=?, severe=?, phone=?, dob=? WHERE id=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, email);

@@ -271,6 +271,7 @@ public class Menu {
 					String HtmlFile = Utilities
 							.readString("Introduce the name of the Htlm File that you want to create: ");
 					Xml2HtmlPatient.simpleTransform(XmlFile, XsltFile, HtmlFile);
+					break;
 				}
 				case 8: {
 					patientManager.deletePatient(pId);
@@ -495,7 +496,7 @@ public class Menu {
 		while (true) {
 			if (u != null && u.getRole().getName().equals("patient")) {
 				System.out.println("login successful");
-				patientMenu(u.getId());
+				patientMenu(u.getId());// patient
 				break;
 			} else {
 				System.out.println("Email or password wrong");
@@ -512,7 +513,9 @@ public class Menu {
 		while (true) {
 			if (u != null && u.getRole().getName().equals("doctor")) {
 				System.out.println("login successful");
+				// pick the doctor w the same email as user and then in doctorMenu(d.getId())
 				doctorMenu(u.getId());
+
 				break;
 			} else {
 				System.out.println("Email or password wrong");
@@ -529,7 +532,7 @@ public class Menu {
 		while (true) {
 			if (u != null && u.getRole().getName().equals("nurse")) {
 				System.out.println("login successful");
-				nurseMenu(u.getId());
+				nurseMenu(u.getId());// same thing n.getId()
 				break;
 			} else {
 				System.out.println("Email or password wrong");
