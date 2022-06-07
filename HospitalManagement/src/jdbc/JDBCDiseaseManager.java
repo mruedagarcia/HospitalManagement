@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hospital.pojos.Disease;
+import hospital.pojos.Symptom;
 import ifaces.DiseaseManager;
 
 public class JDBCDiseaseManager implements DiseaseManager {
@@ -59,6 +60,25 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			while (rs.next()) {
 				String name = rs.getString("name");
 				d = new Disease(name);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
+	
+	@Override
+	public Disease getDiseaseById(int id) {
+		Disease d = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM diseases WHERE id=" + id;
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				d = new Disease(id, name);
 			}
 			rs.close();
 			stmt.close();

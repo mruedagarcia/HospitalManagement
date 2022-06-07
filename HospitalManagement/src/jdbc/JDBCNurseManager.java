@@ -42,7 +42,7 @@ public class JDBCNurseManager implements NurseManager {
 			PreparedStatement p = manager.getConnection().prepareStatement(sq1);
 			p.setInt(1, patientId);
 			p.setInt(2, nurseId);
-
+			p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -190,7 +190,7 @@ public class JDBCNurseManager implements NurseManager {
 	@Override
 	public void updateNurse(int nId, String name, String email) {
 		try {
-			String sql = "UPDATE nurses SET name=? email=? WHERE id=?";
+			String sql = "UPDATE nurses SET name=?, email=? WHERE id=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, email);

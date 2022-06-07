@@ -10,4 +10,6 @@ public interface MedicineManager {
 	public List<Medicine> listAllMedicines();
 
 	public Medicine getMedicineByName(String medicineName);
+	public Medicine getMedicineById(int id);
+	
 }

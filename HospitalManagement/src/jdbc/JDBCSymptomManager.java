@@ -1,11 +1,13 @@
 package jdbc;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import hospital.pojos.Patient;
 import hospital.pojos.Symptom;
 import ifaces.SymptomManager;
 
@@ -57,6 +59,25 @@ public class JDBCSymptomManager implements SymptomManager {
 			while (rs.next()) {
 				String name = rs.getString("name");
 				s = new Symptom(name);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
+	@Override
+	public Symptom getSymptomById(int id) {
+		Symptom s = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM symptoms WHERE id=" + id;
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				s = new Symptom(id, name);
 			}
 			rs.close();
 			stmt.close();

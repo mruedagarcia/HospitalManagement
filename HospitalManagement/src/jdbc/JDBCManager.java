@@ -97,8 +97,7 @@ public class JDBCManager {
 			Statement stmt = c.createStatement();
 			// PATIENTS
 			String sq1 = "CREATE TABLE patients (" + " id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
-					+ " email TEXT NOT NULL," + " severe BOOLEAN, " + " phone INTEGER NOT NULL," + " dob DATE,"
-					+ " nurseID INTEGER REFERENCES nurses(id) ON DELETE RESTRICT" + ");";
+					+ " email TEXT NOT NULL," + " severe BOOLEAN, " + " phone INTEGER NOT NULL," + " dob DATE" + ");";
 			stmt.executeUpdate(sq1);
 
 			// --------->NURSES

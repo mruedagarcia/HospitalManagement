@@ -331,35 +331,35 @@ public class Menu {
 					Patient p = patientManager.getPatientById(id);
 					// System.out.println(p);
 					doctorManager.assignDoctor(p, dId);
-					String name = "";
+					p.addDoctor(d);
+					int id_;
 					// Doctor doctor = doctorManager.getDoctorById(dId);
 					// doctor.addPatient(p);
 					// p.addDoctor(doctor);
 					do {
 						symptoms = symptomManager.listAllSymptoms();
 						System.out.println(symptoms);
-						name = Utilities.readString("Introduce the name of a symptom (write exit when you finished): ");
-						Symptom s = symptomManager.getSymptomByName(name);
+						id_ = Utilities.readInt("Introduce the id of a symptom (write 0 when you have finished): ");
+						Symptom s = symptomManager.getSymptomById(id);
 						doctorManager.assignSymptom(p, s);
 						p.addSymptom(s);
-					} while (!(name.equals("exit")));
+					} while (id != 0);
 					do {
 						diseases = diseaseManager.listAllDiseases();
 						System.out.println(diseases);
-						name = Utilities
-								.readString("Introduce the name of a disease (write exit when you have finished): ");
-						Disease di = diseaseManager.getDiseaseByName(name);
+						id_ = Utilities.readInt("Introduce the id of a disease (write 0 when you have finished): ");
+						Disease di = diseaseManager.getDiseaseById(id_);
 						doctorManager.assignDisease(p, di);
 						p.addDisease(di);
-					} while (!(name.equals("exit")));
+					} while (id != 0);
 					do {
 						medicines = medicineManager.listAllMedicines();
 						System.out.println(medicines);
-						name = Utilities
-								.readString("Introduce the name of a medicine (write exit when you have finished): ");
-						Medicine med = medicineManager.getMedicineByName(name);
+						id_ = Utilities.readInt("Introduce the id of a medicine (write 0 when you have finished): ");
+						Medicine med = medicineManager.getMedicineById(id_);
+						doctorManager.assignMedicine(p, med);
 						p.addMedicine(med);
-					} while (!(name.equals("exit")));
+					} while (id != 0);
 
 					break;
 				}
@@ -431,7 +431,7 @@ public class Menu {
 					nurseManager.updateNurse(nId, name, email);
 					break;
 				}
-				case 2: {
+				case 2: {// !!!!!!!!!!!!!!
 					System.out.println(nurseManager.listMyPatients(nId));
 					break;
 				}
@@ -490,13 +490,18 @@ public class Menu {
 	}
 
 	public static void loginPatient() throws Exception {
+		List<Patient> patients = patientManager.listAllPatients();
 		String email = Utilities.readString("Introduce an email:");
 		String password = Utilities.readString("Introduce a password:");
 		User u = userManager.checkPassword(email, password);
 		while (true) {
 			if (u != null && u.getRole().getName().equals("patient")) {
 				System.out.println("login successful");
-				patientMenu(u.getId());// patient
+				for (Patient p : patients) {
+					if (u.getEmail().equals(p.getEmail())) {
+						patientMenu(p.getId());
+					}
+				}
 				break;
 			} else {
 				System.out.println("Email or password wrong");
@@ -507,14 +512,19 @@ public class Menu {
 	}
 
 	public static void loginDoctor() throws Exception {
+		List<Doctor> doctors = doctorManager.listAllDoctors();
 		String email = Utilities.readString("Introduce an email:");
 		String password = Utilities.readString("Introduce a password:");
 		User u = userManager.checkPassword(email, password);
 		while (true) {
 			if (u != null && u.getRole().getName().equals("doctor")) {
 				System.out.println("login successful");
+				for (Doctor d : doctors) {
+					if (u.getEmail().equals(d.getEmail())) {
+						doctorMenu(d.getId());
+					}
+				}
 				// pick the doctor w the same email as user and then in doctorMenu(d.getId())
-				doctorMenu(u.getId());
 
 				break;
 			} else {
@@ -526,13 +536,18 @@ public class Menu {
 	}
 
 	public static void loginNurse() throws Exception {
+		List<Nurse> nurses = nurseManager.listAllNurses();
 		String email = Utilities.readString("Introduce an email:");
 		String password = Utilities.readString("Introduce a password:");
 		User u = userManager.checkPassword(email, password);
 		while (true) {
 			if (u != null && u.getRole().getName().equals("nurse")) {
 				System.out.println("login successful");
-				nurseMenu(u.getId());// same thing n.getId()
+				for (Nurse n : nurses) {
+					if (u.getEmail().equals(n.getEmail())) {
+						nurseMenu(n.getId());
+					}
+				}
 				break;
 			} else {
 				System.out.println("Email or password wrong");

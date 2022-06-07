@@ -64,7 +64,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void updateDoctor(Integer dId, String name, String specialty, String email) {
 		try {
-			String sql = "UPDATE doctors SET name=? specialty=? email=? WHERE id=?";
+			String sql = "UPDATE doctors SET name=?, specialty=?, email=? WHERE id=?";
 			PreparedStatement ps = manager.getConnection().prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, specialty);
@@ -75,7 +75,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void deleteDoctor(int doctorId) {
 		try {
@@ -128,7 +128,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		}
 
 	}
-	
+
 	@Override
 	public void assignSymptom(Patient p, Symptom s) {
 		try {
@@ -141,7 +141,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void assignDisease(Patient p, Disease d) {
 		try {
@@ -149,6 +149,19 @@ public class JDBCDoctorManager implements DoctorManager {
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setInt(2, d.getId());
+			prep.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void assignMedicine(Patient p, Medicine m) {
+		try {
+			String sql = "INSERT INTO CanBeCured (patientId, medicineId) VALUES (?,?)";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setInt(2, m.getId());
 			prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -268,7 +281,7 @@ public class JDBCDoctorManager implements DoctorManager {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String speciality = rs.getString("speciality");
-				Doctor d = new Doctor(id, name,speciality);
+				Doctor d = new Doctor(id, name, speciality);
 				diseases.add(d);
 			}
 
@@ -286,7 +299,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		Doctor d = null;
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctors WHERE name='" + doctorName+"'";
+			String sql = "SELECT * FROM doctors WHERE name='" + doctorName + "'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String name = rs.getString("name");
@@ -299,8 +312,4 @@ public class JDBCDoctorManager implements DoctorManager {
 		}
 		return d;
 	}
-	}
-
-	
-	
-
+}

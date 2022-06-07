@@ -39,8 +39,8 @@ public interface DoctorManager {
 	// search a medicine by a disease
 	public List<Medicine> searchMedicineByDisease(Disease d);
 
-	public List<Doctor>listAllDoctor();
-	
+	public List<Doctor> listAllDoctor();
+
 	public Doctor getDoctorByName(String doctorName);
 
 	public void assignSymptom(Patient p, Symptom s);
@@ -48,4 +48,6 @@ public interface DoctorManager {
 	public void assignDisease(Patient p, Disease d);
 
 	public void deleteDoctor(int doctorId);
+
+	public void assignMedicine(Patient p, Medicine m);
 }

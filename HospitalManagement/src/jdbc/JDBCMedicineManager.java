@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hospital.pojos.Medicine;
+import hospital.pojos.Symptom;
 import ifaces.MedicineManager;
 
 public class JDBCMedicineManager implements MedicineManager {
@@ -58,6 +59,25 @@ public class JDBCMedicineManager implements MedicineManager {
 			while (rs.next()) {
 				String name = rs.getString("name");
 				m = new Medicine(name);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
+	
+	@Override
+	public Medicine getMedicineById(int id) {
+	     Medicine m = null;
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM medicines WHERE id=" + id;
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				m = new Medicine(id, name);
 			}
 			rs.close();
 			stmt.close();

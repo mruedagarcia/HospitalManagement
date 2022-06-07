@@ -9,5 +9,6 @@ public interface SymptomManager {
 	//public void addSymptom(Symptom s);
 	public List<Symptom>listAllSymptoms();
 	public Symptom getSymptomByName(String symptomName);
+	public Symptom getSymptomById(int id);
 
 }
